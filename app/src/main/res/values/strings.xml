@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Circles</string>
+    <string name="login_user">NYU Email</string>
+    <string name="login_pwd">password</string>
 </resources>

@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
+import model.User;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
     private String username;
     private String pwd;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,11 +85,25 @@ public class MainActivity extends AppCompatActivity {
             String pattern = "@nyu.edu";
             Pattern r = Pattern.compile(pattern);
             Matcher m = r.matcher(username);
-            if (! m.find()) {
+            if (! m.find()) {  // invalid email
                 Toast.makeText(this, "Username should end with @nyu.edu", Toast.LENGTH_SHORT).show();
+            }
+            // email verification passed
+            else {
+                // post to the server
+
+//                new Thread() {
+//                    public void run() {
+//                        Gson gson = new Gson();
+//                        User newUser = new User(username, pwd)
+//                        String jsonNewUser = gson.toJson(newUser);
+//                    }
+//                }
             }
         }
     }
+
+
 
 
     /// three listeners for text change   ---------- IGNORE IT
