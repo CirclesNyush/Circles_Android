@@ -6,7 +6,7 @@
     density="xxxhdpi"
     format="10"
     plugin-version="3.0.0"
-    timestamp="1517557237294"
+    timestamp="1517558910331"
     token="-1188600922439110527"
     verifier="COLD_SWAP_REQUESTED" >
 
@@ -103,7 +103,7 @@
     </build>
     <build
         build-mode="COLD"
-        timestamp="1517557237294"
+        timestamp="1517558910331"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="D:\Code\Circles\app\build\outputs\apk\debug\app-debug.apk"
