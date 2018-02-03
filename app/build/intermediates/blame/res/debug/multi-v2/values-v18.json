@@ -1,10 +1,25 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\Code\\Circles\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v18\\values-v18.xml",
+            "outputFile": "/Users/liwenhe/Desktop/Circles_Android/D:\\Code\\Circles\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v18\\values-v18.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\anpu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\76f14663aff16ee662f02fd562241537\\res\\values-v18\\values-v18.xml",
+                    "source": "/Users/liwenhe/Desktop/Circles_Android/C:\\Users\\anpu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\76f14663aff16ee662f02fd562241537\\res\\values-v18\\values-v18.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "48",
+                        "endOffsets": "99"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/liwenhe/Desktop/Circles_Android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v18/values-v18.xml",
+            "map": [
+                {
+                    "source": "/Users/liwenhe/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/9beffbf244fdbca7285d976c46fa2da0/res/values-v18/values-v18.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
