@@ -5,14 +5,40 @@ package model;
  */
 
 public class User {
-    String username;
-    String pwd;
+    private String email;
+    private String pwd;
+    private int gender;
 
     public User() {
     }
 
-    public User(String username, String pwd) {
-        this.username = username;
+    public User(String email, String pwd) {
+        this.email = email;
         this.pwd = pwd;
+        this.gender = 1;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
+
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
     }
 }
