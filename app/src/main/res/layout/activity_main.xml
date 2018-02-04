@@ -9,13 +9,13 @@
     tools:context="com.example.anpu.circles.MainActivity">
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/userLayout"
-        android:layout_above="@id/pwdLayout"
+        android:id="@+id/userLayoutLogin"
+        android:layout_above="@id/pwdLayoutLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/edit_username"
+            android:id="@+id/edit_username_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
@@ -26,13 +26,13 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/pwdLayout"
+        android:id="@+id/pwdLayoutLogin"
         android:layout_above="@id/login_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/edit_pwd"
+            android:id="@+id/edit_pwd_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
@@ -44,24 +44,50 @@
     <Button
         android:id="@+id/login_button"
         android:layout_centerInParent="true"
-        android:text="Login"
+        android:text="@string/log_in"
         android:background="@drawable/button_login"
         android:textColor="#fafafa"
         android:alpha="0.7"
         android:layout_width="match_parent"
         android:layout_marginTop="15dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/signup_button"
-        android:text="Sign Up"
-        android:theme="@style/PurpleButton"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/login_button"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_height="wrap_content" />
+    <!--<Button-->
+        <!--android:id="@+id/signup_button"-->
+        <!--android:text="@string/sign_up"-->
+        <!--android:theme="@style/PurpleButton"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_below="@id/login_button"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:layout_height="wrap_content" />-->
+
+    <TextView
+        android:id="@+id/forgetpwd_textview"
+        android:text="Forget Password?"
+        android:textColor="#aa00ff"
+        android:textSize="15sp"
+        android:alpha="0.7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        android:gravity="start"
+        android:layout_below="@id/login_button"/>
+
+    <TextView
+        android:id="@+id/signup_textview"
+        android:text="@string/sign_up"
+        android:textColor="#aa00ff"
+        android:textSize="15sp"
+        android:alpha="0.7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:gravity="end"
+        android:layout_below="@id/login_button"/>
 
 </RelativeLayout>

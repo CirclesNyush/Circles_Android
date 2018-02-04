@@ -2,4 +2,6 @@
     <string name="app_name">Circles</string>
     <string name="login_user">NYU Email</string>
     <string name="login_pwd">Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="log_in">Log In</string>
 </resources>
