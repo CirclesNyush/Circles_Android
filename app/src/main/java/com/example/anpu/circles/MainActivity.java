@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.login_button) Button loginButton;
     // bind textview
     @BindView(R.id.signup_textview) TextView signupTextView;
+    @BindView(R.id.forgetpwd_textview) TextView forgetpwdTextView;
 
     private String email;
     private String pwd;
@@ -91,6 +92,12 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
         startActivity(intent);
 //        Toast.makeText(this, "Sign Up clicked", Toast.LENGTH_SHORT).show();
+    }
+
+
+    @OnClick(R.id.forgetpwd_textview)
+    void forgetpwdTextClicked() {
+        Toast.makeText(this, "To do", Toast.LENGTH_SHORT).show();
     }
 
 
