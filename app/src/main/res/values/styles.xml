@@ -10,7 +10,7 @@
 
     <style name="PurpleButton" parent="AppTheme">
         <item name="buttonStyle">@style/Widget.AppCompat.Button.Colored</item>
-        <item name="colorButtonNormal">@color/colorButton</item>
+        <item name="colorButtonNormal">@color/colorLightViolet</item>
     </style>
 
 </resources>
