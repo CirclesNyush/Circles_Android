@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/drawermenu-dashboard" android:title="dashboard"/>
+    <item android:id="@+id/drawermenu-Textbook" android:title="Textbook" />
+    <item android:id="@+id/drawermenu-Events" android:title="Events" />
+    <item android:id="@+id/drawermenu-Logout" android:title="Logout" />
+
+</menu>

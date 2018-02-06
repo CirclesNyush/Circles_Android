@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/actionsetting"
+        android:title="@string/settings_name"
+        app:showAsAction="never"
+        >
+    </item>
+
+    <item
+        android:id="@+id/helpsetting"
+        android:title="@string/help_name"
+        app:showAsAction="never"
+        >
+    </item>
+
+    <item
+        android:id="@+id/extrasetting"
+        android:title="@string/extra_name"
+        app:showAsAction="never"
+        >
+    </item>
+
+</menu>
