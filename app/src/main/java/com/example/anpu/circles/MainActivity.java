@@ -65,12 +65,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @OnTextChanged(R.id.login_layout_email)
+    @OnTextChanged(R.id.edit_email_login)
     void nameChanged(CharSequence s, int start, int before, int count) {
         email = s.toString();
     }
 
-    @OnTextChanged(R.id.login_layout_pwd)
+    @OnTextChanged(R.id.edit_pwd_login)
     void pwdChanged(CharSequence s, int start, int before, int count) {
         pwd = s.toString();
     }
