@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.anpu.circles.HomePage1">
+
+    <include
+        android:id="@+id/appbar"
+        layout="@layout/app_bar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        >
+    </include>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottomdrawer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:itemBackground="@color/colorWhite"
+        app:itemIconTint="@color/colorNYU_Purple"
+        app:itemTextColor="@color/colorNYU_Purple"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottom_nav"
+        >
+
+    </android.support.design.widget.BottomNavigationView>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pageviewer"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+    </android.support.v4.view.ViewPager>
+
+</RelativeLayout>
