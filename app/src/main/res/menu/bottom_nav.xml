@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home_nav"
+        android:enabled="true"
+        android:title="Home"
+        android:icon="@drawable/home_nav"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/group_nav"
+        android:enabled="true"
+        android:title="Group"
+        android:icon="@drawable/group_nav"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/setting_nav"
+        android:enabled="true"
+        android:title="Setting"
+        android:icon="@drawable/setting_nav"
+        app:showAsAction="ifRoom" />
+
+
+
+
+
+</menu>

@@ -5,4 +5,9 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorLightViolet">#aa00ff</color>
     <color name="colorDarkViolet">#907200ca</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="darkgrey">#6c6c6c</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorNYU_Purple">#57068c</color>
+    <color name="colorButton">#aa00ff</color>
 </resources>
