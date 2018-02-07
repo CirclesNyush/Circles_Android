@@ -4,4 +4,7 @@
     <string name="login_pwd">Password</string>
     <string name="sign_up">Sign Up</string>
     <string name="log_in">Log In</string>
+    <string name="settings_name">Settings</string>
+    <string name="help_name">Help</string>
+    <string name="extra_name">Extra</string>
 </resources>
