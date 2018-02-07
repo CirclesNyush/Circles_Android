@@ -6,20 +6,43 @@ import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
+import android.app.ActivityOptions;
+import android.content.Intent;
+import android.support.annotation.UiThread;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.transition.Explode;
+import android.transition.Fade;
+import android.transition.Slide;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+
+import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
+import model.User;
+import model.UserStatus;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -54,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // new
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);  // bind userEditText and pwdEditText
 
@@ -63,6 +87,18 @@ public class MainActivity extends AppCompatActivity {
         if (bar != null) {
             bar.hide();
         }
+
+        Fade fade = new Fade();
+        fade.setDuration(1000);
+
+        Explode explode = new Explode();
+        explode.setDuration(1000);
+
+        Slide slide = new Slide();
+        slide.setDuration(1000);
+
+//        getWindow().setEnterTransition(fade);
+        getWindow().setExitTransition(slide);
     }
 
     @OnTextChanged(R.id.edit_email_login)
@@ -78,13 +114,33 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.main_btn_login)
     void loginClicked() {
 
-        mWidth = mBtnLogin.getMeasuredWidth();
-        mHeight = mBtnLogin.getMeasuredHeight();
+        if (email == null || email.equals("")) {
+            Toast.makeText(this, "Email is empty", Toast.LENGTH_SHORT).show();
+        }
+        else if (pwd == null || pwd.equals("")) {
+            Toast.makeText(this, "Password is empty", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            // Using regex to check if it's nyu email
+            String pattern = "@nyu.edu";
+            Pattern r = Pattern.compile(pattern);
+            Matcher m = r.matcher(email);
+            if (! m.find()) {
+                recovery();
+                Toast.makeText(this, "Email should end with @nyu.edu", Toast.LENGTH_LONG).show();
+            }
+            else {
+                mWidth = mBtnLogin.getMeasuredWidth();
+                mHeight = mBtnLogin.getMeasuredHeight();
 
-        mName.setVisibility(View.INVISIBLE);
-        mPsw.setVisibility(View.INVISIBLE);
+                mName.setVisibility(View.INVISIBLE);
+                mPsw.setVisibility(View.INVISIBLE);
 
-        inputAnimator(mInputLayout, mWidth, mHeight);
+                inputAnimator(mInputLayout, mWidth, mHeight);
+            }
+        }
+
+
     }
 
     private void inputAnimator(final View view, float w, float h) {
@@ -152,7 +208,61 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animator animator) {
-//                recovery();
+                // check if the account is valid
+                // generate json
+                final Gson gson = new Gson();
+                User user = new User(email, pwd);
+                String jsonUser = gson.toJson(user);
+                // post to the server
+                OkHttpClient client = new OkHttpClient();
+                RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonUser);
+                Request request = new Request.Builder()
+                        .post(body)
+                        .url(urlLogin)
+                        .build();
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(MainActivity.this, "Failure to connect to the server", Toast.LENGTH_LONG).show();
+                                recovery();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        UserStatus userStatus = gson.fromJson(response.body().string(), UserStatus.class);
+                        // failure
+                        if (userStatus.getStatus() == 0) {
+                            if (userStatus.getType() == 0) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(MainActivity.this, "Account is not activated.", Toast.LENGTH_LONG).show();
+                                        recovery();
+                                    }
+                                });
+                            }
+                            else {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(MainActivity.this, "Account does not exist.", Toast.LENGTH_LONG).show();
+                                        recovery();
+                                    }
+                                });
+                            }
+                        }
+                        // success
+                        else {
+                            Intent intent = new Intent(MainActivity.this, HomePage1.class);
+                            startActivity(intent);
+                        }
+                    }
+                });
             }
 
             @Override
@@ -217,18 +327,19 @@ public class MainActivity extends AppCompatActivity {
 //    }
 //
 //
-//    @OnClick(R.id.signup_textview)
-//    void signupTextClicked() {
-//        Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
-//        startActivity(intent);
-////        Toast.makeText(this, "Sign Up clicked", Toast.LENGTH_SHORT).show();
-//    }
-//
-//
-//    @OnClick(R.id.forgetpwd_textview)
-//    void forgetpwdTextClicked() {
-//        Toast.makeText(this, "To do", Toast.LENGTH_SHORT).show();
-//    }
+    @OnClick(R.id.signup_textview)
+    void signupTextClicked() {
+        Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+        intent.putExtra("transition", "slide");
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+//        Toast.makeText(this, "Sign Up clicked", Toast.LENGTH_SHORT).show();
+    }
+
+
+    @OnClick(R.id.forgetpwd_textview)
+    void forgetpwdTextClicked() {
+        Toast.makeText(this, "To do", Toast.LENGTH_SHORT).show();
+    }
 
 
 
