@@ -17,6 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
 import model.User;
+import model.UserStatus;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -77,7 +78,7 @@ public class SignUpActivity extends AppCompatActivity{
             // email verification passed
             else {
                 // generate json
-                Gson gson = new Gson();
+                final Gson gson = new Gson();
                 User user = new User(email, pwd);
                 String jsonUser = gson.toJson(user);
                 // post to the server
@@ -100,12 +101,25 @@ public class SignUpActivity extends AppCompatActivity{
 
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(SignUpActivity.this, "An activation email has been sent to your email address. Please click the link in the email to activate your account.", Toast.LENGTH_LONG).show();
-                            }
-                        });
+                        UserStatus userStatus = gson.fromJson(response.body().string(), UserStatus.class);
+                        // success
+                        if (userStatus.getStatus() == 1) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(SignUpActivity.this, "An activation email has been sent to your email address. Please click the link in the email to activate your account.", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }
+                        //failure
+                        else {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(SignUpActivity.this, "This email has been used.", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }
                     }
                 });
             }
