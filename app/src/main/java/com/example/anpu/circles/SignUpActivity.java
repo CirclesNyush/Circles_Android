@@ -67,7 +67,7 @@ public class SignUpActivity extends AppCompatActivity{
             Toast.makeText(this,"Password is empty", Toast.LENGTH_SHORT).show();
         }
         else {
-            // TO DO
+            // TODO
             // check if email is valid
             String pattern = "@nyu.edu";
             Pattern r = Pattern.compile(pattern);

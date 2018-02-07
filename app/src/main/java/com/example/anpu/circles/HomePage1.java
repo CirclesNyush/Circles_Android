@@ -25,9 +25,9 @@ public class HomePage1 extends AppCompatActivity {
         toolbar = findViewById(R.id.appbar);
         setSupportActionBar(toolbar);
 
-        viewpager = (ViewPager) findViewById(R.id.pageviewer);
-        slideadapter = new SlideAdapter(this);
-        viewpager.setAdapter(slideadapter);
+//        viewpager = (ViewPager) findViewById(R.id.pageviewer);
+//        slideadapter = new SlideAdapter(this);
+//        viewpager.setAdapter(slideadapter);
 
         bnv = (BottomNavigationView) findViewById(R.id.bottomdrawer);
         bnv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
