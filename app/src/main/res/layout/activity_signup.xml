@@ -6,38 +6,50 @@
     android:orientation="vertical"
     tools:context="com.example.anpu.circles.SignUpActivity">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/userLayoutSignup"
-        android:layout_above="@id/pwdLayoutSignup"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/edit_username_signup"
+        <include
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:hint="Please enter your NYU email address"
-            android:inputType="textEmailAddress"/>
+            layout="@layout/input_layout_signup">
 
-    </android.support.design.widget.TextInputLayout>
+        </include>
+    </RelativeLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/pwdLayoutSignup"
-        android:layout_above="@id/signup_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:id="@+id/userLayoutSignup"-->
+        <!--android:layout_above="@id/pwdLayoutSignup"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
 
-        <EditText
-            android:id="@+id/edit_pwd_signup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:hint="Please enter your password"
-            android:inputType="textPassword"/>
-    </android.support.design.widget.TextInputLayout>
+        <!--<EditText-->
+            <!--android:id="@+id/edit_username_signup"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:layout_marginRight="15dp"-->
+            <!--android:hint="Please enter your NYU email address"-->
+            <!--android:inputType="textEmailAddress"/>-->
+
+    <!--</android.support.design.widget.TextInputLayout>-->
+
+    <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:id="@+id/pwdLayoutSignup"-->
+        <!--android:layout_above="@id/signup_button"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/edit_pwd_signup"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:layout_marginRight="15dp"-->
+            <!--android:hint="Please enter your password"-->
+            <!--android:inputType="textPassword"/>-->
+    <!--</android.support.design.widget.TextInputLayout>-->
 
     <Button
         android:id="@+id/signup_button"

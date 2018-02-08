@@ -49,8 +49,8 @@ import okhttp3.Response;
 
 public class LogInActivity extends AppCompatActivity {
 
-//    // bind userEditText and pwdEditText
-//    @BindView(R.id.edit_username_login) EditText userEditText;
+//    // bind emailEditText and pwdEditText
+//    @BindView(R.id.edit_username_login) EditText emailEditText;
 //    @BindView(R.id.edit_pwd_login) EditText pwdEditText;
 //    // bind buttons
 //    @BindView(R.id.login_button) Button loginButton;
@@ -82,8 +82,8 @@ public class LogInActivity extends AppCompatActivity {
         // new
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);  // bind userEditText and pwdEditText
+        setContentView(R.layout.activity_login);
+        ButterKnife.bind(this);  // bind emailEditText and pwdEditText
 
         // hide the bar at the top
 //        getSupportActionBar().hide();

@@ -1,6 +1,7 @@
 package com.example.anpu.circles;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,9 +33,11 @@ import okhttp3.Response;
 
 public class SignUpActivity extends AppCompatActivity{
 
-    @BindView(R.id.edit_username_signup) EditText userEditText;
-    @BindView(R.id.edit_pwd_signup) EditText pwdEditText;
+//    @BindView(R.id.signup_layout_email) EditText emailEditText;
+//    @BindView(R.id.signup_layout_pwd) EditText pwdEditText;
     @BindView(R.id.signup_button) Button signupButton;
+
+    private ActionBar bar;
 
     private String email;
     private String pwd;
@@ -45,7 +48,10 @@ public class SignUpActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         ButterKnife.bind(this);
-        getSupportActionBar().hide();
+        bar = getSupportActionBar();
+        if (bar != null) {
+            bar.hide();
+        }
     }
 
     @OnTextChanged(R.id.edit_username_signup)
