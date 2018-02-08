@@ -8,14 +8,12 @@ import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.app.ActivityOptions;
 import android.content.Intent;
-import android.support.annotation.UiThread;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.transition.Explode;
 import android.transition.Fade;
 import android.transition.Slide;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -49,7 +47,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class LogInActivity extends AppCompatActivity {
 
 //    // bind userEditText and pwdEditText
 //    @BindView(R.id.edit_username_login) EditText userEditText;
@@ -137,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.signup_textview)
     void signupTextClicked() {
-        Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+        Intent intent = new Intent(LogInActivity.this, SignUpActivity.class);
         intent.putExtra("transition", "slide");
         startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
@@ -164,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(MainActivity.this, "Failure to connect to the server", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LogInActivity.this, "Failure to connect to the server", Toast.LENGTH_LONG).show();
                         }
                     });
                 }
@@ -178,14 +176,14 @@ public class MainActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(MainActivity.this, "An email has sent to reset the password.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LogInActivity.this, "An email has sent to reset the password.", Toast.LENGTH_LONG).show();
                             }
                         });
                     } else {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(MainActivity.this, "Please check your email it doesn't seem to be right.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LogInActivity.this, "Please check your email it doesn't seem to be right.", Toast.LENGTH_LONG).show();
                             }
                         });
                     }
@@ -331,7 +329,7 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(MainActivity.this, "Failure to connect to the server", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LogInActivity.this, "Failure to connect to the server", Toast.LENGTH_LONG).show();
                         recovery();
                     }
                 });
@@ -346,7 +344,7 @@ public class MainActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(MainActivity.this, "Account is not activated.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LogInActivity.this, "Account is not activated.", Toast.LENGTH_LONG).show();
                                 recovery();
                             }
                         });
@@ -355,7 +353,7 @@ public class MainActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(MainActivity.this, "Account does not exist.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LogInActivity.this, "Account does not exist.", Toast.LENGTH_LONG).show();
                                 recovery();
                             }
                         });
@@ -363,7 +361,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 // success
                 else {
-                    Intent intent = new Intent(MainActivity.this, HomePage1.class);
+                    Intent intent = new Intent(LogInActivity.this, HomePage1.class);
                     startActivity(intent);
                 }
             }
