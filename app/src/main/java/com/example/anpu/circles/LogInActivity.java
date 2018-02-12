@@ -8,6 +8,8 @@ import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -68,11 +70,13 @@ public class LogInActivity extends AppCompatActivity {
 
     private ActionBar bar;
 
-
     private String email;
     private String pwd;
     private String urlLogin = "http://steins.xin:8001/auth/login";
     private String urlForget = "http://steins.xin:8001/auth/forgetpwd";
+
+    SharedPreferences sprefLogin;
+    SharedPreferences.Editor editorLogin;
 
 
 
@@ -103,6 +107,11 @@ public class LogInActivity extends AppCompatActivity {
 
 //        getWindow().setEnterTransition(fade);
         getWindow().setExitTransition(slide);
+
+        // set sharedpreference
+        sprefLogin = PreferenceManager.getDefaultSharedPreferences(this);
+        editorLogin = sprefLogin.edit();
+
     }
 
     @OnTextChanged(R.id.edit_email_login)
@@ -363,6 +372,8 @@ public class LogInActivity extends AppCompatActivity {
                 }
                 // success
                 else {
+                    editorLogin.putBoolean("login", true);
+                    editorLogin.commit();
                     Intent intent = new Intent(LogInActivity.this, HomePage1.class);
                     startActivity(intent);
                     LogInActivity.this.finish();
