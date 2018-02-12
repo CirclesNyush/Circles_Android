@@ -46,13 +46,13 @@
         android:layout_centerInParent="true">
 
         <include
-            android:id="@+id/input_layout"
+            android:id="@+id/input_layout_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             layout="@layout/input_layout_login" />
 
         <include
-            android:id="@+id/layout_progress"
+            android:id="@+id/layout_progress_login"
             android:layout_width="match_parent"
             android:layout_height="130dip"
             layout="@layout/layout_progress"
@@ -62,7 +62,7 @@
             android:id="@+id/main_btn_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/input_layout"
+            android:layout_below="@+id/input_layout_login"
             android:layout_centerInParent="true"
             android:layout_marginTop="15dip"
             android:background="@drawable/text_bg"

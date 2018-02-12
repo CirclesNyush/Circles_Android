@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.transition.Explode;
 import android.transition.Fade;
 import android.transition.Slide;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -58,10 +59,10 @@ public class LogInActivity extends AppCompatActivity {
 //    @BindView(R.id.signup_textview) TextView signupTextView;
 //    @BindView(R.id.forgetpwd_textview) TextView forgetpwdTextView;
     @BindView(R.id.main_btn_login) TextView mBtnLogin;
-    @BindView(R.id.layout_progress) View progress;
-    @BindView(R.id.input_layout) View mInputLayout;
-    @BindView(R.id.login_layout_email) LinearLayout mName;
-    @BindView(R.id.login_layout_pwd) LinearLayout mPsw;
+    @BindView(R.id.layout_progress_login) View progress;
+    @BindView(R.id.input_layout_login) View mInputLayout;
+    @BindView(R.id.login_layout_email) LinearLayout mEmail;
+    @BindView(R.id.login_layout_pwd) LinearLayout mPwd;
 
     private float mWidth, mHeight;
 
@@ -71,7 +72,6 @@ public class LogInActivity extends AppCompatActivity {
     private String email;
     private String pwd;
     private String urlLogin = "http://steins.xin:8001/auth/login";
-    private String urlSignup = "http://steins.xin:8001/auth/signup";
     private String urlForget = "http://steins.xin:8001/auth/forgetpwd";
 
 
@@ -197,15 +197,14 @@ public class LogInActivity extends AppCompatActivity {
         Pattern r = Pattern.compile(pattern);
         Matcher m = r.matcher(email);
         if (! m.find()) {
-            recovery();
             Toast.makeText(this, "Email should end with @nyu.edu", Toast.LENGTH_LONG).show();
         }
         else {
             mWidth = mBtnLogin.getMeasuredWidth();
             mHeight = mBtnLogin.getMeasuredHeight();
 
-            mName.setVisibility(View.INVISIBLE);
-            mPsw.setVisibility(View.INVISIBLE);
+            mEmail.setVisibility(View.INVISIBLE);
+            mPwd.setVisibility(View.INVISIBLE);
 
             inputAnimator(mInputLayout, mWidth, mHeight);
         }
@@ -298,8 +297,8 @@ public class LogInActivity extends AppCompatActivity {
     private void recovery() {
         progress.setVisibility(View.GONE);
         mInputLayout.setVisibility(View.VISIBLE);
-        mName.setVisibility(View.VISIBLE);
-        mPsw.setVisibility(View.VISIBLE);
+        mEmail.setVisibility(View.VISIBLE);
+        mPwd.setVisibility(View.VISIBLE);
 
         ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mInputLayout.getLayoutParams();
         params.leftMargin = 0;
@@ -337,6 +336,9 @@ public class LogInActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
+//                String ans = response.body().string();
+//                Log.d("Test", ans);
+//                System.out.print(ans);
                 UserStatus userStatus = gson.fromJson(response.body().string(), UserStatus.class);
                 // failure
                 if (userStatus.getStatus() == 0) {
@@ -363,6 +365,7 @@ public class LogInActivity extends AppCompatActivity {
                 else {
                     Intent intent = new Intent(LogInActivity.this, HomePage1.class);
                     startActivity(intent);
+                    LogInActivity.this.finish();
                 }
             }
         });
@@ -393,7 +396,7 @@ public class LogInActivity extends AppCompatActivity {
 
 
 //    @OnTextChanged(R.id.edit_username_login)
-//    void usernameChanged(CharSequence s, int start, int before, int count) {
+//    void emailChanged(CharSequence s, int start, int before, int count) {
 //        email = s.toString();
 //    }
 //
