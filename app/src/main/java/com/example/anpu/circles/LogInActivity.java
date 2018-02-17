@@ -8,7 +8,8 @@ import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.app.ActivityOptions;
 import android.content.Intent;
-import android.support.annotation.UiThread;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -49,10 +50,10 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class LogInActivity extends AppCompatActivity {
 
-//    // bind userEditText and pwdEditText
-//    @BindView(R.id.edit_username_login) EditText userEditText;
+//    // bind emailEditText and pwdEditText
+//    @BindView(R.id.edit_username_login) EditText emailEditText;
 //    @BindView(R.id.edit_pwd_login) EditText pwdEditText;
 //    // bind buttons
 //    @BindView(R.id.login_button) Button loginButton;
@@ -60,21 +61,22 @@ public class MainActivity extends AppCompatActivity {
 //    @BindView(R.id.signup_textview) TextView signupTextView;
 //    @BindView(R.id.forgetpwd_textview) TextView forgetpwdTextView;
     @BindView(R.id.main_btn_login) TextView mBtnLogin;
-    @BindView(R.id.layout_progress) View progress;
-    @BindView(R.id.input_layout) View mInputLayout;
-    @BindView(R.id.login_layout_email) LinearLayout mName;
-    @BindView(R.id.login_layout_pwd) LinearLayout mPsw;
+    @BindView(R.id.layout_progress_login) View progress;
+    @BindView(R.id.input_layout_login) View mInputLayout;
+    @BindView(R.id.login_layout_email) LinearLayout mEmail;
+    @BindView(R.id.login_layout_pwd) LinearLayout mPwd;
 
     private float mWidth, mHeight;
 
     private ActionBar bar;
 
-
     private String email;
     private String pwd;
     private String urlLogin = "http://steins.xin:8001/auth/login";
-    private String urlSignup = "http://steins.xin:8001/auth/signup";
     private String urlForget = "http://steins.xin:8001/auth/forgetpwd";
+
+    SharedPreferences sprefLogin;
+    SharedPreferences.Editor editorLogin;
 
 
 
@@ -84,8 +86,8 @@ public class MainActivity extends AppCompatActivity {
         // new
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);  // bind userEditText and pwdEditText
+        setContentView(R.layout.activity_login);
+        ButterKnife.bind(this);  // bind emailEditText and pwdEditText
 
         // hide the bar at the top
 //        getSupportActionBar().hide();
@@ -105,6 +107,11 @@ public class MainActivity extends AppCompatActivity {
 
 //        getWindow().setEnterTransition(fade);
         getWindow().setExitTransition(slide);
+
+        // set sharedpreference
+        sprefLogin = PreferenceManager.getDefaultSharedPreferences(this);
+        editorLogin = sprefLogin.edit();
+
     }
 
     @OnTextChanged(R.id.edit_email_login)
@@ -137,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.signup_textview)
     void signupTextClicked() {
-        Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+        Intent intent = new Intent(LogInActivity.this, SignUpActivity.class);
         intent.putExtra("transition", "slide");
         startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
@@ -164,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(MainActivity.this, "Failure to connect to the server", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LogInActivity.this, "Failure to connect to the server", Toast.LENGTH_LONG).show();
                         }
                     });
                 }
@@ -178,14 +185,14 @@ public class MainActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(MainActivity.this, "An email has sent to reset the password.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LogInActivity.this, "An email has sent to reset the password.", Toast.LENGTH_LONG).show();
                             }
                         });
                     } else {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(MainActivity.this, "Please check your email it doesn't seem to be right.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LogInActivity.this, "Please check your email it doesn't seem to be right.", Toast.LENGTH_LONG).show();
                             }
                         });
                     }
@@ -199,15 +206,14 @@ public class MainActivity extends AppCompatActivity {
         Pattern r = Pattern.compile(pattern);
         Matcher m = r.matcher(email);
         if (! m.find()) {
-            recovery();
             Toast.makeText(this, "Email should end with @nyu.edu", Toast.LENGTH_LONG).show();
         }
         else {
             mWidth = mBtnLogin.getMeasuredWidth();
             mHeight = mBtnLogin.getMeasuredHeight();
 
-            mName.setVisibility(View.INVISIBLE);
-            mPsw.setVisibility(View.INVISIBLE);
+            mEmail.setVisibility(View.INVISIBLE);
+            mPwd.setVisibility(View.INVISIBLE);
 
             inputAnimator(mInputLayout, mWidth, mHeight);
         }
@@ -300,8 +306,8 @@ public class MainActivity extends AppCompatActivity {
     private void recovery() {
         progress.setVisibility(View.GONE);
         mInputLayout.setVisibility(View.VISIBLE);
-        mName.setVisibility(View.VISIBLE);
-        mPsw.setVisibility(View.VISIBLE);
+        mEmail.setVisibility(View.VISIBLE);
+        mPwd.setVisibility(View.VISIBLE);
 
         ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mInputLayout.getLayoutParams();
         params.leftMargin = 0;
@@ -331,7 +337,7 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(MainActivity.this, "Failure to connect to the server", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LogInActivity.this, "Failure to connect to the server", Toast.LENGTH_LONG).show();
                         recovery();
                     }
                 });
@@ -339,6 +345,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
+//                String ans = response.body().string();
+//                Log.d("Test", ans);
+//                System.out.print(ans);
                 UserStatus userStatus = gson.fromJson(response.body().string(), UserStatus.class);
                 // failure
                 if (userStatus.getStatus() == 0) {
@@ -346,7 +355,7 @@ public class MainActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(MainActivity.this, "Account is not activated.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LogInActivity.this, "Account is not activated.", Toast.LENGTH_LONG).show();
                                 recovery();
                             }
                         });
@@ -355,7 +364,7 @@ public class MainActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(MainActivity.this, "Account does not exist.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LogInActivity.this, "Account does not exist.", Toast.LENGTH_LONG).show();
                                 recovery();
                             }
                         });
@@ -363,8 +372,11 @@ public class MainActivity extends AppCompatActivity {
                 }
                 // success
                 else {
-                    Intent intent = new Intent(MainActivity.this, HomePage1.class);
+                    editorLogin.putBoolean("login", true);
+                    editorLogin.commit();
+                    Intent intent = new Intent(LogInActivity.this, HomePage1.class);
                     startActivity(intent);
+                    LogInActivity.this.finish();
                 }
             }
         });
@@ -395,7 +407,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 //    @OnTextChanged(R.id.edit_username_login)
-//    void usernameChanged(CharSequence s, int start, int before, int count) {
+//    void emailChanged(CharSequence s, int start, int before, int count) {
 //        email = s.toString();
 //    }
 //

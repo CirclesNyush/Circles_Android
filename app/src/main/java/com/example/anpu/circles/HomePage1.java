@@ -1,6 +1,8 @@
 package com.example.anpu.circles;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
@@ -18,6 +20,10 @@ public class HomePage1 extends AppCompatActivity {
     private ViewPager viewpager;
     private SlideAdapter slideadapter;
 
+    // test log out
+    SharedPreferences sprefHome;
+    SharedPreferences.Editor editorHome;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +34,9 @@ public class HomePage1 extends AppCompatActivity {
 //        viewpager = (ViewPager) findViewById(R.id.pageviewer);
 //        slideadapter = new SlideAdapter(this);
 //        viewpager.setAdapter(slideadapter);
+
+        sprefHome = PreferenceManager.getDefaultSharedPreferences(this);
+        editorHome = sprefHome.edit();
 
         bnv = (BottomNavigationView) findViewById(R.id.bottomdrawer);
         bnv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -43,6 +52,15 @@ public class HomePage1 extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"you selected Home",Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.setting_nav:
+
+                        // only to test log out
+                        editorHome.putBoolean("login", false);
+                        editorHome.commit();
+                        Intent intent = new Intent(HomePage1.this, LogInActivity.class);
+                        startActivity(intent);
+                        HomePage1.this.finish();
+
+
                         //replace this with intent
                         Toast.makeText(getApplicationContext(),"you selected settings",Toast.LENGTH_SHORT).show();
                         break;
