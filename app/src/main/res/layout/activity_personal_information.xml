@@ -1,0 +1,230 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.anpu.circles.Personal_Information">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="20">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/personal_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="9"
+            >
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/personal_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="7"
+                android:background="@drawable/orange_purple_gradient"
+                >
+
+
+                <Button
+                    android:id="@+id/personal_button_back"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/ic_arrow_back"
+                    android:layout_gravity="top|left"/>
+
+
+                <ImageView
+                    android:id="@+id/personal_icon"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="bottom|center"
+
+                    android:src="@drawable/project_detail_cir" />
+
+            </android.support.v7.widget.Toolbar>
+
+
+
+        </android.support.design.widget.AppBarLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:textSize="23sp"
+            android:textColor="@color/colorBlack"
+            android:text="Hansa Chen2" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1.2">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal|center"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textSize="16sp"
+                android:textColor="@color/colorBlack"
+                android:text="Username:" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal|center"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textSize="16sp"
+                android:textColor="@color/colorBlack"
+                android:text="Hansa" />
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@android:color/darker_gray"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1.2">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal|center"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textSize="16sp"
+                android:textColor="@color/colorBlack"
+                android:text="Phone Number:" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal|center"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textSize="16sp"
+                android:textColor="@color/colorBlack"
+                android:text="+86 139 8888 8888" />
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@android:color/darker_gray"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1.2">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal|center"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textSize="16sp"
+                android:textColor="@color/colorBlack"
+                android:text="Email:" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal|center"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textSize="16sp"
+                android:textColor="@color/colorBlack"
+                android:text="hansa.chen@nyu.edu" />
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@android:color/darker_gray"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/personal_bottom_published"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center_horizontal|center"
+
+                android:text="Published" />
+
+            <Button
+                android:id="@+id/personal_bottom_fav"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_horizontal|center"
+
+                android:text="Saved" />
+            <Button
+                android:id="@+id/personal_bottom_tag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_horizontal|center"
+
+                android:text="Tags" />
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:gravity="center|left"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack"
+            android:layout_weight="1"
+            android:text="Personal Description:" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:ellipsize="end"
+            android:textSize="14sp"
+            android:textColor="@color/darkgrey"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in turpis sodales, condimentum sapien et, lacinia sem. Donec iaculis, nunc id congue pretium, mauris ipsum hendrerit dolor, quis fringilla mauris felis eget urna. Aenean tempus justo orci, in placerat risus consequat vel. Quisque sodales lacus at rutrum scelerisque. In tristique enim lorem, id gravida dui venenatis in. Etiam sit amet justo lorem. Nulla lacinia dolor dui, sit amet venenatis justo pellentesque ac. Morbi aliquam et lorem eu fringilla. Etiam cursus pretium sapien fermentum dictum. Nulla facilisi. Aliquam eu tincidunt metus, vulputate vehicula velit. Suspendisse non tempus nisl. Fusce fringilla sagittis magna, ut dictum massa commodo sit amet. Quisque in auctor turpis." />
+
+
+
+    </LinearLayout>
+
+</ScrollView>

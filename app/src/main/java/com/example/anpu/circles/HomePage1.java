@@ -1,6 +1,8 @@
 package com.example.anpu.circles;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
@@ -18,6 +20,10 @@ public class HomePage1 extends AppCompatActivity {
     private ViewPager viewpager;
     private SlideAdapter slideadapter;
 
+    // test log out
+    SharedPreferences sprefHome;
+    SharedPreferences.Editor editorHome;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,9 +31,12 @@ public class HomePage1 extends AppCompatActivity {
         toolbar = findViewById(R.id.appbar);
         setSupportActionBar(toolbar);
 
-        viewpager = (ViewPager) findViewById(R.id.pageviewer);
-        slideadapter = new SlideAdapter(this);
-        viewpager.setAdapter(slideadapter);
+//        viewpager = (ViewPager) findViewById(R.id.pageviewer);
+//        slideadapter = new SlideAdapter(this);
+//        viewpager.setAdapter(slideadapter);
+
+        sprefHome = PreferenceManager.getDefaultSharedPreferences(this);
+        editorHome = sprefHome.edit();
 
         bnv = (BottomNavigationView) findViewById(R.id.bottomdrawer);
         bnv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -35,14 +44,25 @@ public class HomePage1 extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()) {
                     case R.id.group_nav:
-                        navGroup();
+
                         Toast.makeText(getApplicationContext(),"you selected Group",Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.home_nav:
-                        //replace this with intent
-                        Toast.makeText(getApplicationContext(),"you selected Home",Toast.LENGTH_SHORT).show();
+                        //testing the personal information
+                        //Toast.makeText(getApplicationContext(),"you selected Home",Toast.LENGTH_SHORT).show();
+                        Intent PIintent = new Intent(HomePage1.this,Personal_Information.class);
+                        startActivity(PIintent);
                         break;
                     case R.id.setting_nav:
+
+                        // only to test log out
+                        editorHome.putBoolean("login", false);
+                        editorHome.commit();
+                        Intent intent = new Intent(HomePage1.this, LogInActivity.class);
+                        startActivity(intent);
+                        HomePage1.this.finish();
+
+
                         //replace this with intent
                         Toast.makeText(getApplicationContext(),"you selected settings",Toast.LENGTH_SHORT).show();
                         break;
@@ -58,10 +78,5 @@ public class HomePage1 extends AppCompatActivity {
 
     }
 
-    public void navGroup () {
-        Intent intent = new Intent(this,Group.class);
-        startActivity(intent);
-
-    }
 
 }
