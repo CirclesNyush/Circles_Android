@@ -44,12 +44,14 @@ public class HomePage1 extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()) {
                     case R.id.group_nav:
-                        navGroup();
+
                         Toast.makeText(getApplicationContext(),"you selected Group",Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.home_nav:
-                        //replace this with intent
-                        Toast.makeText(getApplicationContext(),"you selected Home",Toast.LENGTH_SHORT).show();
+                        //testing the personal information
+                        //Toast.makeText(getApplicationContext(),"you selected Home",Toast.LENGTH_SHORT).show();
+                        Intent PIintent = new Intent(HomePage1.this,Personal_Information.class);
+                        startActivity(PIintent);
                         break;
                     case R.id.setting_nav:
 
@@ -76,10 +78,5 @@ public class HomePage1 extends AppCompatActivity {
 
     }
 
-    public void navGroup () {
-        Intent intent = new Intent(this,Group.class);
-        startActivity(intent);
-
-    }
 
 }

@@ -22,6 +22,8 @@
         <activity android:name=".SignUpActivity" />
         <activity android:name=".HomePage1" />
         <activity android:name=".Group" />
+        <activity android:name=".Personal_Information"
+            android:noHistory="false"/>
     </application>
 
 </manifest>
