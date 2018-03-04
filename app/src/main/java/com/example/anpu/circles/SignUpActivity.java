@@ -14,12 +14,11 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.anpu.circles.utilities.MD5Util;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -30,8 +29,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
-import model.User;
-import model.UserStatus;
+
+import com.example.anpu.circles.model.User;
+import com.example.anpu.circles.model.UserStatus;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -60,7 +61,7 @@ public class SignUpActivity extends AppCompatActivity{
 
     private ActionBar bar;
 
-    private String username;
+    private String nickname;
     private String email;
     private String pwd;
     private String urlSignup = "http://steins.xin:8001/auth/signup";
@@ -81,7 +82,7 @@ public class SignUpActivity extends AppCompatActivity{
 
     @OnTextChanged(R.id.edit_username_signup)
     void usernameChanged(CharSequence s, int start, int before, int count) {
-        username = s.toString();
+        nickname = s.toString();
     }
     @OnTextChanged(R.id.edit_email_signup)
     void emailChanged(CharSequence s, int start, int before, int count) {
@@ -95,7 +96,7 @@ public class SignUpActivity extends AppCompatActivity{
 
     @OnClick(R.id.main_btn_signup)
     void signupClicked() {
-        if (username == null || username.equals("")) {
+        if (nickname == null || nickname.equals("")) {
             Toast.makeText(this, "Username is empty", Toast.LENGTH_SHORT).show();
         }
         else if (email == null || email.equals("")) {
@@ -212,7 +213,7 @@ public class SignUpActivity extends AppCompatActivity{
 
     private void validSignup() {
         final Gson gson = new Gson();
-        User user = new User(email, pwd);
+        User user = new User(email, MD5Util.getMD5Str(pwd), nickname);
         String jsonUser = gson.toJson(user);
         // post to the server
         OkHttpClient client = new OkHttpClient();

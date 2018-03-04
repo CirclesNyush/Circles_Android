@@ -1,4 +1,4 @@
-package model;
+package com.example.anpu.circles.model;
 
 /**
  * Created by anpu on 2018/2/7.

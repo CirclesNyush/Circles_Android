@@ -16,7 +16,6 @@ import android.os.Bundle;
 import android.transition.Explode;
 import android.transition.Fade;
 import android.transition.Slide;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -26,6 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.anpu.circles.utilities.MD5Util;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -40,8 +40,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
-import model.User;
-import model.UserStatus;
+import com.example.anpu.circles.model.User;
+import com.example.anpu.circles.model.UserStatus;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -111,6 +111,7 @@ public class LogInActivity extends AppCompatActivity {
         // set sharedpreference
         sprefLogin = PreferenceManager.getDefaultSharedPreferences(this);
         editorLogin = sprefLogin.edit();
+        editorLogin.apply();
 
     }
 
@@ -322,7 +323,7 @@ public class LogInActivity extends AppCompatActivity {
 
     private void validLogin() {
         final Gson gson = new Gson();
-        User user = new User(email, pwd);
+        User user = new User(email, MD5Util.getMD5Str(pwd));
         String jsonUser = gson.toJson(user);
         // post to the server
         OkHttpClient client = new OkHttpClient();
