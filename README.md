@@ -1,12 +1,18 @@
 # Circles_Android
 ## This is a Application for Software Engineering.
  
-<del>- [x] Login/Logout </del>
+- [x] Login/Logout
 - [ ] Person Information
   - [ ] Avatar
+    - [ ] Glide
   - [ ] Layout Design
   - [ ] Basic Function(query, change, private)
 - [ ] Circle Activity
   - [ ] Circle Display(RecyclerView?)
   - [ ] Interac with the backend
-- [ ] Cyphered login 
+- [x] Cyphered login 
+
+-[ ] format email
+
+-[ ] notification
+    -[ ] firebase
