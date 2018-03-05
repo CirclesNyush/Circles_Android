@@ -9,7 +9,10 @@ import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.preference.PreferenceManager;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,10 +24,13 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.example.anpu.circles.utilities.MD5Util;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -65,6 +71,7 @@ public class LogInActivity extends AppCompatActivity {
     @BindView(R.id.input_layout_login) View mInputLayout;
     @BindView(R.id.login_layout_email) LinearLayout mEmail;
     @BindView(R.id.login_layout_pwd) LinearLayout mPwd;
+    @BindView(R.id.login_avatar) ImageView loginAvatar;
 
     private float mWidth, mHeight;
 
@@ -113,6 +120,9 @@ public class LogInActivity extends AppCompatActivity {
         editorLogin = sprefLogin.edit();
         editorLogin.apply();
 
+
+        Glide.with(getApplicationContext()).load(R.drawable.paw_code)
+                .into(loginAvatar);
     }
 
     @OnTextChanged(R.id.edit_email_login)

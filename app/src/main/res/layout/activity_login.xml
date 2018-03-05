@@ -16,6 +16,7 @@
         android:layout_above="@id/input_set_login">
 
         <ImageView
+            android:id="@+id/login_avatar"
             android:layout_width="55dip"
             android:layout_height="55dip"
             android:layout_gravity="center_horizontal"

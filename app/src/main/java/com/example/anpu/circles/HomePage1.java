@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 
+
 public class HomePage1 extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -44,7 +45,6 @@ public class HomePage1 extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()) {
                     case R.id.group_nav:
-
                         Toast.makeText(getApplicationContext(),"you selected Group",Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.home_nav:
