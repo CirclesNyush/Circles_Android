@@ -385,7 +385,8 @@ public class LogInActivity extends AppCompatActivity {
                 else {
                     editorLogin.putBoolean("login", true);
                     editorLogin.commit();
-                    Intent intent = new Intent(LogInActivity.this, HomePage1.class);
+//                    Intent intent = new Intent(LogInActivity.this, HomePage1.class);
+                    Intent intent = new Intent(LogInActivity.this, MainActivityFragment.class);
                     startActivity(intent);
                     LogInActivity.this.finish();
                 }

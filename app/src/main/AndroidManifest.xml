@@ -27,6 +27,7 @@
         <activity android:name=".Group" />
         <activity android:name=".Personal_Information"
             android:noHistory="false"/>
+        <activity android:name=".MainActivityFragment" />
     </application>
 
 </manifest>
