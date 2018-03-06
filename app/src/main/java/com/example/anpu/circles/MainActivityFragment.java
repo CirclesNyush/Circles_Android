@@ -1,17 +1,15 @@
 package com.example.anpu.circles;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
+import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
-import android.widget.Toolbar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,8 +21,11 @@ import butterknife.ButterKnife;
 public class MainActivityFragment extends FragmentActivity {
 
     @BindView(R.id.bottom_bar) BottomNavigationView bnv;
+    @BindView(R.id.id__main_viewpager) ViewPager viewPager;
 
-    private Fragment tabHome, tabGroup, tabSettings;
+    private android.support.v4.app.Fragment tabHome, tabGroup, tabSettings;
+
+    List<android.support.v4.app.Fragment> fragmentList = new ArrayList<>();
 
 
     @Override
@@ -34,20 +35,25 @@ public class MainActivityFragment extends FragmentActivity {
         // bind all things
         ButterKnife.bind(this);
 
-        setTabSelection(0);
+        // initialize home as the first window
+//        setTabSelection(0);
+
+        initFragmentList();
+        initViewPager();
+
 
         bnv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.home_nav:
-                        setTabSelection(0);
+                        viewPager.setCurrentItem(0);
                         break;
                     case R.id.group_nav:
-                        setTabSelection(1);
+                        viewPager.setCurrentItem(1);
                         break;
                     case R.id.setting_nav:
-                        setTabSelection(2);
+                        viewPager.setCurrentItem(2);
                         break;
                 }
                 return false;
@@ -55,53 +61,88 @@ public class MainActivityFragment extends FragmentActivity {
         });
     }
 
-    public void setTabSelection(int tabSelection) {
-        // start a fragment transaction
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        // hide all fragments in case some overlap
-        hideFragments(fragmentTransaction);
-        switch (tabSelection) {
-            case 0:
-                if (tabHome == null) {
-                    tabHome = new HomeFragment();
-                    fragmentTransaction.add(R.id.id_content, tabHome);
-                }
-                else {
-                    fragmentTransaction.show(tabHome);
-                }
-                break;
-            case 1:
-                if (tabGroup == null) {
-                    tabGroup = new GroupFragment();
-                    fragmentTransaction.add(R.id.id_content, tabGroup);
-                }
-                else {
-                    fragmentTransaction.show(tabGroup);
-                }
-                break;
-            case 2:
-                if (tabSettings == null) {
-                    tabSettings = new SettingsFragment();
-                    fragmentTransaction.add(R.id.id_content, tabSettings);
-                }
-                else {
-                    fragmentTransaction.show(tabSettings);
-                }
-                break;
-        }
-        fragmentTransaction.commit();
+    private void initFragmentList() {
+        tabHome = new HomeFragment();
+        tabGroup = new GroupFragment();
+        tabSettings = new SettingsFragment();
+        fragmentList.add(tabHome);
+        fragmentList.add(tabGroup);
+        fragmentList.add(tabSettings);
     }
 
-    private void hideFragments(FragmentTransaction fragmentTransaction) {
-        if (tabHome != null) {
-            fragmentTransaction.hide(tabHome);
+    private void initViewPager() {
+        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+        ViewPagerFragmentAdapter viewPagerFragmentAdapter = new ViewPagerFragmentAdapter(fragmentManager, fragmentList);
+        viewPager.addOnPageChangeListener(new ViewPagerOnPagerChangedListener());
+        viewPager.setAdapter(viewPagerFragmentAdapter);
+        viewPager.setCurrentItem(0);
+    }
+
+    class ViewPagerOnPagerChangedListener implements ViewPager.OnPageChangeListener {
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
         }
-        if (tabGroup != null) {
-            fragmentTransaction.hide(tabGroup);
+
+        @Override
+        public void onPageSelected(int position) {
+
         }
-        if (tabSettings != null) {
-            fragmentTransaction.hide(tabSettings);
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
         }
     }
+
+//    public void setTabSelection(int tabSelection) {
+//        // start a fragment transaction
+//        FragmentManager fragmentManager = getFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        // hide all fragments in case some overlap
+//        hideFragments(fragmentTransaction);
+//        switch (tabSelection) {
+//            case 0:
+//                if (tabHome == null) {
+//                    tabHome = new HomeFragment();
+//                    fragmentTransaction.add(R.id.id_content, tabHome);
+//                }
+//                else {
+//                    fragmentTransaction.show(tabHome);
+//                }
+//                break;
+//            case 1:
+//                if (tabGroup == null) {
+//                    tabGroup = new GroupFragment();
+//                    fragmentTransaction.add(R.id.id_content, tabGroup);
+//                }
+//                else {
+//                    fragmentTransaction.show(tabGroup);
+//                }
+//                break;
+//            case 2:
+//                if (tabSettings == null) {
+//                    tabSettings = new SettingsFragment();
+//                    fragmentTransaction.add(R.id.id_content, tabSettings);
+//                }
+//                else {
+//                    fragmentTransaction.show(tabSettings);
+//                }
+//                break;
+//        }
+//        fragmentTransaction.commit();
+//    }
+
+//    private void hideFragments(FragmentTransaction fragmentTransaction) {
+//        if (tabHome != null) {
+//            fragmentTransaction.hide(tabHome);
+//        }
+//        if (tabGroup != null) {
+//            fragmentTransaction.hide(tabGroup);
+//        }
+//        if (tabSettings != null) {
+//            fragmentTransaction.hide(tabSettings);
+//        }
+//    }
 }

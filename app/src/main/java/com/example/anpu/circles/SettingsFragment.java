@@ -11,7 +11,7 @@ import android.view.ViewGroup;
  * Created by anpu on 2018/3/5.
  */
 
-public class SettingsFragment extends android.app.Fragment {
+public class SettingsFragment extends Fragment {
 
     @Nullable
     @Override

@@ -11,7 +11,7 @@ import android.view.ViewGroup;
  * Created by anpu on 2018/3/5.
  */
 
-public class GroupFragment extends android.app.Fragment {
+public class GroupFragment extends Fragment {
 
     @Nullable
     @Override
