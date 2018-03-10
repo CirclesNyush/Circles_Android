@@ -1,6 +1,5 @@
 package com.example.anpu.circles;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -33,10 +32,10 @@ public class WelcomeActivity extends AppCompatActivity {
                 System.out.println(result);
                 if (result) {
 //                    intent = new Intent(WelcomeActivity.this, HomePage1.class);
-                    intent = new Intent(WelcomeActivity.this, MainActivityFragment.class);
+                    intent = new Intent(WelcomeActivity.this, HomePageFragmentActivity.class);
                 }
                 else {
-                    intent = new Intent(WelcomeActivity.this, MainActivityFragment.class);
+                    intent = new Intent(WelcomeActivity.this, HomePageFragmentActivity.class);
 //                    intent = new Intent(WelcomeActivity.this, LogInActivity.class);
                 }
                 startActivity(intent);

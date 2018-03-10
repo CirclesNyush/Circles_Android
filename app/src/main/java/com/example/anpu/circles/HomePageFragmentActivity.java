@@ -9,6 +9,9 @@ import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
 
 import com.example.anpu.circles.adapter.ViewPagerFragmentAdapter;
+import com.example.anpu.circles.fragment.GroupFragment;
+import com.example.anpu.circles.fragment.HomeFragment;
+import com.example.anpu.circles.fragment.SettingsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +23,7 @@ import butterknife.ButterKnife;
  * Created by anpu on 2018/3/5.
  */
 
-public class MainActivityFragment extends FragmentActivity {
+public class HomePageFragmentActivity extends FragmentActivity {
 
     @BindView(R.id.bottom_bar) BottomNavigationView bnv;
     @BindView(R.id.id__main_viewpager) ViewPager viewPager;

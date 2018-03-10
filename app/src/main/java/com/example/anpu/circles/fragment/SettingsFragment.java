@@ -1,4 +1,4 @@
-package com.example.anpu.circles;
+package com.example.anpu.circles.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.anpu.circles.R;
 
 /**
  * Created by anpu on 2018/3/5.

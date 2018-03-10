@@ -1,4 +1,4 @@
-package com.example.anpu.circles;
+package com.example.anpu.circles.adapter;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import com.example.anpu.circles.R;
 
 public class SlideAdapter extends PagerAdapter {
 

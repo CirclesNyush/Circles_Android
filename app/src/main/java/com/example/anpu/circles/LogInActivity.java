@@ -9,10 +9,7 @@ import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.preference.PreferenceManager;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,7 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.example.anpu.circles.utilities.JellyInterpolator;
 import com.example.anpu.circles.utilities.MD5Util;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -386,7 +383,7 @@ public class LogInActivity extends AppCompatActivity {
                     editorLogin.putBoolean("login", true);
                     editorLogin.commit();
 //                    Intent intent = new Intent(LogInActivity.this, HomePage1.class);
-                    Intent intent = new Intent(LogInActivity.this, MainActivityFragment.class);
+                    Intent intent = new Intent(LogInActivity.this, HomePageFragmentActivity.class);
                     startActivity(intent);
                     LogInActivity.this.finish();
                 }

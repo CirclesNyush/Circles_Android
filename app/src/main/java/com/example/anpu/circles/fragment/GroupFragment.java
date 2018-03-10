@@ -1,4 +1,4 @@
-package com.example.anpu.circles;
+package com.example.anpu.circles.fragment;
 
 import android.Manifest;
 import android.content.Intent;
@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.anpu.circles.R;
 import com.example.anpu.circles.utilities.GlideV4ImageEngine;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.zhihu.matisse.Matisse;

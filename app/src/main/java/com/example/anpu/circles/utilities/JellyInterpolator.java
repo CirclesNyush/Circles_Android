@@ -1,4 +1,4 @@
-package com.example.anpu.circles;
+package com.example.anpu.circles.utilities;
 
 import android.view.animation.LinearInterpolator;
 
@@ -6,7 +6,7 @@ import android.view.animation.LinearInterpolator;
  * Created by anpu on 2018/2/5.
  */
 
-class JellyInterpolator extends LinearInterpolator {
+public class JellyInterpolator extends LinearInterpolator {
     private float factor;
 
     public  JellyInterpolator() { this.factor = 0.15f; }

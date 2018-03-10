@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.anpu.circles.adapter.SlideAdapter;
 
 
 public class HomePage1 extends AppCompatActivity {
