@@ -29,6 +29,8 @@ public class HomePage1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        // meaning of these two lines?
         toolbar = findViewById(R.id.appbar);
         setSupportActionBar(toolbar);
 

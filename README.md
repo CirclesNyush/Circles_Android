@@ -10,8 +10,10 @@
 - [ ] Circle Activity
   - [ ] Circle Display(RecyclerView?)
   - [ ] Interac with the backend
-- [x] Cyphered login 
-
+- [x] Cyphered login
+- [ ] Notification Utility
+  - [x] Short message
+  - [ ] other amendment
 -[ ] format email
 
 -[ ] notification

@@ -32,10 +32,12 @@ public class WelcomeActivity extends AppCompatActivity {
                 Log.d("test", String.valueOf(result));
                 System.out.println(result);
                 if (result) {
-                    intent = new Intent(WelcomeActivity.this, HomePage1.class);
+//                    intent = new Intent(WelcomeActivity.this, HomePage1.class);
+                    intent = new Intent(WelcomeActivity.this, MainActivityFragment.class);
                 }
                 else {
-                    intent = new Intent(WelcomeActivity.this, LogInActivity.class);
+                    intent = new Intent(WelcomeActivity.this, MainActivityFragment.class);
+//                    intent = new Intent(WelcomeActivity.this, LogInActivity.class);
                 }
                 startActivity(intent);
                 WelcomeActivity.this.finish();

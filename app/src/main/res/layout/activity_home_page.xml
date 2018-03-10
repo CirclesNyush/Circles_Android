@@ -9,8 +9,6 @@
     <include
         android:id="@+id/appbar"
         layout="@layout/app_bar"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
         >
     </include>
 
