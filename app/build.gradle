@@ -22,6 +22,10 @@ android {
     }
 }
 
+repositories {
+    jcenter()
+}
+
 dependencies {
 
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -37,13 +41,15 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'com.google.code.gson:gson:2.8.0'
     compile 'com.android.support:design:26.1.0'
-
     implementation("com.github.bumptech.glide:glide:4.6.1") {
         exclude group: "com.android.support"
     }
     implementation "com.android.support:support-fragment:26.1.0"
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
+    compile 'com.zhihu.android:matisse:0.4.3'
+
 }
+
 
 
 apply plugin: 'com.google.gms.google-services'

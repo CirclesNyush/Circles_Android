@@ -1,4 +1,4 @@
-package com.example.anpu.circles;
+package com.example.anpu.circles.service;
 
 import android.app.Notification;
 import android.app.NotificationManager;

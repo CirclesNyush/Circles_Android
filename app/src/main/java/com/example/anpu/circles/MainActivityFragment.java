@@ -26,6 +26,7 @@ public class MainActivityFragment extends FragmentActivity {
     @BindView(R.id.id__main_viewpager) ViewPager viewPager;
 
     private android.support.v4.app.Fragment tabHome, tabGroup, tabSettings;
+    private MenuItem menuItem;
 
     List<android.support.v4.app.Fragment> fragmentList = new ArrayList<>();
 
@@ -89,9 +90,14 @@ public class MainActivityFragment extends FragmentActivity {
 
         @Override
         public void onPageSelected(int position) {
-
+            if (menuItem != null) {
+                menuItem.setChecked(false);
+            } else {
+                bnv.getMenu().getItem(0).setChecked(false);
+            }
+            menuItem = bnv.getMenu().getItem(position);
+            menuItem.setChecked(true);
         }
-
         @Override
         public void onPageScrollStateChanged(int state) {
 
