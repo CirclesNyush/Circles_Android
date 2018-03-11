@@ -24,24 +24,18 @@
         android:layout_weight="1">
 
     </android.support.v4.view.ViewPager>
-
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bottom_background"
-        android:elevation="16dp"
+        android:layout_height="67dp"
+        android:layout_marginBottom="0dp"
+        android:background="#ffffff"
+        app:elevation="24dp"
         app:itemIconTint="@color/bottom_selector"
         app:itemTextColor="@color/bottom_selector"
-        app:elevation="16dp"
-        app:menu="@menu/bottom_nav"
-        >
+        app:menu="@menu/bottom_nav">
+
 
     </android.support.design.widget.BottomNavigationView>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="@drawable/bottom_shadow" />
 
 </LinearLayout>

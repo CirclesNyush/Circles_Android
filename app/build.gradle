@@ -47,7 +47,9 @@ dependencies {
     implementation "com.android.support:support-fragment:26.1.0"
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
     compile 'com.zhihu.android:matisse:0.4.3'
-    testCompile 'junit:junit:4.12'
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+    compile 'de.hdodenhof:circleimageview:2.2.0'
+
 
 }
 
