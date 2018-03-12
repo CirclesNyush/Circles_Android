@@ -58,7 +58,13 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
 
-                Toast.makeText(getContext(), "you click:" + view.getId(), Toast.LENGTH_LONG).show();
+                switch (view.getId()){
+                    case R.id.circle_avatar:
+                        Toast.makeText(getContext(), "jump to avatar" , Toast.LENGTH_LONG).show();
+                        break;
+                    case R.id.circle_title:
+                        Toast.makeText(getContext(), "you click title", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
