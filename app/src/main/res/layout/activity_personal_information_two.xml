@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/personal_appbar_two"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:fitsSystemWindows="true"
+        >
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:contentScrim="@color/colorPrimary"
+            app:expandedTitleMarginStart="48dp"
+            app:expandedTitleMarginEnd="64dp"
+            android:fitsSystemWindows="true"
+            android:background="@drawable/orange_purple_gradient"
+            app:title="My Profile"
+            >
+
+            <ImageButton
+                android:id="@+id/personal_pfp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:background="@drawable/project_detail_cir"
+                android:onClick="onClick_pfp" />
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/personal_toolbar_two"
+                android:layout_width="match_parent"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                >
+            </android.support.v7.widget.Toolbar>
+
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="true"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:weightSum="10"
+
+                >
+                <LinearLayout
+                    android:paddingTop="25dp"
+                    android:paddingBottom="25dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal|right"
+                        android:layout_weight="5"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textSize="17sp"
+                        android:textColor="@color/colorBlack"
+                        android:text="Username:  "/>
+
+
+                    <TextView
+                        android:id="@+id/personal_nickname"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                        android:gravity="center_horizontal|left"
+                        android:textSize="17sp"
+                        android:textColor="@color/colorBlack"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:paddingTop="25dp"
+                    android:paddingBottom="25dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal|right"
+                        android:layout_weight="5"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textSize="17sp"
+                        android:textColor="@color/colorBlack"
+                        android:text="Email:  "/>
+
+
+                    <TextView
+                        android:id="@+id/personal_email"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                        android:gravity="center_horizontal|left"
+                        android:textSize="17sp"
+                        android:textColor="@color/colorBlack"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:paddingTop="25dp"
+                    android:paddingBottom="25dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal|right"
+                        android:layout_weight="5"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textSize="17sp"
+                        android:textColor="@color/colorBlack"
+                        android:text="Cell:  "/>
+
+
+                    <TextView
+                        android:id="@+id/personal_cell"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                        android:gravity="center_horizontal|left"
+                        android:textSize="17sp"
+                        android:textColor="@color/colorBlack"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:paddingTop="25dp"
+                    android:paddingBottom="25dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:id="@+id/personal_bottom_published"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center_horizontal|center"
+
+                        android:text="Published" />
+
+                    <Button
+                        android:id="@+id/personal_bottom_fav"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_horizontal|center"
+
+                        android:text="Saved" />
+                    <Button
+                        android:id="@+id/personal_bottom_tag"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_horizontal|center"
+                        android:onClick="tags_clicked"
+                        android:text="Tags" />
+                </LinearLayout>
+
+                <TextView
+                    android:paddingTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:gravity="center|left"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorBlack"
+                    android:layout_weight="1"
+                    android:text="Personal Description:" />
+                <TextView
+                    android:id="@+id/personal_description_test"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:ellipsize="end"
+                    android:textSize="14sp"
+                    android:textColor="@color/darkgrey"
+                     />
+
+
+
+            </LinearLayout>
+
+
+
+
+
+        </android.support.v7.widget.CardView>
+
+
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>
