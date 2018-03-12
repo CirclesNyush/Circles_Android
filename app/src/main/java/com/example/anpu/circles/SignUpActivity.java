@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.anpu.circles.utilities.JellyInterpolator;
 import com.example.anpu.circles.utilities.MD5Util;
 import com.google.gson.Gson;
 

@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.anpu.circles.adapter.SlideAdapter;
 
 
 public class HomePage1 extends AppCompatActivity {
@@ -29,6 +30,8 @@ public class HomePage1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        // meaning of these two lines?
         toolbar = findViewById(R.id.appbar);
         setSupportActionBar(toolbar);
 
