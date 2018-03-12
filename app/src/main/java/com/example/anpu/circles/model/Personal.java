@@ -35,12 +35,12 @@ public class Personal {
 
 
     public String getEmail() {
-        return MD5Util.getMD5Str(email);
+        return MD5Util.getMD5(email);
     }
 
     public void setEmail(String email) {
 
-        String temp = MD5Util.getMD5Str(email);
+        String temp = MD5Util.getMD5(email);
         this.email = temp;
     }
 

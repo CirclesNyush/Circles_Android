@@ -1,5 +1,6 @@
 package com.example.anpu.circles;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -32,42 +33,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.MediaScannerConnection;
-import android.net.Uri;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.example.anpu.circles.model.Personal;
-import com.example.anpu.circles.model.User;
-import com.example.anpu.circles.model.UserStatus;
-import com.example.anpu.circles.utilities.MD5Util;
-import com.google.gson.Gson;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Calendar;
-
-import static android.media.MediaRecorder.VideoSource.CAMERA;
 
 
 /**
@@ -83,6 +50,10 @@ public class Personal_Information extends AppCompatActivity {
     ImageButton pfp;
     String ImageDecode;
     private int GALLERY = 1, CAMERA = 2;
+
+
+
+
     private String url_personal_upload = "http://steins.xin:8001/personal/updateinfo";
     private String url_personal_download = "http://steins.xin:8001/personal/getinfo";
 
@@ -103,103 +74,103 @@ public class Personal_Information extends AppCompatActivity {
 
 
         //upload info (Temporary information)
-        final Gson gson = new Gson();
-        Personal person = new Personal();
-        String jsonUser = gson.toJson(person);
-        OkHttpClient client = new OkHttpClient();
-        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonUser);
-        Request request = new Request.Builder()
-                .post(body)
-                .url(url_personal_upload)
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Personal_Information.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        textview_personal.setText("oh no");
-                    }
-                });
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-
-                UserStatus userStatus = gson.fromJson(response.body().string(), UserStatus.class);
-
-                if (userStatus.getStatus() == 1) {
-
-                    Personal_Information.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            Toast.makeText(Personal_Information.this, "Success.", Toast.LENGTH_LONG).show();
-
-                        }
-                    });
-                }
-
-                else {
-                    Toast.makeText(Personal_Information.this, "Failed to get info.", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+//        final Gson gson = new Gson();
+//        Personal person = new Personal();
+//        String jsonUser = gson.toJson(person);
+//        OkHttpClient client = new OkHttpClient();
+//        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonUser);
+//        Request request = new Request.Builder()
+//                .post(body)
+//                .url(url_personal_upload)
+//                .build();
+//
+//        client.newCall(request).enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                Personal_Information.this.runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        textview_personal.setText("oh no");
+//                    }
+//                });
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//
+//                UserResponseStatus userStatus = gson.fromJson(response.body().string(), UserResponseStatus.class);
+//
+//                if (userStatus.getStatus() == 1) {
+//
+//                    Personal_Information.this.runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//
+//                            Toast.makeText(Personal_Information.this, "Success.", Toast.LENGTH_LONG).show();
+//
+//                        }
+//                    });
+//                }
+//
+//                else {
+//                    Toast.makeText(Personal_Information.this, "Failed to get info.", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//        });
 
 
 
         //download info (Temp)
-        final Gson gson_d = new Gson();
-        OkHttpClient client_d = new OkHttpClient();
-        //RequestBody body_d = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonUser);
-        Request request_d = new Request.Builder()
-                //.post(body)
-                .url(url_personal_download)
-                .build();
-
-        client_d.newCall(request_d).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Personal_Information.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        textview_personal.setText("oh no");
-                    }
-                });
-            }
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-
-                UserStatus userStatus = gson_d.fromJson(response.body().string(), UserStatus.class);
-
-                if (userStatus.getStatus() == 1) {
-
-                    final Personal person = gson_d.fromJson(response.body().string(), Personal.class);
-
-                    Personal_Information.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            Toast.makeText(Personal_Information.this, "Success.", Toast.LENGTH_LONG).show();
-                            textview_personal = (TextView) findViewById(R.id.personal_description_test);
-                            textview_personal.setText(person.getPersonal_description());
-                            cell = (TextView) findViewById(R.id.personal_cell);
-                            cell.setText(person.getCell());
-                            nickname = (TextView) findViewById(R.id.personal_nickname);
-                            nickname.setText(person.getUsername());
-                            email = (TextView) findViewById(R.id.personal_email);
-                            email.setText(person.getEmail());
-
-                        }
-                    });
-                }
-
-                else {
-                    Toast.makeText(Personal_Information.this, "Failed to get info.", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+//        final Gson gson_d = new Gson();
+//        OkHttpClient client_d = new OkHttpClient();
+//        //RequestBody body_d = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonUser);
+//        Request request_d = new Request.Builder()
+//                //.post(body)
+//                .url(url_personal_download)
+//                .build();
+//
+//        client_d.newCall(request_d).enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                Personal_Information.this.runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        textview_personal.setText("oh no");
+//                    }
+//                });
+//            }
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//
+//                UserResponseStatus userStatus = gson_d.fromJson(response.body().string(), UserResponseStatus.class);
+//
+//                if (userStatus.getStatus() == 1) {
+//
+//                    final Personal person = gson_d.fromJson(response.body().string(), Personal.class);
+//
+//                    Personal_Information.this.runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//
+//                            Toast.makeText(Personal_Information.this, "Success.", Toast.LENGTH_LONG).show();
+//                            textview_personal = (TextView) findViewById(R.id.personal_description_test);
+//                            textview_personal.setText(person.getPersonal_description());
+//                            cell = (TextView) findViewById(R.id.personal_cell);
+//                            cell.setText(person.getCell());
+//                            nickname = (TextView) findViewById(R.id.personal_nickname);
+//                            nickname.setText(person.getUsername());
+//                            email = (TextView) findViewById(R.id.personal_email);
+//                            email.setText(person.getEmail());
+//
+//                        }
+//                    });
+//                }
+//
+//                else {
+//                    Toast.makeText(Personal_Information.this, "Failed to get info.", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//        });
 
     /*
         //go back button

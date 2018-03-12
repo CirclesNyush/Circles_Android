@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.example.anpu.circles.adapter.ViewPagerFragmentAdapter;
@@ -23,7 +24,7 @@ import butterknife.ButterKnife;
  * Created by anpu on 2018/3/5.
  */
 
-public class HomePageFragmentActivity extends FragmentActivity {
+public class HomePageFragmentActivity extends AppCompatActivity {
 
     @BindView(R.id.bottom_bar) BottomNavigationView bnv;
     @BindView(R.id.id__main_viewpager) ViewPager viewPager;

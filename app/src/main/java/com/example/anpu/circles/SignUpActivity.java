@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.anpu.circles.model.UserResponseStatus;
 import com.example.anpu.circles.utilities.JellyInterpolator;
 import com.example.anpu.circles.utilities.MD5Util;
 import com.google.gson.Gson;
@@ -32,7 +33,6 @@ import butterknife.OnClick;
 import butterknife.OnTextChanged;
 
 import com.example.anpu.circles.model.User;
-import com.example.anpu.circles.model.UserStatus;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -237,9 +237,9 @@ public class SignUpActivity extends AppCompatActivity{
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                UserStatus userStatus = gson.fromJson(response.body().string(), UserStatus.class);
+                UserResponseStatus userResponseStatus = gson.fromJson(response.body().string(), UserResponseStatus.class);
                 // failure
-                if (userStatus.getStatus() == 0) {
+                if (userResponseStatus.getStatus() == 0) {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
