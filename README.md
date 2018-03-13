@@ -3,18 +3,18 @@
  
 - [x] Login/Logout
 - [ ] Person Information
-  - [ ] Avatar
-    - [ ] Glide
+  - [x] Avatar
+    - [x] Glide
   - [ ] Layout Design
-  - [ ] Basic Function(query, change, private)
+  - [x] Basic Function(query, change, private)
 - [ ] Circle Activity
-  - [ ] Circle Display(RecyclerView?)
+  - [x] Circle Display(RecyclerView?)
   - [ ] Interac with the backend
 - [x] Cyphered login
 - [ ] Notification Utility
   - [x] Short message
   - [ ] other amendment
--[ ] format email
+-[x] format email
 
 -[ ] notification
     -[ ] firebase

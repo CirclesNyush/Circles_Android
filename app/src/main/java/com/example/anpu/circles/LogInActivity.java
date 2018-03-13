@@ -56,7 +56,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class LogInActivity extends AppCompatActivity {
-    
+
     @BindView(R.id.main_btn_login) TextView mBtnLogin;
     @BindView(R.id.layout_progress_login) View progress;
     @BindView(R.id.input_layout_login) View mInputLayout;
@@ -375,10 +375,13 @@ public class LogInActivity extends AppCompatActivity {
                 }
                 // success
                 else {
-                    editorLogin.putBoolean("login", true);
-                    editorLogin.commit();
                     UserData.setEmail(MD5Util.getMD5(email));
                     UserData.setNickname(userResponseStatus.getNickname());
+                    UserData.setAvatar(userResponseStatus.getAvatar());
+                    UserData.setUncypheredEmail(email);
+
+                    editorLogin.putString("email", email);
+                    editorLogin.commit();
 
 //                    Intent intent = new Intent(LogInActivity.this, HomePage1.class);
                     Intent intent = new Intent(LogInActivity.this, HomePageFragmentActivity.class);

@@ -12,17 +12,26 @@ public class UserResponseStatus {
     private String nickname;
     private String avatar;
 
-    public UserResponseStatus(int status, int type, int is_new, String nickname) {
+    public UserResponseStatus(int status, int type, int is_new, String nickname, String avatar) {
         this.status = status;
         this.type = type;
         this.is_new = is_new;
         this.nickname = nickname;
+        this.avatar = avatar;
     }
 
     public UserResponseStatus(int status, String avatar) {
         this.status = status;
         this.avatar = avatar;
     }
+
+    public UserResponseStatus(int status, String avatar, String nickname) {
+        this.status = status;
+        this.avatar = avatar;
+        this.nickname = nickname;
+    }
+
+
 
     public String getAvatar() {
         return avatar;

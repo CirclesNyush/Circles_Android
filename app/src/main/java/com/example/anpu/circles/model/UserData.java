@@ -1,9 +1,19 @@
 package com.example.anpu.circles.model;
 
 public class UserData {
+
+    private static String uncypheredEmail;
     private static String email;
     private static String nickname;
     private static String avatar;
+
+    public static String getUncypheredEmail() {
+        return uncypheredEmail;
+    }
+
+    public static void setUncypheredEmail(String uncypheredEmail) {
+        UserData.uncypheredEmail = uncypheredEmail;
+    }
 
     public static String getAvatar() {
         return avatar;

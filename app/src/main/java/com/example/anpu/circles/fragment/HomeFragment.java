@@ -33,6 +33,7 @@ import com.bumptech.glide.request.target.Target;
 import com.example.anpu.circles.HomePageFragmentActivity;
 import com.example.anpu.circles.LogInActivity;
 import com.example.anpu.circles.R;
+import com.example.anpu.circles.model.InfoBean;
 import com.example.anpu.circles.model.User;
 import com.example.anpu.circles.model.UserAvatar;
 import com.example.anpu.circles.model.UserData;
@@ -71,7 +72,7 @@ public class HomeFragment extends Fragment {
 
     private Window window;
     private android.support.v7.widget.Toolbar toolbar;
-    private TextView textview_personal, cell, nickname, email;
+    private TextView personal_description, cell, nickname, email;
 
 
     private int REQUEST = 1001;
@@ -79,7 +80,18 @@ public class HomeFragment extends Fragment {
 
     private String urlUpdateAvatar = "http://steins.xin:8001/personal/updateavatar";
     private String fetchAvatar = "http://steins.xin:8001/personal/getinfo";
+    private String getInfoUrl = "/personal/getinfo";
+
     private String baseUrl = "http://steins.xin:8001";
+
+    private final RequestOptions options = new RequestOptions()
+            .centerCrop()
+            .skipMemoryCache(true)
+            .placeholder(R.drawable.ic_book_black_24dp)
+            .error(R.drawable.ic_arrow_back)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .circleCrop()
+            .priority(Priority.HIGH);
 
     @Nullable
     @Override
@@ -93,6 +105,18 @@ public class HomeFragment extends Fragment {
         toolbar.setPadding(0, getStatusBarHeight(), 0, 20);
 
         pfp = (ImageButton) rootView.findViewById(R.id.personal_pfp);
+
+        nickname = (TextView) rootView.findViewById(R.id.personal_nickname);
+        cell = (TextView) rootView.findViewById(R.id.personal_cell);
+        email = (TextView) rootView.findViewById(R.id.personal_email);
+        personal_description = (TextView) rootView.findViewById(R.id.personal_description_test);
+
+        Glide.with(getActivity())
+                .load(baseUrl + UserData.getAvatar())
+                .apply(options)
+                .into(pfp);
+
+        getInfo();
 
         return rootView;
     }
@@ -171,15 +195,8 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-//                String ans = response.body().string();
-//                Log.d("Test", ans);
-//                System.out.print(ans);
-
                 String ans = response.body().string();
-
                 final UserResponseStatus userResponseStatus = gson.fromJson(ans, UserResponseStatus.class);
-
-
                 if (userResponseStatus.getStatus() == 0) {
 
                     getActivity().runOnUiThread(new Runnable() {
@@ -193,20 +210,10 @@ public class HomeFragment extends Fragment {
                     String updateTime = String.valueOf(System.currentTimeMillis());
                     UserData.setAvatar(userResponseStatus.getAvatar());
                     //TODO : add signature
-                    final RequestOptions options = new RequestOptions()
-                            .centerCrop()
-                            .skipMemoryCache(true)
-                            .placeholder(R.drawable.ic_book_black_24dp)
-                            .error(R.drawable.ic_arrow_back)
-                            .diskCacheStrategy(DiskCacheStrategy.NONE)
-                            .circleCrop()
-                            .priority(Priority.HIGH);
 
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-
-
                                 Glide.with(HomeFragment.this)
                                         .load(baseUrl + UserData.getAvatar())
                                         .apply(options)
@@ -218,5 +225,56 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    private void getInfo() {
+        final Gson gson = new Gson();
+        User user = new User(UserData.getEmail());
+        String userJson = gson.toJson(user);
 
+        Log.d("json", userJson);
+        // post to the server
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), userJson);
+        Request request = new Request.Builder()
+                .post(body)
+                .url(baseUrl+getInfoUrl)
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getActivity(), "Failure to connect to the server", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String ans = response.body().string();
+                final InfoBean infoBean = gson.fromJson(ans, InfoBean.class);
+                if (infoBean.getStatus() == 0) {
+
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getActivity(), "Account is not activated.", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+                else {
+                    //TODO : add signature
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            nickname.setText(infoBean.getData().getNickname());
+                            cell.setText(infoBean.getData().getPhone());
+                            personal_description.setText(infoBean.getData().getDescription());
+                            email.setText(infoBean.getData().getEmail());
+                        }
+                    });
+                }
+            }
+        });
+    }
 }
