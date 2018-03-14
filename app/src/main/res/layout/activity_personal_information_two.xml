@@ -32,6 +32,14 @@
                 android:background="@drawable/project_detail_cir"
                 android:onClick="onClick_pfp" />
 
+            <Button
+                android:id="@+id/personal_button_back_two"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/ic_edit_"
+                android:paddingTop="200dp"
+                android:layout_gravity="right"/>
+
             <android.support.v7.widget.Toolbar
                 android:id="@+id/personal_toolbar_two"
                 android:layout_width="match_parent"
@@ -39,6 +47,8 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 >
+
+
             </android.support.v7.widget.Toolbar>
 
 

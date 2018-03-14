@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +34,7 @@ import com.bumptech.glide.request.target.Target;
 import com.example.anpu.circles.HomePageFragmentActivity;
 import com.example.anpu.circles.LogInActivity;
 import com.example.anpu.circles.R;
+import com.example.anpu.circles.edit_personal;
 import com.example.anpu.circles.model.InfoBean;
 import com.example.anpu.circles.model.User;
 import com.example.anpu.circles.model.UserAvatar;
@@ -73,6 +75,7 @@ public class HomeFragment extends Fragment {
     private Window window;
     private android.support.v7.widget.Toolbar toolbar;
     private TextView personal_description, cell, nickname, email;
+    private Button btn_edit;
 
 
     private int REQUEST = 1001;
@@ -110,6 +113,16 @@ public class HomeFragment extends Fragment {
         cell = (TextView) rootView.findViewById(R.id.personal_cell);
         email = (TextView) rootView.findViewById(R.id.personal_email);
         personal_description = (TextView) rootView.findViewById(R.id.personal_description_test);
+
+        //edit info
+        btn_edit = (Button)rootView.findViewById(R.id.personal_button_back_two);
+        btn_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),edit_personal.class);
+                startActivity(intent);
+            }
+        });
 
         Glide.with(getActivity())
                 .load(baseUrl + UserData.getAvatar())
