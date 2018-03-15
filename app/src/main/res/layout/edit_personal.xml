@@ -9,6 +9,7 @@
         >
 
         <android.support.v7.widget.Toolbar
+            android:id="@+id/edit_personal_toolbar"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@drawable/orange_purple_gradient"
@@ -47,7 +48,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.3"
                     android:gravity="center_vertical"
                     android:text="User name: "
                     android:textSize="18dp"
@@ -58,7 +59,7 @@
                     android:id="@+id/edit_personal_username"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.3"
                     android:ems="10"
                     android:inputType="textPersonName" />
 
@@ -75,7 +76,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.3"
                     android:gravity="center_vertical"
                     android:text="Email:"
                     android:textSize="18dp"
@@ -86,7 +87,7 @@
                     android:id="@+id/edit_personal_email"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.3"
                     android:ems="10"
                     android:inputType="textEmailAddress" />
 
@@ -103,7 +104,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.3"
                     android:text="Cell:"
                     android:gravity="center_vertical"
                     android:textSize="18dp"
@@ -114,7 +115,7 @@
                     android:id="@+id/edit_personal_cell"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.3"
                     android:ems="10"
                     android:inputType="textPersonName" />
 
@@ -131,7 +132,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.3"
                     android:gravity="center_vertical"
                     android:text="Personal Description:"
                     android:textSize="18dp"

@@ -251,6 +251,8 @@ public class HomeFragment extends Fragment {
                 .post(body)
                 .url(baseUrl+getInfoUrl)
                 .build();
+
+        //receive from server
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
