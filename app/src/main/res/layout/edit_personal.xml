@@ -56,6 +56,7 @@
                     />
 
                 <EditText
+                    android:text="hansa_c"
                     android:id="@+id/edit_personal_username"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -84,6 +85,7 @@
                     />
 
                 <EditText
+                    android:text="wc1369@nyu.edu"
                     android:id="@+id/edit_personal_email"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -112,6 +114,7 @@
                     />
 
                 <EditText
+                    android:text="9293095892"
                     android:id="@+id/edit_personal_cell"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -140,6 +143,7 @@
                     />
 
                 <EditText
+                    android:text="personal description"
                     android:id="@+id/edit_personal_personal_description"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"

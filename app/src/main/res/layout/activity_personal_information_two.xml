@@ -38,7 +38,7 @@
                 android:layout_height="24dp"
                 android:background="@drawable/ic_edit_"
                 android:layout_marginRight="18dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
                 android:layout_gravity="right"/>
 
             <android.support.v7.widget.Toolbar

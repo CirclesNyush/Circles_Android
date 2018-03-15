@@ -9,16 +9,25 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.anpu.circles.model.InfoBean;
 import com.example.anpu.circles.model.Personal;
 import com.example.anpu.circles.model.User;
 import com.example.anpu.circles.model.UserData;
+import com.example.anpu.circles.utilities.MD5Util;
 import com.google.gson.Gson;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * Created by Hansa on 3/14/18.
@@ -44,14 +53,6 @@ public class edit_personal extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.edit_personal_toolbar);
         setSupportActionBar(toolbar);
 
-        EditText edit = (EditText) findViewById(R.id.edit_personal_cell);
-        cell = edit.getText().toString();
-        edit = (EditText) findViewById(R.id.edit_personal_email);
-        email = edit.getText().toString();
-        edit = (EditText) findViewById(R.id.edit_personal_personal_description);
-        pd = edit.getText().toString();
-        edit = (EditText) findViewById(R.id.edit_personal_username);
-        username = edit.getText().toString();
 
 
         //save info to server and return to personal info
@@ -60,18 +61,63 @@ public class edit_personal extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                final Gson gson = new Gson();
-                Personal person = new Personal();
-                String userInfo = gson.toJson(person);
-                // post to the server
-                OkHttpClient client = new OkHttpClient();
-                RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), userInfo);
-                Request request = new Request.Builder()
-                        .post(body)
-                        .url(updateinfo)
-                        .build();
+                EditText edit = (EditText) findViewById(R.id.edit_personal_cell);
+                cell = edit.getText().toString();
+                edit = (EditText) findViewById(R.id.edit_personal_email);
+                email = edit.getText().toString();
+                edit = (EditText) findViewById(R.id.edit_personal_personal_description);
+                pd = edit.getText().toString();
+                edit = (EditText) findViewById(R.id.edit_personal_username);
+                username = edit.getText().toString();
 
-                onBackPressed();
+                ArrayList<String>variables = new ArrayList<String>();
+                variables.add(cell);
+                variables.add(email);
+                variables.add(pd);
+                variables.add(username);
+
+                //verify all input fields are filled
+                Boolean gate = true;
+                for (int n = 0; n < variables.size(); n++) {
+                    if (variables.get(n).matches("")) {
+                        gate = false;
+                    }
+                }
+
+                if (gate == true) {
+
+                    InfoBean entry_package = new InfoBean();
+                    InfoBean.DataBean entry = new InfoBean.DataBean();
+
+                    entry.setDescription(pd);
+                    entry.setEmail(email);
+                    entry.setNickname(username);
+                    entry.setPhone(cell);
+
+                    entry_package.setData(entry);
+
+
+                    final Gson gson = new Gson();
+                    String datajson = gson.toJson(entry);
+                    Personal person = new Personal(MD5Util.getMD5Str(email), datajson);
+                    String userInfo = gson.toJson(person);
+                    // post to the server
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), userInfo);
+                    Request request = new Request.Builder()
+                            .post(body)
+                            .url(updateinfo)
+                            .build();
+
+                    onBackPressed();
+
+                }
+
+                else if (gate == false) {
+                    Toast.makeText(edit_personal.this, "Fill in all the blanks", Toast.LENGTH_LONG).show();
+                }
+
+
             }
         });
 
