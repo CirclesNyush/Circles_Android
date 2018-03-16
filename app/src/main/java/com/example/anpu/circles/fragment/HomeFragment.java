@@ -75,7 +75,7 @@ public class HomeFragment extends Fragment {
     private Window window;
     private android.support.v7.widget.Toolbar toolbar;
     private TextView personal_description, cell, nickname, email;
-    private Button btn_edit;
+    private Button btn_edit, btn_save;
 
 
     private int REQUEST = 1001;
@@ -124,12 +124,15 @@ public class HomeFragment extends Fragment {
             }
         });
 
+
+
         Glide.with(getActivity())
                 .load(baseUrl + UserData.getAvatar())
                 .apply(options)
                 .into(pfp);
 
         getInfo();
+
 
         return rootView;
     }

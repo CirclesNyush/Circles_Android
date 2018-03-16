@@ -86,7 +86,6 @@ public class edit_personal extends AppCompatActivity {
 
                 if (gate == true) {
 
-                    InfoBean entry_package = new InfoBean();
                     InfoBean.DataBean entry = new InfoBean.DataBean();
 
                     entry.setDescription(pd);
@@ -94,21 +93,19 @@ public class edit_personal extends AppCompatActivity {
                     entry.setNickname(username);
                     entry.setPhone(cell);
 
-                    entry_package.setData(entry);
-
+                    InfoBean entry_package = new InfoBean(MD5Util.getMD5(email), entry);
 
                     final Gson gson = new Gson();
-                    String datajson = gson.toJson(entry);
-                    Personal person = new Personal(MD5Util.getMD5Str(email), datajson);
-                    String userInfo = gson.toJson(person);
+                    String datajson = gson.toJson(entry_package);
                     // post to the server
                     OkHttpClient client = new OkHttpClient();
-                    RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), userInfo);
+                    RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), datajson);
                     Request request = new Request.Builder()
                             .post(body)
                             .url(updateinfo)
                             .build();
 
+                    Toast.makeText(edit_personal.this, "Saved", Toast.LENGTH_LONG).show();
                     onBackPressed();
 
                 }

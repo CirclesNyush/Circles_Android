@@ -9,6 +9,12 @@ public class InfoBean {
 
     private int status;
     private DataBean data;
+    private String email;
+
+    public InfoBean (String email, DataBean entry) {
+        this.email = email;
+        this.data = entry;
+    }
 
     public int getStatus() {
         return status;
@@ -17,6 +23,10 @@ public class InfoBean {
     public void setStatus(int status) {
         this.status = status;
     }
+
+    public String getEmail () {return email;}
+
+    public void setEmail (String email) {this.email = email;}
 
     public DataBean getData() {
         return data;
