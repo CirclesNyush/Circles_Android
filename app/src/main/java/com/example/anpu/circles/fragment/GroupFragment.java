@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.anpu.circles.R;
 import com.example.anpu.circles.utilities.GlideV4ImageEngine;
+import com.example.anpu.circles.utilities.PermissonHelper;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
@@ -26,6 +27,7 @@ import com.zhihu.matisse.filter.Filter;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
+import static com.example.anpu.circles.utilities.PermissonHelper.askStroage;
 
 /**
  * Created by anpu on 2018/3/5.
@@ -46,8 +48,7 @@ public class GroupFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Button selc = (Button) getActivity().findViewById(R.id.test_selc);
-
-        askStroage();
+        askStroage(getActivity());
         selc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,21 +76,5 @@ public class GroupFragment extends Fragment {
         }
     }
 
-    private void askStroage() {
-        int REQUEST_EXTERNAL_STORAGE = 1;
-        String[] PERMISSIONS_STORAGE = {
-                android.Manifest.permission.READ_EXTERNAL_STORAGE,
-                android.Manifest.permission.WRITE_EXTERNAL_STORAGE
-        };
-        int permission = ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            // We don't have permission so prompt the user
-            ActivityCompat.requestPermissions(
-                    getActivity(),
-                    PERMISSIONS_STORAGE,
-                    REQUEST_EXTERNAL_STORAGE
-            );
-        }
-    }
 }

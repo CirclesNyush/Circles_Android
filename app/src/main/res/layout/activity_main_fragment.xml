@@ -5,10 +5,6 @@
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <include
-        android:id="@+id/top_bar"
-        layout="@layout/app_bar" />
-
     <!--<FrameLayout-->
         <!--android:id="@+id/id_content"-->
         <!--android:layout_width="match_parent"-->

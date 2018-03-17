@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.transition.Explode;
 import android.transition.Fade;
 import android.transition.Slide;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -27,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.anpu.circles.model.UserData;
 import com.example.anpu.circles.utilities.JellyInterpolator;
 import com.example.anpu.circles.utilities.MD5Util;
 import com.google.gson.Gson;
@@ -44,7 +46,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
 import com.example.anpu.circles.model.User;
-import com.example.anpu.circles.model.UserStatus;
+import com.example.anpu.circles.model.UserResponseStatus;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -55,14 +57,6 @@ import okhttp3.Response;
 
 public class LogInActivity extends AppCompatActivity {
 
-//    // bind emailEditText and pwdEditText
-//    @BindView(R.id.edit_username_login) EditText emailEditText;
-//    @BindView(R.id.edit_pwd_login) EditText pwdEditText;
-//    // bind buttons
-//    @BindView(R.id.login_button) Button loginButton;
-//    // bind textview
-//    @BindView(R.id.signup_textview) TextView signupTextView;
-//    @BindView(R.id.forgetpwd_textview) TextView forgetpwdTextView;
     @BindView(R.id.main_btn_login) TextView mBtnLogin;
     @BindView(R.id.layout_progress_login) View progress;
     @BindView(R.id.input_layout_login) View mInputLayout;
@@ -75,6 +69,7 @@ public class LogInActivity extends AppCompatActivity {
     private ActionBar bar;
 
     private String email;
+    private String nickname;
     private String pwd;
     private String urlLogin = "http://steins.xin:8001/auth/login";
     private String urlForget = "http://steins.xin:8001/auth/forgetpwd";
@@ -356,10 +351,10 @@ public class LogInActivity extends AppCompatActivity {
 //                String ans = response.body().string();
 //                Log.d("Test", ans);
 //                System.out.print(ans);
-                UserStatus userStatus = gson.fromJson(response.body().string(), UserStatus.class);
+                UserResponseStatus userResponseStatus = gson.fromJson(response.body().string(), UserResponseStatus.class);
                 // failure
-                if (userStatus.getStatus() == 0) {
-                    if (userStatus.getType() == 0) {
+                if (userResponseStatus.getStatus() == 0) {
+                    if (userResponseStatus.getType() == 0) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -380,8 +375,14 @@ public class LogInActivity extends AppCompatActivity {
                 }
                 // success
                 else {
-                    editorLogin.putBoolean("login", true);
+                    UserData.setEmail(MD5Util.getMD5(email));
+                    UserData.setNickname(userResponseStatus.getNickname());
+                    UserData.setAvatar(userResponseStatus.getAvatar());
+                    UserData.setUncypheredEmail(email);
+
+                    editorLogin.putString("email", email);
                     editorLogin.commit();
+
 //                    Intent intent = new Intent(LogInActivity.this, HomePage1.class);
                     Intent intent = new Intent(LogInActivity.this, HomePageFragmentActivity.class);
                     startActivity(intent);
@@ -390,60 +391,4 @@ public class LogInActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
-
-
-
-    /// three listeners for text change   ---------- IGNORE IT
-//    @OnTextChanged(value = R.id.edit_username)
-//    void onTextChanged(CharSequence s, int start, int before, int count) {
-//        Log.d("Test", s.toString());
-//    }
-
-//    void afterTextChanged(Editable e) {
-//        Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
-//    }
-//    void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//        Log.d("Test", s.toString());
-//    }
-
-//    @OnTextChanged(value = R.id.edit_pwd, callback = OnTextChanged.Callback.TEXT_CHANGED)
-//    public void  getPwd(EditText pwd) {
-//        Log.d("Test", String.valueOf(pwd.getText()));
-//    }
-
-
-//    @OnTextChanged(R.id.edit_username_login)
-//    void emailChanged(CharSequence s, int start, int before, int count) {
-//        email = s.toString();
-//    }
-//
-//    @OnTextChanged(R.id.edit_pwd_login)
-//    void pwdChanged(CharSequence s, int start, int before, int count) {
-//        pwd = s.toString();
-//    }
-//
-//    @OnClick(R.id.login_button)
-//    void loginClicked() {
-//        if (email == null || email.equals("")) {
-//            Toast.makeText(this, "Username is empty", Toast.LENGTH_SHORT).show();
-//        }
-//        else if (pwd == null || pwd.equals("")) {
-//            Toast.makeText(this,"Password is empty", Toast.LENGTH_SHORT).show();
-//        }
-//        else {
-//            // TO DO
-//            // check if email is valid
-//            String pattern = "@nyu.edu";
-//            Pattern r = Pattern.compile(pattern);
-//            Matcher m = r.matcher(email);
-//            if (! m.find()) {
-//                Toast.makeText(this, "Username should end with @nyu.edu", Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//    }
-//
-
 }
