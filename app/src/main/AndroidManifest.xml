@@ -43,6 +43,7 @@
             android:name=".Personal_Information"
             android:noHistory="false" />
         <activity android:name=".HomePageFragmentActivity" />
+        <activity android:name=".CircleAddActivity" />
 
         <service android:name=".service.AppFirebaseInstanceIdService">
             <intent-filter>

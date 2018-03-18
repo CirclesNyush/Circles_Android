@@ -48,10 +48,6 @@ import okhttp3.Response;
 
 public class SignUpActivity extends AppCompatActivity{
 
-//    @BindView(R.id.signup_layout_email) EditText emailEditText;
-//    @BindView(R.id.signup_layout_pwd) EditText pwdEditText;
-//    @BindView(R.id.signup_button) Button signupButton;
-
     @BindView(R.id.main_btn_signup) TextView mBtnLogin;
     @BindView(R.id.layout_progress_signup) View progress;
     @BindView(R.id.input_layout_signup) View mInputLayout;

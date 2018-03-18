@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dip"
+    android:gravity="center_vertical"
+    android:padding="10dip"
+    android:background="@color/colorLightViolet">
+    
+    <ImageView
+        android:id="@+id/circle_add_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_arrow_back"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Create a new circle"
+        android:textSize="25sp"
+        android:textColor="#ffffff"/>
+
+    <ImageView
+        android:id="@+id/circle_add_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_edit_"
+        android:layout_alignParentEnd="true"/>
+
+
+</RelativeLayout>
