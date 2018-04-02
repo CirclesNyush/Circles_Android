@@ -144,7 +144,6 @@ public class LogInActivity extends AppCompatActivity {
 
     }
 
-
     @OnClick(R.id.signup_textview)
     void signupTextClicked() {
         Intent intent = new Intent(LogInActivity.this, SignUpActivity.class);
