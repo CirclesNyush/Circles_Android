@@ -50,6 +50,14 @@ public class InfoBean {
         private String description;
         private String email;
 
+        public DataBean(String nickname, String phone, String description, String email) {
+            this.nickname = nickname;
+            this.phone = phone;
+            this.description = description;
+            this.email = email;
+            this.avatar = "";
+        }
+
         public String getEmail() {
             return email;
         }

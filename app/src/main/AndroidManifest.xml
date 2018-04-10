@@ -38,10 +38,6 @@
         <activity android:name=".SignUpActivity" />
         <activity android:name=".HomePage1" />
         <activity android:name=".Group" />
-        <activity android:name=".edit_personal" />
-        <activity
-            android:name=".Personal_Information"
-            android:noHistory="false" />
         <activity android:name=".HomePageFragmentActivity" />
 
         <service android:name=".service.AppFirebaseInstanceIdService">

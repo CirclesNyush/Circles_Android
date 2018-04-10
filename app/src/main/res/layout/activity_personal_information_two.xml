@@ -2,6 +2,8 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.design.widget.AppBarLayout
@@ -31,15 +33,6 @@
                 android:layout_gravity="center"
                 android:background="@drawable/project_detail_cir"
                 android:onClick="onClick_pfp" />
-
-            <Button
-                android:id="@+id/personal_button_back_two"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:background="@drawable/ic_edit_"
-                android:layout_marginRight="18dp"
-                android:layout_marginTop="30dp"
-                android:layout_gravity="right"/>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/personal_toolbar_two"
@@ -92,24 +85,27 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:gravity="center_horizontal|right"
                         android:layout_weight="5"
                         android:ellipsize="end"
+                        android:gravity="center_horizontal|right"
                         android:maxLines="1"
-                        android:textSize="17sp"
+                        android:text="Username:  "
                         android:textColor="@color/colorBlack"
-                        android:text="Username:  "/>
+                        android:textSize="17sp" />
 
 
-                    <TextView
+                    <EditText
                         android:id="@+id/personal_nickname"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="32dp"
                         android:layout_weight="5"
                         android:gravity="center_horizontal|left"
-                        android:textSize="17sp"
+                        android:background="@null"
+                        android:inputType="text"
+                        android:selectAllOnFocus="false"
+                        android:singleLine="true"
                         android:textColor="@color/colorBlack"
-                        />
+                        android:textSize="17sp" />
 
                 </LinearLayout>
 
@@ -138,6 +134,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="5"
+                        android:background="@null"
                         android:gravity="center_horizontal|left"
                         android:textSize="17sp"
                         android:textColor="@color/colorBlack"
@@ -165,15 +162,16 @@
                         android:text="Cell:  "/>
 
 
-                    <TextView
+                    <EditText
                         android:id="@+id/personal_cell"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="5"
+                        android:background="@null"
                         android:gravity="center_horizontal|left"
-                        android:textSize="17sp"
+                        android:singleLine="true"
                         android:textColor="@color/colorBlack"
-                        />
+                        android:textSize="17sp" />
 
                 </LinearLayout>
 
@@ -225,16 +223,19 @@
                     android:textColor="@color/colorBlack"
                     android:layout_weight="1"
                     android:text="Personal Description:" />
-                <TextView
+
+                <EditText
                     android:id="@+id/personal_description_test"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="121dp"
+                    android:hint="Click to edit"
+                    android:gravity="top"
+                    android:background="@null"
+                    android:ellipsize="end"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:ellipsize="end"
-                    android:textSize="14sp"
                     android:textColor="@color/darkgrey"
-                     />
+                    android:textSize="14sp" />
 
 
 
