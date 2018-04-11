@@ -8,6 +8,9 @@ public class CircleItem {
     private String avatar;
     private int id;
 
+    public CircleItem() {
+    }
+
     public CircleItem(String title, String content) {
         this.title = title;
         this.content = content;

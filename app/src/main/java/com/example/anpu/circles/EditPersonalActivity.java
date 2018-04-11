@@ -3,7 +3,6 @@ package com.example.anpu.circles;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -12,28 +11,21 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.anpu.circles.model.InfoBean;
-import com.example.anpu.circles.model.Personal;
-import com.example.anpu.circles.model.User;
-import com.example.anpu.circles.model.UserData;
 import com.example.anpu.circles.utilities.MD5Util;
 import com.google.gson.Gson;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import okhttp3.Response;
 
 /**
  * Created by Hansa on 3/14/18.
  */
 
-public class edit_personal extends AppCompatActivity {
+public class EditPersonalActivity extends AppCompatActivity {
 
 
     private Button btn_save;
@@ -105,13 +97,13 @@ public class edit_personal extends AppCompatActivity {
                             .url(updateinfo)
                             .build();
 
-                    Toast.makeText(edit_personal.this, "Saved", Toast.LENGTH_LONG).show();
+                    Toast.makeText(EditPersonalActivity.this, "Saved", Toast.LENGTH_LONG).show();
                     onBackPressed();
 
                 }
 
                 else if (gate == false) {
-                    Toast.makeText(edit_personal.this, "Fill in all the blanks", Toast.LENGTH_LONG).show();
+                    Toast.makeText(EditPersonalActivity.this, "Fill in all the blanks", Toast.LENGTH_LONG).show();
                 }
 
 

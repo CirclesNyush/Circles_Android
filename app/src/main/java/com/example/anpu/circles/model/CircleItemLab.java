@@ -24,6 +24,12 @@ public class CircleItemLab {
 
     private CircleItemLab(Context context) {
         mCircleItems = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            CircleItem circleItem = new CircleItem();
+            circleItem.setTitle("Circle Item #" + i);
+            circleItem.setContent("This Is Circle Item #" + i);
+            mCircleItems.add(circleItem);
+        }
     }
 
     public List<CircleItem> getCircleItems() {

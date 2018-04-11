@@ -3,9 +3,6 @@ package com.example.anpu.circles.fragment;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -25,16 +22,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
-import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.Target;
-import com.example.anpu.circles.HomePageFragmentActivity;
-import com.example.anpu.circles.LogInActivity;
 import com.example.anpu.circles.R;
-import com.example.anpu.circles.edit_personal;
+import com.example.anpu.circles.EditPersonalActivity;
 import com.example.anpu.circles.model.InfoBean;
 import com.example.anpu.circles.model.User;
 import com.example.anpu.circles.model.UserAvatar;
@@ -42,7 +33,6 @@ import com.example.anpu.circles.model.UserData;
 import com.example.anpu.circles.model.UserResponseStatus;
 import com.example.anpu.circles.utilities.GlideV4ImageEngine;
 import com.example.anpu.circles.utilities.ImageHelper;
-import com.example.anpu.circles.utilities.MD5Util;
 import com.example.anpu.circles.utilities.PermissonHelper;
 import com.google.gson.Gson;
 import com.zhihu.matisse.Matisse;
@@ -60,7 +50,6 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static android.app.Activity.RESULT_OK;
-import static com.bumptech.glide.load.engine.DiskCacheStrategy.NONE;
 
 /**
  * Created by anpu on 2018/3/5.
@@ -119,7 +108,7 @@ public class HomeFragment extends Fragment {
         btn_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),edit_personal.class);
+                Intent intent = new Intent(getActivity(),EditPersonalActivity.class);
                 startActivity(intent);
             }
         });

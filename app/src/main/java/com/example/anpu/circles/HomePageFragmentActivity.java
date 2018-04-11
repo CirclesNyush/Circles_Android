@@ -42,9 +42,6 @@ public class HomePageFragmentActivity extends AppCompatActivity {
         // bind all things
         ButterKnife.bind(this);
 
-        // initialize home as the first window
-//        setTabSelection(0);
-
         initFragmentList();
         initViewPager();
 

@@ -86,7 +86,8 @@ public class LogInActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
-        ButterKnife.bind(this);  // bind emailEditText and pwdEditText
+        // bind emailEditText and pwdEditText
+        ButterKnife.bind(this);
 
         // hide the bar at the top
 //        getSupportActionBar().hide();
@@ -129,7 +130,6 @@ public class LogInActivity extends AppCompatActivity {
 
     @OnClick(R.id.main_btn_login)
     void loginClicked() {
-
         if (email == null || email.equals("")) {
             Toast.makeText(this, "Email is empty", Toast.LENGTH_SHORT).show();
         }
@@ -140,8 +140,6 @@ public class LogInActivity extends AppCompatActivity {
             // Using regex to check if it's nyu email
             checkEmail();
         }
-
-
     }
 
 
@@ -287,10 +285,7 @@ public class LogInActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animator animator) {
-                // check if the account is valid
-                // generate json
                 validLogin();
-
             }
 
             @Override

@@ -1,4 +1,4 @@
-package com.example.anpu.circles;
+package com.example.anpu.circles.utilities;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

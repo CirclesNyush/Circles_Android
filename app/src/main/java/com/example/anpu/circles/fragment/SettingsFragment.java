@@ -11,9 +11,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.example.anpu.circles.HomePageFragmentActivity;
 import com.example.anpu.circles.R;
 import com.example.anpu.circles.adapter.CirclesAdapter;
 import com.example.anpu.circles.model.CircleItem;
+import com.example.anpu.circles.model.CircleItemLab;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,12 +39,14 @@ public class SettingsFragment extends Fragment {
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.circles_recycler);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        List<CircleItem> itemsData = new ArrayList<CircleItem>();
-        itemsData.add(new CircleItem("Blue", "3"));
-        itemsData.add(new CircleItem("Red", "2"));
-        itemsData.add(new CircleItem("Green", "4"));
-        itemsData.add(new CircleItem("Amber","5"));
-        itemsData.add(new CircleItem("Indigo", "1"));
+//        List<CircleItem> itemsData = new ArrayList<CircleItem>();
+//        itemsData.add(new CircleItem("Blue", "3"));
+//        itemsData.add(new CircleItem("Red", "2"));
+//        itemsData.add(new CircleItem("Green", "4"));
+//        itemsData.add(new CircleItem("Amber","5"));
+//        itemsData.add(new CircleItem("Indigo", "1"));
+
+        List<CircleItem> itemsData = CircleItemLab.get(getContext()).getCircleItems();
 
 
         mAdapter = new CirclesAdapter(R.layout.circle_item, itemsData);
