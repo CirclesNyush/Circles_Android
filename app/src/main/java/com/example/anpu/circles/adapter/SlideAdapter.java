@@ -12,10 +12,10 @@ import com.example.anpu.circles.R;
 
 public class SlideAdapter extends PagerAdapter {
 
-    Context context;
-    LayoutInflater inflater;
+    private Context context;
+    private LayoutInflater inflater;
 
-    public int[] images =  {
+    private int[] images =  {
         R.drawable.one_slide,
         R.drawable.two_slide
     };

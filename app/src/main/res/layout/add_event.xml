@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10">
+
+    <ImageButton
+        android:id="@+id/add_event_change_cover"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:src="@drawable/orange_purple_gradient"
+        android:onClick="onClick_add_event"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_weight="4">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/add_event_name"
+                android:paddingTop="@dimen/dp_10"
+                android:paddingBottom="@dimen/dp_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter your event name"
+                android:textSize="25dp"
+                android:background="@android:color/transparent"
+                android:gravity="center"/>
+
+            <LinearLayout
+                android:paddingTop="@dimen/dp_10"
+                android:paddingBottom="@dimen/dp_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_location"/>
+
+                <EditText
+                    android:id="@+id/add_event_location"
+                    android:layout_width="0dp"
+                    android:layout_weight="9"
+                    android:layout_height="wrap_content"
+                    android:hint="Where is it?"
+                    android:background="@android:color/transparent"
+                    android:textSize="25dp"
+                    android:gravity="center"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:paddingTop="@dimen/dp_10"
+                android:paddingBottom="@dimen/dp_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_time"/>
+
+                <EditText
+                    android:id="@+id/add_event_time"
+                    android:layout_width="0dp"
+                    android:layout_weight="9"
+                    android:layout_height="wrap_content"
+                    android:hint="When is it?"
+                    android:background="@android:color/transparent"
+                    android:textSize="25dp"
+                    android:gravity="center"/>
+
+
+            </LinearLayout>
+            
+
+            <LinearLayout
+                android:paddingTop="@dimen/dp_10"
+                android:paddingBottom="@dimen/dp_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_email_black_24dp"/>
+
+                <EditText
+                    android:id="@+id/add_event_email"
+                    android:layout_width="0dp"
+                    android:layout_weight="9"
+                    android:layout_height="wrap_content"
+                    android:hint="What is your email?"
+                    android:background="@android:color/transparent"
+                    android:textSize="25dp"
+                    android:gravity="center"/>
+
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/add_event_description"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:hint="Why not give it a description?"
+                android:background="@android:color/transparent"
+                android:layout_height="100dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:weightSum="10">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3.5"
+            android:text="Save"
+            android:background="@color/colorNYU_Purple"
+            android:textColor="@color/colorWhite"
+            />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/white" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6.5"
+            android:text="Join!"
+            android:background="@color/colorNYU_Purple"
+            android:textColor="@color/colorWhite"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

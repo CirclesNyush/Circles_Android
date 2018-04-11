@@ -22,6 +22,11 @@ public class User {
         this.gender = 1;
     }
 
+
+    public User(String email) {
+        this.email = email;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -53,4 +58,5 @@ public class User {
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
+
 }
