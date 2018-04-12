@@ -19,6 +19,6 @@
         android:layout_margin="@dimen/sp_16"
         android:clickable="true"
         android:src="@drawable/ic_edit_"
-        app:layout_behavior="com.example.anpu.circles.utilities.ScrollAwareFabBehavior"
+        app:layout_behavior=".utilities.ScrollAwareFabBehavior"
         />
 </android.support.design.widget.CoordinatorLayout>
