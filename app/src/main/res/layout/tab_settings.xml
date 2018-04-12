@@ -1,4 +1,5 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -7,4 +8,17 @@
         android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-</LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="normal"
+        app:layout_anchor="@+id/circles_recycler"
+        app:layout_anchorGravity="end|bottom"
+        android:layout_margin="@dimen/sp_16"
+        android:clickable="true"
+        android:src="@drawable/ic_edit_"
+        app:layout_behavior="com.example.anpu.circles.utilities.ScrollAwareFabBehavior"
+        />
+</android.support.design.widget.CoordinatorLayout>
