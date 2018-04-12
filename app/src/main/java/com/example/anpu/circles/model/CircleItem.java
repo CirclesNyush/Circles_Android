@@ -5,11 +5,21 @@ import java.net.URL;
 public class CircleItem {
     private String title;
     private String content;
-    private URL avatar;
+    private String avatar;
+    private int id;
+
+    public CircleItem() {
+    }
 
     public CircleItem(String title, String content) {
         this.title = title;
         this.content = content;
+    }
+
+    public CircleItem(String title, String content, String avatar) {
+        this.title = title;
+        this.content = content;
+        this.avatar = avatar;
     }
 
     public String getTitle() {
@@ -28,11 +38,19 @@ public class CircleItem {
         this.content = content;
     }
 
-    public URL getAvatar() {
+    public String getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(URL avatar) {
+    public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
