@@ -36,7 +36,7 @@
         </activity>
         <activity android:name=".LogInActivity" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".HomePage1" />
+        <activity android:name=".AddCircleActivity" />
         <activity android:name=".Group" />
         <activity android:name=".HomePageFragmentActivity" />
 

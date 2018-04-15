@@ -12,7 +12,7 @@
         android:layout_height="0dp"
         android:layout_weight="5"
         android:src="@drawable/orange_purple_gradient"
-        android:onClick="onClick_add_event"/>
+        />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -153,6 +153,7 @@
             android:background="@android:color/white" />
 
         <Button
+            android:id="@+id/add_event_submit"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="6.5"

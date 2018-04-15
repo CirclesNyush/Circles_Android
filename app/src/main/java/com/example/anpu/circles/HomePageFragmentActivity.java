@@ -4,9 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.anpu.circles.adapter.ViewPagerFragmentAdapter;
@@ -27,10 +27,12 @@ import butterknife.ButterKnife;
 public class HomePageFragmentActivity extends AppCompatActivity {
 
     @BindView(R.id.bottom_bar) BottomNavigationView bnv;
-    @BindView(R.id.id__main_viewpager) ViewPager viewPager;
+    ViewPager viewPager;
 
     private android.support.v4.app.Fragment tabHome, tabGroup, tabSettings;
     private MenuItem menuItem;
+
+    ViewPagerFragmentAdapter viewPagerFragmentAdapter;
 
     List<android.support.v4.app.Fragment> fragmentList = new ArrayList<>();
 
@@ -41,13 +43,13 @@ public class HomePageFragmentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_fragment);
         // bind all things
         ButterKnife.bind(this);
+        viewPager = findViewById(R.id.id__main_viewpager);
 
         // initialize home as the first window
 //        setTabSelection(0);
 
         initFragmentList();
         initViewPager();
-
 
         bnv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -79,7 +81,7 @@ public class HomePageFragmentActivity extends AppCompatActivity {
 
     private void initViewPager() {
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-        ViewPagerFragmentAdapter viewPagerFragmentAdapter = new ViewPagerFragmentAdapter(fragmentManager, fragmentList);
+        viewPagerFragmentAdapter = new ViewPagerFragmentAdapter(fragmentManager, fragmentList);
         viewPager.addOnPageChangeListener(new ViewPagerOnPagerChangedListener());
         viewPager.setAdapter(viewPagerFragmentAdapter);
         viewPager.setCurrentItem(0);
@@ -99,8 +101,12 @@ public class HomePageFragmentActivity extends AppCompatActivity {
             } else {
                 bnv.getMenu().getItem(0).setChecked(false);
             }
-            menuItem = bnv.getMenu().getItem(position);
-            menuItem.setChecked(true);
+            Log.d("menu", String.valueOf(position));
+            if (position < 3) {
+                menuItem = bnv.getMenu().getItem(position);
+                menuItem.setChecked(true);
+            }
+
         }
         @Override
         public void onPageScrollStateChanged(int state) {

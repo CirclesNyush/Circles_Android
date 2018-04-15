@@ -13,7 +13,7 @@ public class CircleItemLab {
 
     private static CircleItemLab sCircleItemLab;
 
-    private List<CircleItem> mCircleItems;
+    private List<CircleBean> mCircleItems;
 
     public static CircleItemLab get(Context context) {
         if (sCircleItemLab == null) {
@@ -24,28 +24,22 @@ public class CircleItemLab {
 
     private CircleItemLab(Context context) {
         mCircleItems = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            CircleItem circleItem = new CircleItem();
-            circleItem.setTitle("Circle Item #" + i);
-            circleItem.setContent("This Is Circle Item #" + i);
-            mCircleItems.add(circleItem);
-        }
     }
 
-    public List<CircleItem> getCircleItems() {
+    public List<CircleBean> getCircleItems() {
         return mCircleItems;
     }
 
-    public CircleItem getCircleItem(int id) {
-        for (CircleItem circleItem : mCircleItems) {
-            if (circleItem.getId() == id) {
-                return circleItem;
+    public CircleBean getCircleItem(int id) {
+        for (CircleBean CircleBean : mCircleItems) {
+            if (CircleBean.getId() == id) {
+                return CircleBean;
             }
         }
         return null;
     }
 
-    public void addCircleItem(CircleItem circleItem) {
+    public void addCircleItem(CircleBean circleItem) {
         mCircleItems.add(circleItem);
     }
 }
