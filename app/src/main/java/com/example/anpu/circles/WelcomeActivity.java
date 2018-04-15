@@ -3,7 +3,6 @@ package com.example.anpu.circles;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -12,7 +11,6 @@ import android.widget.Toast;
 import com.example.anpu.circles.model.User;
 import com.example.anpu.circles.model.UserData;
 import com.example.anpu.circles.model.UserResponseStatus;
-import com.example.anpu.circles.utilities.MD5Util;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -78,7 +76,7 @@ public class WelcomeActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 UserResponseStatus userResponseStatus = gson.fromJson(response.body().string(), UserResponseStatus.class);
                 if (userResponseStatus.getStatus() == 0) {
-                    Intent i = new Intent(WelcomeActivity.this, LogInActivity.class);
+                    Intent i = new Intent(WelcomeActivity.this, LoginActivity.class);
                     startActivity(i);
                 } else {
                     Intent i = new Intent(WelcomeActivity.this, HomePageFragmentActivity.class);

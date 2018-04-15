@@ -6,8 +6,6 @@ import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 
-import com.example.anpu.circles.LogInActivity;
-
 public class PermissonHelper {
 
     public static void askStroage(FragmentActivity activity) {

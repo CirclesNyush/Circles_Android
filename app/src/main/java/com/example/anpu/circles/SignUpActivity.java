@@ -256,7 +256,7 @@ public class SignUpActivity extends AppCompatActivity{
                             Toast.makeText(SignUpActivity.this, "An activation email has been sent to your email address. Please click the link in the email to activate your account.", Toast.LENGTH_LONG).show();
                         }
                     });
-                    Intent intent = new Intent(SignUpActivity.this, LogInActivity.class);
+                    Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                     startActivity(intent);
                     SignUpActivity.this.finish();
                 }
