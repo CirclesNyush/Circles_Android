@@ -28,7 +28,9 @@ import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.input_layout_login.*
 import okhttp3.*
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import java.io.IOException
 import java.util.*
@@ -273,8 +275,7 @@ class LoginActivity : AppCompatActivity() {
                     editorLogin?.putString("email", email)
                     editorLogin?.commit()
 
-                    val intent = Intent(this@LoginActivity, HomePageFragmentActivity::class.java)
-                    startActivity(intent)
+                    startActivity<HomePageFragmentActivity>()
                     this@LoginActivity.finish()
                 }
             }
