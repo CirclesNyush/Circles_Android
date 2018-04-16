@@ -30,7 +30,6 @@
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -39,6 +38,7 @@
         <activity android:name=".AddCircleActivity" />
         <activity android:name=".Group" />
         <activity android:name=".HomePageFragmentActivity" />
+
 
         <service android:name=".service.AppFirebaseInstanceIdService">
             <intent-filter>
