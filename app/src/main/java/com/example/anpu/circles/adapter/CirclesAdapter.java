@@ -4,7 +4,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.anpu.circles.R;
 import com.example.anpu.circles.model.CircleBean;
-import com.example.anpu.circles.model.CircleItem;
 
 import java.util.List;
 
