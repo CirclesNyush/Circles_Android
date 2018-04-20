@@ -44,6 +44,12 @@ public class CircleItemLab {
     }
 
     public void addCircleItem(CircleBean circleItem) {
-        mCircleItems.add(circleItem);
+        if (! mCircleItems.contains(circleItem)) {
+            mCircleItems.add(circleItem);
+        }
+    }
+
+    public void clear() {
+        mCircleItems.clear();
     }
 }

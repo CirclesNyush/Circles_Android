@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -69,13 +70,26 @@ class SettingsFragment : Fragment() {
             override fun onLoadMore() {
                 //pull upon
                 Handler().postDelayed({ mSwipeRefreshLayout.loadMoreComplete({ }, 500) }, 2000)
-
+                // This is a local test
+                // TODO: add by index
+                for (i in 31..41) {
+                    val circleBean = CircleBean("test$i",
+                            "This is test$i",
+                            "/static/pic/33a5cbb6a9a0e88b4a6adcb73f6ad025.jpg",
+                            "mars")
+                    CircleItemLab.get(activity).addCircleItem(circleBean)
+                }
+                activity.runOnUiThread { mAdapter.notifyDataSetChanged() }
             }
 
             override fun onRefreshing() {
                 //pull down
                 Handler().postDelayed({ mSwipeRefreshLayout.refreshComplete() }, 2000)
-
+                // just an expedient
+                // clear the data set and reload it
+                // TODO: use index to load
+                CircleItemLab.get(activity).clear()
+                getEvent(0)
             }
         })
 
@@ -116,6 +130,7 @@ class SettingsFragment : Fragment() {
                     for (dataBean in circleResponseBean.data) {
                         CircleItemLab.get(activity).addCircleItem(CircleBean(dataBean.title,
                                 dataBean.content, dataBean.avatar, dataBean.nickname))
+
                     }
                     activity.runOnUiThread { mAdapter.notifyDataSetChanged() }
                 }
