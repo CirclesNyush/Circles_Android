@@ -41,6 +41,7 @@ public class NotificationUtil {
                 .setOngoing(true)
                 .setNumber(20);
 
+
         Notification notification = builder.build();
         notification.flags = Notification.FLAG_NO_CLEAR;
         notificationManager.notify(0, notification);

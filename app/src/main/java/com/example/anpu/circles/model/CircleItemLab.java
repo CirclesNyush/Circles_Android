@@ -39,6 +39,10 @@ public class CircleItemLab {
         return null;
     }
 
+    public boolean isEmpty() {
+        return this.mCircleItems == null || this.mCircleItems.isEmpty();
+    }
+
     public void addCircleItem(CircleBean circleItem) {
         mCircleItems.add(circleItem);
     }

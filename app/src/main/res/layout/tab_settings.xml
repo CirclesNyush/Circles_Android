@@ -3,11 +3,16 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/circles_recycler"
-        android:scrollbars="vertical"
+    <com.ajguan.library.EasyRefreshLayout
+        android:id="@+id/swipe_circle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/circles_recycler"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </com.ajguan.library.EasyRefreshLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_add"
