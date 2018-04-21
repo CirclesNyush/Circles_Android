@@ -97,6 +97,7 @@ public class AddCircleActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             Toast.makeText(AddCircleActivity.this, "upload", Toast.LENGTH_LONG).show();
+                            finish();
                         }
                     });
                 }

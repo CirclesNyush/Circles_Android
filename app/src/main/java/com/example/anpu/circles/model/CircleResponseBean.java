@@ -42,6 +42,15 @@ public class CircleResponseBean {
         private String time;
         private String avatar;
         private String nickname;
+        private int event_id;
+
+        public int getEvent_id() {
+            return event_id;
+        }
+
+        public void setEvent_id(int event_id) {
+            this.event_id = event_id;
+        }
 
         public String getTitle() {
             return title;

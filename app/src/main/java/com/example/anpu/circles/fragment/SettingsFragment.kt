@@ -71,15 +71,10 @@ class SettingsFragment : Fragment() {
                 //pull upon
                 Handler().postDelayed({ mSwipeRefreshLayout.loadMoreComplete({ }, 500) }, 2000)
                 // This is a local test
-                // TODO: add by index
-                for (i in 31..41) {
-                    val circleBean = CircleBean("test$i",
-                            "This is test$i",
-                            "/static/pic/33a5cbb6a9a0e88b4a6adcb73f6ad025.jpg",
-                            "mars")
-                    CircleItemLab.get(activity).addCircleItem(circleBean)
-                }
-                activity.runOnUiThread { mAdapter.notifyDataSetChanged() }
+                val len = CircleItemLab.get(activity).length()
+                val eventId = CircleItemLab.get(activity).getCircleItem(len - 1).id
+
+                getEvent(eventId)
             }
 
             override fun onRefreshing() {
@@ -87,9 +82,8 @@ class SettingsFragment : Fragment() {
                 Handler().postDelayed({ mSwipeRefreshLayout.refreshComplete() }, 2000)
                 // just an expedient
                 // clear the data set and reload it
-                // TODO: use index to load
                 CircleItemLab.get(activity).clear()
-                getEvent(0)
+                getEvent(-1)
             }
         })
 
@@ -98,14 +92,15 @@ class SettingsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        getEvent(0)
+        CircleItemLab.get(activity).circleItems
+        getEvent(-1)
         addButton.onClick { startActivity<AddCircleActivity>() }
     }
 
     private fun getEvent(event_id: Int) {
         val gson = Gson()
 
-        val circle = CircleBean(0)
+        val circle = CircleBean(event_id)
 
         val circleString = gson.toJson(circle)
         // post to the server
@@ -127,12 +122,16 @@ class SettingsFragment : Fragment() {
                 if (circleResponseBean.status == 0) {
                     activity.runOnUiThread { Toast.makeText(activity, "Account is not activated.", Toast.LENGTH_LONG).show() }
                 } else {
-                    for (dataBean in circleResponseBean.data) {
-                        CircleItemLab.get(activity).addCircleItem(CircleBean(dataBean.title,
-                                dataBean.content, dataBean.avatar, dataBean.nickname))
+                    if (circleResponseBean.data.isEmpty()) {
+                        activity.runOnUiThread { toast("no more message") }
+                    } else {
+                        for (dataBean in circleResponseBean.data) {
+                            CircleItemLab.get(activity).addCircleItem(CircleBean(dataBean.title,
+                                    dataBean.content, dataBean.avatar, dataBean.nickname, dataBean.event_id))
 
+                        }
+                        activity.runOnUiThread { mAdapter.notifyDataSetChanged() }
                     }
-                    activity.runOnUiThread { mAdapter.notifyDataSetChanged() }
                 }
             }
         })

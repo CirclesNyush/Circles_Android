@@ -30,11 +30,12 @@ public class CircleBean {
         this.eventId = id;
     }
 
-    public CircleBean(String title, String content, String avatar, String nickname) {
+    public CircleBean(String title, String content, String avatar, String nickname, int eventId) {
         this.title = title;
         this.content = content;
         this.avatar = avatar;
         this.nickname = nickname;
+        this.eventId = eventId;
     }
 
     public int getId() {
