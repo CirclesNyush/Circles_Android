@@ -1,6 +1,7 @@
 package com.example.anpu.circles.fragment;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.anpu.circles.R;
+import com.example.anpu.circles.adapter.ViewPageSlideShowAdapter;
 import com.example.anpu.circles.utilities.GlideV4ImageEngine;
 import com.example.anpu.circles.utilities.PermissonHelper;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -36,7 +39,9 @@ import static com.example.anpu.circles.utilities.PermissonHelper.askStroage;
 public class GroupFragment extends Fragment {
 
     List<Uri> mSelected;
-
+    ViewPager viewPager;
+    int images[] = {R.drawable.orange_purple_gradient, R.drawable.orange_purple_gradient};
+    ViewPageSlideShowAdapter myCustomPagerAdapter;
 
     @Nullable
     @Override
@@ -47,6 +52,11 @@ public class GroupFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        viewPager = (ViewPager)getActivity().findViewById(R.id.viewPager);
+
+        myCustomPagerAdapter = new ViewPageSlideShowAdapter(getActivity(), images);
+        viewPager.setAdapter(myCustomPagerAdapter);
+
         Button selc = (Button) getActivity().findViewById(R.id.test_selc);
         askStroage(getActivity());
         selc.setOnClickListener(new View.OnClickListener() {
