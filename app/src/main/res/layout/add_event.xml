@@ -6,20 +6,23 @@
     android:orientation="vertical"
     android:weightSum="10">
 
-    <ImageButton
-        android:id="@+id/add_event_change_cover"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="5"
-        android:src="@drawable/orange_purple_gradient"
-        />
+    <include
+        layout="@layout/add_event_app_bar" />
+
+    <!--<ImageButton-->
+        <!--android:id="@+id/add_event_change_cover"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="3"-->
+        <!--android:src="@drawable/orange_purple_gradient"-->
+        <!--/>-->
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:layout_weight="4">
+        android:layout_weight="8">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,10 +35,33 @@
                 android:paddingBottom="@dimen/dp_10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter your event name"
+                android:hint="Event name here"
                 android:textSize="25dp"
                 android:background="@android:color/transparent"
                 android:gravity="center"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E0E0E0"/>
+
+            <EditText
+                android:id="@+id/add_event_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:minLines="7"
+                android:gravity="center"
+                android:hint="Why not give it a description?"
+                android:textSize="25dp"
+                android:background="@android:color/transparent"/>
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E0E0E0"/>
 
             <LinearLayout
                 android:paddingTop="@dimen/dp_10"
@@ -119,49 +145,41 @@
 
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/add_event_description"
-                android:layout_width="match_parent"
-                android:gravity="center"
-                android:hint="Why not give it a description?"
-                android:background="@android:color/transparent"
-                android:layout_height="100dp" />
-
         </LinearLayout>
 
     </ScrollView>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:layout_weight="1"
-        android:weightSum="10">
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_weight="1"-->
+        <!--android:weightSum="10">-->
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3.5"
-            android:text="Save"
-            android:background="@color/colorNYU_Purple"
-            android:textColor="@color/colorWhite"
-            />
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@android:color/white" />
+        <!--<Button-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="3.5"-->
+            <!--android:text="Save"-->
+            <!--android:background="@color/colorNYU_Purple"-->
+            <!--android:textColor="@color/colorWhite"-->
+            <!--/>-->
+        <!--<View-->
+            <!--android:layout_width="1dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@android:color/white" />-->
 
-        <Button
-            android:id="@+id/add_event_submit"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="6.5"
-            android:text="Join!"
-            android:background="@color/colorNYU_Purple"
-            android:textColor="@color/colorWhite"
-            />
+        <!--<Button-->
+            <!--android:id="@+id/add_event_submit"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="6.5"-->
+            <!--android:text="Post!"-->
+            <!--android:background="@color/colorNYU_Purple"-->
+            <!--android:textColor="@color/colorWhite"-->
+            <!--/>-->
 
-    </LinearLayout>
+    <!--</LinearLayout>-->
 
 </LinearLayout>
