@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.anpu.circles.model.CircleBean;
@@ -29,7 +30,8 @@ public class AddCircleActivity extends AppCompatActivity {
 
     @BindView(R.id.add_event_name) EditText eventName;
     @BindView(R.id.add_event_description) EditText eventDetail;
-    @BindView(R.id.add_event_submit) Button eventSubmit;
+    @BindView(R.id.add_event_post) ImageView eventSubmit;
+    @BindView(R.id.add_event_back) ImageView eventBack;
 
     private String addCircleUrl = "http://steins.xin:8001/circles/postcircles";
 
