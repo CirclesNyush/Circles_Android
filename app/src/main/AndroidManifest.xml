@@ -38,6 +38,7 @@
         <activity android:name=".AddCircleActivity" />
         <activity android:name=".Group" />
         <activity android:name=".HomePageFragmentActivity" />
+        <activity android:name=".ViewPersonalInfoActivity" />
 
 
         <service android:name=".service.AppFirebaseInstanceIdService">

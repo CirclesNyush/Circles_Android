@@ -1,5 +1,6 @@
 package com.example.anpu.circles.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.support.design.widget.FloatingActionButton
@@ -15,6 +16,7 @@ import com.ajguan.library.EasyRefreshLayout
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.example.anpu.circles.AddCircleActivity
 import com.example.anpu.circles.R
+import com.example.anpu.circles.ViewPersonalInfoActivity
 import com.example.anpu.circles.adapter.CirclesAdapter
 import com.example.anpu.circles.model.CircleBean
 import com.example.anpu.circles.model.CircleItemLab
@@ -22,6 +24,7 @@ import com.example.anpu.circles.model.CircleResponseBean
 import com.google.gson.Gson
 import okhttp3.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
 import java.io.IOException
@@ -55,11 +58,12 @@ class SettingsFragment : Fragment() {
         mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
 
         mAdapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener {
-            adapter, view, position -> toast("you click:$position") }
+            adapter, view, position -> toast("click item")
+        }
 
         mAdapter.onItemChildClickListener = BaseQuickAdapter.OnItemChildClickListener { adapter, view, position ->
             when (view.id) {
-                R.id.circle_avatar -> toast( "jump to avatar")
+                R.id.circle_avatar -> startActivity<ViewPersonalInfoActivity>("eventId" to adapter.data[id])
                 R.id.circle_title -> toast( "you click title")
             }
         }
@@ -72,8 +76,9 @@ class SettingsFragment : Fragment() {
                 Handler().postDelayed({ mSwipeRefreshLayout.loadMoreComplete({ }, 500) }, 2000)
                 // This is a local test
                 val len = CircleItemLab.get(activity).length()
-                val eventId = CircleItemLab.get(activity).getCircleItem(len - 1).id
 
+                val eventId = CircleItemLab.get(activity).circleItems[len-1].id
+                Log.d("loadmore", eventId.toString())
                 getEvent(eventId)
             }
 
@@ -95,6 +100,13 @@ class SettingsFragment : Fragment() {
         CircleItemLab.get(activity).circleItems
         getEvent(-1)
         addButton.onClick { startActivity<AddCircleActivity>() }
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        CircleItemLab.get(activity).clear()
+        getEvent(-1)
+
     }
 
     private fun getEvent(event_id: Int) {
@@ -123,6 +135,7 @@ class SettingsFragment : Fragment() {
                     activity.runOnUiThread { Toast.makeText(activity, "Account is not activated.", Toast.LENGTH_LONG).show() }
                 } else {
                     if (circleResponseBean.data.isEmpty()) {
+                        mAdapter.loadMoreEnd()
                         activity.runOnUiThread { toast("no more message") }
                     } else {
                         for (dataBean in circleResponseBean.data) {

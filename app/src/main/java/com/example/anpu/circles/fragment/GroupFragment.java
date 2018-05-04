@@ -46,16 +46,13 @@ public class GroupFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.tab_group, container, false);
+        View view = inflater.inflate(R.layout.tab_group, container, false);
+        return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        viewPager = (ViewPager)getActivity().findViewById(R.id.viewPager);
-
-        myCustomPagerAdapter = new ViewPageSlideShowAdapter(getActivity(), images);
-        viewPager.setAdapter(myCustomPagerAdapter);
 
         Button selc = (Button) getActivity().findViewById(R.id.test_selc);
         askStroage(getActivity());
