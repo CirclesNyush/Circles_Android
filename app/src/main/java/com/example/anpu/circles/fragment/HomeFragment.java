@@ -77,7 +77,7 @@ public class HomeFragment extends Fragment {
 
     private String baseUrl = "http://steins.xin:8001";
 
-    private final RequestOptions options = new RequestOptions()
+    public static final RequestOptions options = new RequestOptions()
             .centerCrop()
             .skipMemoryCache(true)
             .placeholder(R.drawable.ic_book_black_24dp)
@@ -346,6 +346,15 @@ public class HomeFragment extends Fragment {
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 updateInfo("", textView.getText().toString(), "", UserData.getEmail());
                 cell.clearFocus();
+                return false;
+            }
+        });
+
+        personal_description.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                updateInfo("", "", textView.getText().toString(), UserData.getEmail());
+                personal_description.clearFocus();
                 return false;
             }
         });

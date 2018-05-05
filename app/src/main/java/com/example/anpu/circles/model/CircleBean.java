@@ -85,4 +85,12 @@ public class CircleBean {
     public void setFollower_id(List<Integer> follower_id) {
         this.follower_id = follower_id;
     }
+
+    public int getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
+    }
 }
