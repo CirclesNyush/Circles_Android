@@ -38,7 +38,7 @@
         <activity android:name=".AddCircleActivity" />
         <activity android:name=".Group" />
         <activity android:name=".HomePageFragmentActivity" />
-        <activity android:name=".AddImageActivity" 
+        <activity android:name=".AddImageActivity" />
         <activity android:name=".ViewPersonalInfoActivity" />
 
 
