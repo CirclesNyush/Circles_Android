@@ -16,6 +16,7 @@ import com.ajguan.library.EasyRefreshLayout
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.example.anpu.circles.AddCircleActivity
 import com.example.anpu.circles.R
+import com.example.anpu.circles.ViewCircleActivity
 import com.example.anpu.circles.ViewPersonalInfoActivity
 import com.example.anpu.circles.adapter.CirclesAdapter
 import com.example.anpu.circles.model.CircleBean
@@ -57,7 +58,7 @@ class SettingsFragment : Fragment() {
         mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
 
         mAdapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener {
-            adapter, view, position -> Log.d("a", "a")
+            adapter, view, position -> startActivity<ViewCircleActivity>("eventId" to mAdapter.getItem(position)!!.eventId)
         }
 
         mAdapter.onItemChildClickListener = BaseQuickAdapter.OnItemChildClickListener { adapter, view, position ->

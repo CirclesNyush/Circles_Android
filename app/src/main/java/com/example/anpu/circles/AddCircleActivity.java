@@ -9,10 +9,8 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -25,17 +23,10 @@ import com.example.anpu.circles.model.UserResponseStatus;
 import com.example.anpu.circles.utilities.GlideV4ImageEngine;
 import com.example.anpu.circles.utilities.MainConstant;
 import com.example.anpu.circles.utilities.PermissonHelper;
-import com.example.anpu.circles.utilities.PictureSelectorConfig;
 import com.google.gson.Gson;
-import com.luck.picture.lib.PictureSelector;
-import com.luck.picture.lib.config.PictureConfig;
-import com.luck.picture.lib.config.PictureMimeType;
-import com.luck.picture.lib.config.PictureSelectionConfig;
-import com.luck.picture.lib.entity.LocalMedia;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,12 +41,17 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static com.example.anpu.circles.utilities.ImageHelper.Bitmap2StrByBase64;
+
 public class AddCircleActivity extends AppCompatActivity {
 
     @BindView(R.id.add_event_name) EditText eventName;
     @BindView(R.id.add_event_description) EditText eventDetail;
+    @BindView(R.id.add_event_location) EditText eventLocation;
+    @BindView(R.id.add_event_time) EditText eventTime;
     @BindView(R.id.add_event_post) ImageView eventSubmit;
     @BindView(R.id.add_event_back) ImageView eventBack;
+    @BindView(R.id.add_event_email) EditText eventEmail;
 
     private static final String TAG = "AddCircleActivity";
     private String addCircleUrl = "http://steins.xin:8001/circles/postcircles";
@@ -73,15 +69,20 @@ public class AddCircleActivity extends AppCompatActivity {
         mContext = this;
         gridView = (GridView) findViewById(R.id.gridView);
         initGridView();
+        eventEmail.setVisibility(EditText.GONE);
 
         eventSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 String eventNameString = String.valueOf(eventName.getText());
                 String eventDetailString = String.valueOf(eventDetail.getText());
+                String eventLocationString = String.valueOf(eventLocation.getText());
+                String eventTimeString = String.valueOf(eventTime.getText());
+
                 if (eventDetailString != null && !eventDetailString.isEmpty()
                         && eventNameString != null && !eventNameString.isEmpty()) {
-                    submitEvent(eventNameString, eventDetailString, UserData.getEmail());
+                    submitEvent(AddCircleActivity.this, eventNameString, eventDetailString, UserData.getEmail(), eventLocationString, eventTimeString);
                 } else {
                     Toast.makeText(AddCircleActivity.this, "Empty", Toast.LENGTH_SHORT).show();
                 }
@@ -154,21 +155,6 @@ public class AddCircleActivity extends AppCompatActivity {
             refreshAdapter(Matisse.obtainResult(data));
         }
 
-        // for picture selector
-//        if (resultCode == RESULT_OK) {
-//            switch (requestCode) {
-//                case PictureConfig.CHOOSE_REQUEST:
-//                    // 图片选择结果回调
-//                    refreshAdapter(PictureSelector.obtainMultipleResult(data));
-//                    // 例如 LocalMedia 里面返回三种path
-//                    // 1.media.getPath(); 为原图path
-//                    // 2.media.getCutPath();为裁剪后path，需判断media.isCut();是否为true
-//                    // 3.media.getCompressPath();为压缩后path，需判断media.isCompressed();是否为true
-//                    // 如果裁剪并压缩了，以取压缩路径为准，因为是先裁剪后压缩的
-//                    break;
-//            }
-//        }
-
         if (requestCode == MainConstant.REQUEST_CODE_MAIN && resultCode == MainConstant.RESULT_CODE_VIEW_IMG) {
             ArrayList<String> toDeletePicList = data.getStringArrayListExtra(MainConstant.IMG_LIST);
             mPicList.clear();
@@ -176,18 +162,6 @@ public class AddCircleActivity extends AppCompatActivity {
             mGridViewAdapter.notifyDataSetChanged();
         }
     }
-
-    // for PictureSelector
-//    private void refreshAdapter(List<LocalMedia> picList) {
-//        for (LocalMedia localMedia : picList) {
-//            if (localMedia.isCompressed()) {
-//                String compressPath = localMedia.getCompressPath();
-//                mPicList.add(compressPath);
-//                mGridViewAdapter.notifyDataSetChanged();
-//            }
-//        }
-//    }
-
 
     // for Matisse
     private void refreshAdapter(List<Uri> uris) {
@@ -199,10 +173,22 @@ public class AddCircleActivity extends AppCompatActivity {
     }
 
 
-    private void submitEvent(String title, String content, String publisher) {
+    private void submitEvent(Context theActivity, String title, String content, String publisher, String location, String time) {
         final Gson gson = new Gson();
 
-        CircleBean circle = new CircleBean(title, content, publisher);
+        ArrayList<String> imgs = new ArrayList<>();
+
+        for (String s : mPicList) {
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(theActivity.getContentResolver(), Uri.parse(s));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            imgs.add(Bitmap2StrByBase64(bitmap));
+        }
+
+        CircleBean circle = new CircleBean(title, content, publisher, imgs, location, time);
 
         String circleString = gson.toJson(circle);
         // post to the server

@@ -40,6 +40,7 @@
         <activity android:name=".HomePageFragmentActivity" />
         <activity android:name=".AddImageActivity" />
         <activity android:name=".ViewPersonalInfoActivity" />
+        <activity android:name=".ViewCircleActivity" />
 
 
         <service android:name=".service.AppFirebaseInstanceIdService">
