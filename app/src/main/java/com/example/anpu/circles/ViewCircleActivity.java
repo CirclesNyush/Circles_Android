@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -21,6 +22,7 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -133,6 +135,21 @@ public class ViewCircleActivity extends AppCompatActivity {
                             location.setText(dataBean.getLocation());
                             time.setText(dataBean.getTime());
                             email.setText(dataBean.getEmail());
+
+                            imgs = (ArrayList<String>) dataBean.getImgs();
+
+                            if (imgs.get(0).length() == 0) {
+                                imgs.clear();
+                            }
+
+                            for (int i = 0 ; i < imgs.size() ; i ++) {
+                                Log.d("img", String.valueOf(imgs.get(i).length()));
+                                imgs.set(i, "http://steins.xin:8001" + imgs.get(i));
+                                Log.d("img", imgs.get(i));
+                            }
+                            mGridViewAdapter.setImgs(imgs);
+                            mGridViewAdapter.notifyDataSetChanged();
+
 
                         }
                     });
