@@ -1,20 +1,43 @@
 package com.example.anpu.circles;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.anpu.circles.adapter.GridViewAdapter;
 import com.example.anpu.circles.model.CircleBean;
 import com.example.anpu.circles.model.UserData;
 import com.example.anpu.circles.model.UserResponseStatus;
+import com.example.anpu.circles.utilities.GlideV4ImageEngine;
+import com.example.anpu.circles.utilities.MainConstant;
+import com.example.anpu.circles.utilities.PictureSelectorConfig;
 import com.google.gson.Gson;
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.config.PictureMimeType;
+import com.luck.picture.lib.config.PictureSelectionConfig;
+import com.luck.picture.lib.entity.LocalMedia;
+import com.zhihu.matisse.Matisse;
+import com.zhihu.matisse.MimeType;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,13 +56,23 @@ public class AddCircleActivity extends AppCompatActivity {
     @BindView(R.id.add_event_post) ImageView eventSubmit;
     @BindView(R.id.add_event_back) ImageView eventBack;
 
+    private static final String TAG = "AddCircleActivity";
     private String addCircleUrl = "http://steins.xin:8001/circles/postcircles";
+    private Context mContext;
+    private GridView gridView;
+    private GridViewAdapter mGridViewAdapter;
+    private ArrayList<String> mPicList = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_event);
         ButterKnife.bind(this);
+
+        mContext = this;
+        gridView = (GridView) findViewById(R.id.gridView);
+        initGridView();
+
         eventSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,6 +90,110 @@ public class AddCircleActivity extends AppCompatActivity {
 
 
     }
+
+    private void initGridView() {
+        mGridViewAdapter = new GridViewAdapter(mContext, mPicList);
+        gridView.setAdapter(mGridViewAdapter);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position == parent.getChildCount() - 1) {
+                    // if + is at the last position and there are less than 5 pics
+                    // user can add pic
+                    if (mPicList.size() == MainConstant.MAX_SELECT_PIC_NUM) {
+                        // at most 5 pics
+                        viewPulImg(position);
+                    }
+                    else {
+                        // add pic
+                        selectPic(MainConstant.MAX_SELECT_PIC_NUM - mPicList.size());
+                    }
+                }
+                else {
+                    viewPulImg(position);
+                }
+            }
+        });
+    }
+
+    // view full size pic
+    private void viewPulImg(int position) {
+        Intent intent = new Intent(mContext, AddImageActivity.class);
+        intent.putStringArrayListExtra(MainConstant.IMG_LIST, mPicList);
+        intent.putExtra(MainConstant.POSITION, position);
+        startActivityForResult(intent, MainConstant.REQUEST_CODE_MAIN);
+    }
+
+    private void selectPic(int maxTotal) {
+        // use Matisse
+        Matisse.from(AddCircleActivity.this)
+                .choose(MimeType.allOf())
+                .countable(true)
+                .maxSelectable(MainConstant.MAX_SELECT_PIC_NUM)
+                .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.picker))
+                .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
+                .thumbnailScale(0.85f)
+                .theme(R.style.Matisse_Zhihu)
+                .imageEngine(new GlideV4ImageEngine())
+                .forResult(MainConstant.REQUEST_CODE_MAIN);
+
+        // use PictureSelector
+//        PictureSelectorConfig.initMultiConfig(AddCircleActivity.this, maxTotal);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // for Matisse
+        if (requestCode == MainConstant.REQUEST_CODE_MAIN && resultCode == RESULT_OK) {
+            refreshAdapter(Matisse.obtainResult(data));
+        }
+
+        // for picture selector
+//        if (resultCode == RESULT_OK) {
+//            switch (requestCode) {
+//                case PictureConfig.CHOOSE_REQUEST:
+//                    // 图片选择结果回调
+//                    refreshAdapter(PictureSelector.obtainMultipleResult(data));
+//                    // 例如 LocalMedia 里面返回三种path
+//                    // 1.media.getPath(); 为原图path
+//                    // 2.media.getCutPath();为裁剪后path，需判断media.isCut();是否为true
+//                    // 3.media.getCompressPath();为压缩后path，需判断media.isCompressed();是否为true
+//                    // 如果裁剪并压缩了，以取压缩路径为准，因为是先裁剪后压缩的
+//                    break;
+//            }
+//        }
+
+        if (requestCode == MainConstant.REQUEST_CODE_MAIN && resultCode == MainConstant.RESULT_CODE_VIEW_IMG) {
+            ArrayList<String> toDeletePicList = data.getStringArrayListExtra(MainConstant.IMG_LIST);
+            mPicList.clear();
+            mPicList.addAll(toDeletePicList);
+            mGridViewAdapter.notifyDataSetChanged();
+        }
+    }
+
+    // for PictureSelector
+//    private void refreshAdapter(List<LocalMedia> picList) {
+//        for (LocalMedia localMedia : picList) {
+//            if (localMedia.isCompressed()) {
+//                String compressPath = localMedia.getCompressPath();
+//                mPicList.add(compressPath);
+//                mGridViewAdapter.notifyDataSetChanged();
+//            }
+//        }
+//    }
+
+
+    // for Matisse
+    private void refreshAdapter(List<Uri> uris) {
+        for (Uri uri : uris) {
+            String path = uri.toString();
+            mPicList.add(path);
+            mGridViewAdapter.notifyDataSetChanged();
+        }
+    }
+
 
     private void submitEvent(String title, String content, String publisher) {
         final Gson gson = new Gson();
