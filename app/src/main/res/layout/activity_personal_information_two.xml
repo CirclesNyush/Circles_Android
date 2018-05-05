@@ -24,6 +24,7 @@
             android:fitsSystemWindows="true"
             android:background="@drawable/orange_purple_gradient"
             app:title="My Profile"
+            android:id="@+id/coll_tab"
             >
 
             <ImageButton
@@ -31,8 +32,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
-                android:background="@drawable/project_detail_cir"
-                android:onClick="onClick_pfp" />
+                android:background="@drawable/project_detail_cir"/>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/personal_toolbar_two"
@@ -235,7 +235,8 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:textColor="@color/darkgrey"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:inputType="textMultiLine" />
 
 
 
