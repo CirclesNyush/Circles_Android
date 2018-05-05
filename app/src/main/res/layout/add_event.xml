@@ -22,7 +22,7 @@
         android:layout_height="0dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:layout_weight="8">
+        android:layout_weight="7">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -149,37 +149,11 @@
 
     </ScrollView>
 
+    <include
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="3"
+        layout="@layout/add_event_gridview" />
 
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:layout_weight="1"-->
-        <!--android:weightSum="10">-->
-
-        <!--<Button-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="3.5"-->
-            <!--android:text="Save"-->
-            <!--android:background="@color/colorNYU_Purple"-->
-            <!--android:textColor="@color/colorWhite"-->
-            <!--/>-->
-        <!--<View-->
-            <!--android:layout_width="1dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:background="@android:color/white" />-->
-
-        <!--<Button-->
-            <!--android:id="@+id/add_event_submit"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="6.5"-->
-            <!--android:text="Post!"-->
-            <!--android:background="@color/colorNYU_Purple"-->
-            <!--android:textColor="@color/colorWhite"-->
-            <!--/>-->
-
-    <!--</LinearLayout>-->
 
 </LinearLayout>
