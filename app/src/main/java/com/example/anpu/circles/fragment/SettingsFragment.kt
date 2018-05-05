@@ -42,7 +42,7 @@ class SettingsFragment : Fragment() {
     private lateinit var addButton: FloatingActionButton
     private val queryCirlcesUrl = "http://steins.xin:8001/circles/querycircles"
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater!!.inflate(R.layout.tab_settings, container, false)
         mRecyclerView = rootView.findViewById<View>(R.id.circles_recycler) as RecyclerView
         mRecyclerView.layoutManager = LinearLayoutManager(activity)
@@ -112,7 +112,7 @@ class SettingsFragment : Fragment() {
                 .build()
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                activity.runOnUiThread { Toast.makeText(activity, "Failure to connect to the server", Toast.LENGTH_LONG).show() }
+                activity?.runOnUiThread { Toast.makeText(activity, "Failure to connect to the server", Toast.LENGTH_LONG).show() }
             }
 
             @Throws(IOException::class)
@@ -120,17 +120,17 @@ class SettingsFragment : Fragment() {
                 val ans = response.body().string()
                 val circleResponseBean = gson.fromJson(ans, CircleResponseBean::class.java)
                 if (circleResponseBean.status == 0) {
-                    activity.runOnUiThread { Toast.makeText(activity, "Account is not activated.", Toast.LENGTH_LONG).show() }
+                    activity?.runOnUiThread { Toast.makeText(activity, "Account is not activated.", Toast.LENGTH_LONG).show() }
                 } else {
                     if (circleResponseBean.data.isEmpty()) {
-                        activity.runOnUiThread { toast("no more message") }
+                        activity?.runOnUiThread { toast("no more message") }
                     } else {
                         for (dataBean in circleResponseBean.data) {
                             CircleItemLab.get(activity).addCircleItem(CircleBean(dataBean.title,
                                     dataBean.content, dataBean.avatar, dataBean.nickname, dataBean.event_id))
 
                         }
-                        activity.runOnUiThread { mAdapter.notifyDataSetChanged() }
+                        activity?.runOnUiThread { mAdapter.notifyDataSetChanged() }
                     }
                 }
             }
