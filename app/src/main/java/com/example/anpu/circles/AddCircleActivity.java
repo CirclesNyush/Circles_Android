@@ -24,6 +24,7 @@ import com.example.anpu.circles.model.UserData;
 import com.example.anpu.circles.model.UserResponseStatus;
 import com.example.anpu.circles.utilities.GlideV4ImageEngine;
 import com.example.anpu.circles.utilities.MainConstant;
+import com.example.anpu.circles.utilities.PermissonHelper;
 import com.example.anpu.circles.utilities.PictureSelectorConfig;
 import com.google.gson.Gson;
 import com.luck.picture.lib.PictureSelector;
@@ -125,6 +126,9 @@ public class AddCircleActivity extends AppCompatActivity {
     }
 
     private void selectPic(int maxTotal) {
+        // asking for permission
+        PermissonHelper.askStroage(this);
+        PermissonHelper.askCamera(this);
         // use Matisse
         Matisse.from(AddCircleActivity.this)
                 .choose(MimeType.allOf())
