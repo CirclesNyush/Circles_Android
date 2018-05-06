@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.anpu.circles.adapter.GridPreViewAdapter;
-import com.example.anpu.circles.adapter.GridViewAdapter;
 import com.example.anpu.circles.model.CircleBean;
 import com.example.anpu.circles.model.CircleResponseBean;
 import com.example.anpu.circles.utilities.MainConstant;
@@ -22,7 +21,6 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -48,7 +46,7 @@ public class ViewCircleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_event);
+        setContentView(R.layout.activity_add_event);
         TextView eventTitle = findViewById(R.id.event_title);
         eventTitle.setText("");
         ImageView imageView = findViewById(R.id.add_event_post);
@@ -86,7 +84,7 @@ public class ViewCircleActivity extends AppCompatActivity {
     }
 
     private void viewPulImg(int position) {
-        Intent intent = new Intent(ViewCircleActivity.this, AddImageActivity.class);
+        Intent intent = new Intent(ViewCircleActivity.this, ViewImageActivity.class);
         intent.putStringArrayListExtra(MainConstant.IMG_LIST, imgs);
         intent.putExtra(MainConstant.POSITION, position);
         startActivityForResult(intent, MainConstant.REQUEST_CODE_MAIN);
