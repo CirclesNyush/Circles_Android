@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.anpu.circles.adapter.ViewPagerAdapter;
@@ -15,18 +16,28 @@ import com.example.anpu.circles.utilities.MainConstant;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class AddImageActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener, View.OnClickListener {
 
-    private ViewPager viewPager;
-    private TextView positionTv;
+//    private ViewPager viewPager;
+//    private TextView positionTv;
     private ArrayList<String> imgList;
     private int mPosition;
     private ViewPagerAdapter mAdapter;
+
+    @BindView(R.id.back_iv) ImageView backIv;
+    @BindView(R.id.delete_iv) ImageView deleteIv;
+    @BindView(R.id.viewPager) ViewPager viewPager;
+    @BindView(R.id.position_tv) TextView positionTv;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_image);
+        ButterKnife.bind(this);
 
         imgList = getIntent().getStringArrayListExtra(MainConstant.IMG_LIST);
         mPosition = getIntent().getIntExtra(MainConstant.POSITION, 0);
@@ -34,10 +45,13 @@ public class AddImageActivity extends AppCompatActivity implements ViewPager.OnP
     }
 
     private void initView() {
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
-        positionTv = (TextView) findViewById(R.id.position_tv);
-        findViewById(R.id.back_iv).setOnClickListener(this);
-        findViewById(R.id.delete_iv).setOnClickListener(this);
+//        viewPager = (ViewPager) findViewById(R.id.viewPager);
+//        positionTv = (TextView) findViewById(R.id.position_tv);
+//        findViewById(R.id.back_iv).setOnClickListener(this);
+        backIv.setOnClickListener(this);
+//        findViewById(R.id.delete_iv).setOnClickListener(this);
+        deleteIv.setVisibility(View.VISIBLE);
+        deleteIv.setOnClickListener(this);
         viewPager.addOnPageChangeListener(this);
 
         mAdapter = new ViewPagerAdapter(this, imgList);
@@ -88,6 +102,9 @@ public class AddImageActivity extends AppCompatActivity implements ViewPager.OnP
             public void ok() {
                 super.ok();
                 imgList.remove(mPosition);
+                if (imgList.size() == 0) {
+                    back();
+                }
                 setPosition();
                 dismiss();
             }
