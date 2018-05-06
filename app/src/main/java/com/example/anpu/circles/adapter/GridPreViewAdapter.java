@@ -28,13 +28,17 @@ public class GridPreViewAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         // one more picture at last for adding photos
-        int count = mList == null ? 1 : mList.size() + 1;
+        int count = mList == null ? 0 : mList.size();
         if (count > MainConstant.MAX_SELECT_PIC_NUM) {
             return mList.size();
         }
         else {
             return count;
         }
+    }
+
+    public void setImgs(List<String> imgs) {
+        this.mList = imgs;
     }
 
 
