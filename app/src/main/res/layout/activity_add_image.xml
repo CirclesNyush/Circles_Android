@@ -45,7 +45,8 @@
                 android:contentDescription="@null"
                 android:padding="10dp"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/delete"/>
+                android:src="@mipmap/delete"
+                android:visibility="invisible"/>
 
         </RelativeLayout>
 

@@ -4,21 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/circle_item"
     android:layout_width="match_parent"
-    android:layout_height="130dp">
+    android:layout_height="wrap_content">
 
     <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/circle_avatar"
         android:layout_width="55dp"
         android:layout_height="63dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         app:civ_border_color="#ffffff"
         app:civ_border_width="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,11 +21,13 @@
         android:id="@+id/linearLayout"
         android:layout_width="294dp"
         android:layout_height="88dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginStart="112dp"
+        android:layout_marginTop="16dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/circle_title"
@@ -44,5 +41,19 @@
             android:layout_height="62dp"
             android:text="This is content" />
     </LinearLayout>
+
+    <include
+        android:id="@+id/circle_thumbnails"
+        layout="@layout/add_event_gridview"
+        android:layout_width="297dp"
+        android:layout_height="93dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 </android.support.constraint.ConstraintLayout>

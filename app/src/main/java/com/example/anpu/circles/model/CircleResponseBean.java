@@ -43,7 +43,7 @@ public class CircleResponseBean {
         private String avatar;
         private String nickname;
         private int event_id;
-        private  List<String> imgs;
+        private List<String> imgs;
         private String location;
         private String email;
 

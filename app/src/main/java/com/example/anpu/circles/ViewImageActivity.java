@@ -19,18 +19,16 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AddImageActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener, View.OnClickListener {
+public class ViewImageActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener, ViewPager.OnClickListener{
 
-//    private ViewPager viewPager;
-//    private TextView positionTv;
     private ArrayList<String> imgList;
     private int mPosition;
     private ViewPagerAdapter mAdapter;
 
     @BindView(R.id.back_iv) ImageView backIv;
-    @BindView(R.id.delete_iv) ImageView deleteIv;
     @BindView(R.id.viewPager) ViewPager viewPager;
-    @BindView(R.id.position_tv) TextView positionTv;
+    @BindView(R.id.position_tv)
+    TextView positionTv;
 
 
     @Override
@@ -45,13 +43,7 @@ public class AddImageActivity extends AppCompatActivity implements ViewPager.OnP
     }
 
     private void initView() {
-//        viewPager = (ViewPager) findViewById(R.id.viewPager);
-//        positionTv = (TextView) findViewById(R.id.position_tv);
-//        findViewById(R.id.back_iv).setOnClickListener(this);
         backIv.setOnClickListener(this);
-//        findViewById(R.id.delete_iv).setOnClickListener(this);
-        deleteIv.setVisibility(View.VISIBLE);
-        deleteIv.setOnClickListener(this);
         viewPager.addOnPageChangeListener(this);
 
         mAdapter = new ViewPagerAdapter(this, imgList);
@@ -82,10 +74,6 @@ public class AddImageActivity extends AppCompatActivity implements ViewPager.OnP
             case R.id.back_iv:
                 back();
                 break;
-            case R.id.delete_iv:
-                System.out.println("delete clicked!!!!!!!!");
-                deletePic();
-                break;
         }
     }
 
@@ -94,22 +82,6 @@ public class AddImageActivity extends AppCompatActivity implements ViewPager.OnP
         intent.putStringArrayListExtra(MainConstant.IMG_LIST, imgList);
         setResult(MainConstant.RESULT_CODE_VIEW_IMG, intent);
         finish();
-    }
-
-    private void deletePic() {
-        CancelOrOkDialog dialog = new CancelOrOkDialog(this, "Delete this image?") {
-            @Override
-            public void ok() {
-                super.ok();
-                imgList.remove(mPosition);
-                if (imgList.size() == 0) {
-                    back();
-                }
-                setPosition();
-                dismiss();
-            }
-        };
-        dialog.show();
     }
 
     private void setPosition() {

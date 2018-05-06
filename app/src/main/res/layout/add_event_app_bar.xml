@@ -20,7 +20,7 @@
         android:layout_centerInParent="true"
         android:paddingBottom="8dp"
         android:text="Create a new event"
-        android:textSize="24sp"
+        android:textSize="16sp"
         android:textColor="#ffffff" />
 
     <ImageView

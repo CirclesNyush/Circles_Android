@@ -140,7 +140,7 @@ class SettingsFragment : Fragment() {
                     } else {
                         for (dataBean in circleResponseBean.data) {
                             CircleItemLab.get(activity).addCircleItem(CircleBean(dataBean.title,
-                                    dataBean.content, dataBean.avatar, dataBean.nickname, dataBean.event_id))
+                                    dataBean.content, dataBean.avatar, dataBean.nickname, dataBean.event_id, dataBean.imgs))
 
                         }
                         activity!!.runOnUiThread { mAdapter.notifyDataSetChanged() }

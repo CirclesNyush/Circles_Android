@@ -20,15 +20,16 @@ public class CircleBean {
     private String nickname;
     private String location;
     private String time;
+    private List<String> imgs;
 
     private ArrayList<String> images;
 
-    public CircleBean(String title, String content, String publisher_id, ArrayList<String> imgs, String location, String time) {
+    public CircleBean(String title, String content, String publisher_id, ArrayList<String> images, String location, String time) {
         this.title = title;
         this.content = content;
         this.publisher_id = publisher_id;
         this.follower_id = new ArrayList<>();
-        this.images = imgs;
+        this.images = images;
         this.location = location;
         this.time = time;
     }
@@ -37,12 +38,13 @@ public class CircleBean {
         this.eventId = id;
     }
 
-    public CircleBean(String title, String content, String avatar, String nickname, int eventId) {
+    public CircleBean(String title, String content, String avatar, String nickname, int eventId, List<String> imgs) {
         this.title = title;
         this.content = content;
         this.avatar = avatar;
         this.nickname = nickname;
         this.eventId = eventId;
+        this.imgs = imgs;
     }
 
     public int getId() {
@@ -124,5 +126,13 @@ public class CircleBean {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public List<String> getImgs() {
+        return imgs;
+    }
+
+    public void setImgs(List<String> imgs) {
+        this.imgs = imgs;
     }
 }
