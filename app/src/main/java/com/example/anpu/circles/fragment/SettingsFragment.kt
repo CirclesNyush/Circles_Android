@@ -52,6 +52,15 @@ class SettingsFragment : Fragment() {
         mSwipeRefreshLayout = rootView.findViewById(R.id.swipe_circle)
         addButton = rootView.findViewById(R.id.fab_add)
 
+        return rootView
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        CircleItemLab.get(activity).circleItems
+        getEvent(-1)
+        addButton.onClick { startActivity<AddCircleActivity>() }
+
         val itemsData = CircleItemLab.get(context).circleItems
         mAdapter = CirclesAdapter(R.layout.circle_item, itemsData)
 
@@ -91,15 +100,6 @@ class SettingsFragment : Fragment() {
                 getEvent(-1)
             }
         })
-
-        return rootView
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        CircleItemLab.get(activity).circleItems
-        getEvent(-1)
-        addButton.onClick { startActivity<AddCircleActivity>() }
     }
 
     override fun onAttach(context: Context?) {
@@ -138,9 +138,21 @@ class SettingsFragment : Fragment() {
                         mAdapter.loadMoreEnd()
                         activity!!.runOnUiThread { toast("no more message") }
                     } else {
+                        val imgs = ArrayList<String>()
                         for (dataBean in circleResponseBean.data) {
+                            val imgs = dataBean.imgs
+                            if (imgs.size == 1 && imgs[0].isEmpty()) {
+                                imgs.clear()
+                            }
+
+                            for (i in imgs.indices) {
+                                imgs[i] = "http://steins.xin:8001" + imgs[i]
+                                Log.d("imgs", imgs[i])
+                            }
+
                             CircleItemLab.get(activity).addCircleItem(CircleBean(dataBean.title,
-                                    dataBean.content, dataBean.avatar, dataBean.nickname, dataBean.event_id, dataBean.imgs))
+                                    dataBean.content, dataBean.avatar, dataBean.nickname, dataBean.event_id, imgs))
+
 
                         }
                         activity!!.runOnUiThread { mAdapter.notifyDataSetChanged() }

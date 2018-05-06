@@ -2,6 +2,9 @@ package com.example.anpu.circles.adapter;
 
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 
@@ -39,8 +42,17 @@ public class CirclesAdapter extends BaseQuickAdapter<CircleBean, BaseViewHolder>
 
         GridView gridView = helper.getView(R.id.gridView);
         gridView.setAdapter(new GridPreViewAdapter(mContext, item.getImgs()));
-
-        Log.d("glide", item.getAvatar());
+        Log.d("imgs", String.valueOf(item.getImgs().size() ));
+        if (item.getImgs().size() == 0) {
+            Log.d("img", "000");
+            gridView.setVisibility(GridView.GONE);
+            gridView.setEnabled(false);
+            GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams();
+            layoutParams.height = 0;
+            layoutParams.width = 0;
+            gridView.setBackgroundColor(255);
+            gridView.setLayoutParams(layoutParams);
+        }
         helper.addOnClickListener(R.id.circle_avatar);
         helper.addOnClickListener(R.id.circle_title);
 
