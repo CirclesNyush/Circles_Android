@@ -31,14 +31,15 @@
 
             <EditText
                 android:id="@+id/add_event_name"
-                android:paddingTop="@dimen/dp_10"
-                android:paddingBottom="@dimen/dp_10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Event name here"
-                android:textSize="25dp"
                 android:background="@android:color/transparent"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:hint="Event name here"
+                android:paddingBottom="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_10"
+                android:textSize="25dp"
+                />
 
             <View
                 android:layout_width="match_parent"
@@ -116,7 +117,7 @@
 
 
             </LinearLayout>
-            
+
 
             <LinearLayout
                 android:paddingTop="@dimen/dp_10"

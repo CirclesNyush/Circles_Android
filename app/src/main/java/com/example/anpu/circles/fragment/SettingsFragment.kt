@@ -16,6 +16,7 @@ import com.ajguan.library.EasyRefreshLayout
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.example.anpu.circles.AddCircleActivity
 import com.example.anpu.circles.R
+import com.example.anpu.circles.ViewCircleActivity
 import com.example.anpu.circles.ViewPersonalInfoActivity
 import com.example.anpu.circles.adapter.CirclesAdapter
 import com.example.anpu.circles.model.CircleBean
@@ -24,7 +25,6 @@ import com.example.anpu.circles.model.CircleResponseBean
 import com.google.gson.Gson
 import okhttp3.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
-import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
 import java.io.IOException
@@ -46,7 +46,7 @@ class SettingsFragment : Fragment() {
     private val queryCirlcesUrl = "http://steins.xin:8001/circles/querycircles"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater!!.inflate(R.layout.tab_settings, container, false)
+        val rootView = inflater.inflate(R.layout.tab_settings, container, false)
         mRecyclerView = rootView.findViewById<View>(R.id.circles_recycler) as RecyclerView
         mRecyclerView.layoutManager = LinearLayoutManager(activity)
         mSwipeRefreshLayout = rootView.findViewById(R.id.swipe_circle)
@@ -58,12 +58,12 @@ class SettingsFragment : Fragment() {
         mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
 
         mAdapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener {
-            adapter, view, position -> toast("click item")
+            adapter, view, position -> startActivity<ViewCircleActivity>("eventId" to mAdapter.getItem(position)!!.eventId)
         }
 
         mAdapter.onItemChildClickListener = BaseQuickAdapter.OnItemChildClickListener { adapter, view, position ->
             when (view.id) {
-                R.id.circle_avatar -> startActivity<ViewPersonalInfoActivity>("eventId" to adapter.data[id])
+                R.id.circle_avatar -> startActivity<ViewPersonalInfoActivity>("eventId" to mAdapter.getItem(position)!!.eventId)
                 R.id.circle_title -> toast( "you click title")
             }
         }
@@ -124,7 +124,7 @@ class SettingsFragment : Fragment() {
                 .build()
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                activity?.runOnUiThread { Toast.makeText(activity, "Failure to connect to the server", Toast.LENGTH_LONG).show() }
+                activity!!.runOnUiThread { Toast.makeText(activity, "Failure to connect to the server", Toast.LENGTH_LONG).show() }
             }
 
             @Throws(IOException::class)
@@ -132,18 +132,18 @@ class SettingsFragment : Fragment() {
                 val ans = response.body().string()
                 val circleResponseBean = gson.fromJson(ans, CircleResponseBean::class.java)
                 if (circleResponseBean.status == 0) {
-                    activity?.runOnUiThread { Toast.makeText(activity, "Account is not activated.", Toast.LENGTH_LONG).show() }
+                    activity!!.runOnUiThread { Toast.makeText(activity, "Account is not activated.", Toast.LENGTH_LONG).show() }
                 } else {
                     if (circleResponseBean.data.isEmpty()) {
                         mAdapter.loadMoreEnd()
-                        activity?.runOnUiThread { toast("no more message") }
+                        activity!!.runOnUiThread { toast("no more message") }
                     } else {
                         for (dataBean in circleResponseBean.data) {
                             CircleItemLab.get(activity).addCircleItem(CircleBean(dataBean.title,
                                     dataBean.content, dataBean.avatar, dataBean.nickname, dataBean.event_id))
 
                         }
-                        activity?.runOnUiThread { mAdapter.notifyDataSetChanged() }
+                        activity!!.runOnUiThread { mAdapter.notifyDataSetChanged() }
                     }
                 }
             }
