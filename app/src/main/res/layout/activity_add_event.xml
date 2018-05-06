@@ -120,6 +120,7 @@
 
 
             <LinearLayout
+                android:id="@+id/add_event_email_layout"
                 android:paddingTop="@dimen/dp_10"
                 android:paddingBottom="@dimen/dp_10"
                 android:layout_width="match_parent"

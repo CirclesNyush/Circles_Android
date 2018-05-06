@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.anpu.circles.adapter.GridViewAdapter;
@@ -53,6 +54,7 @@ public class AddCircleActivity extends AppCompatActivity {
     @BindView(R.id.add_event_post) ImageView eventSubmit;
     @BindView(R.id.add_event_back) ImageView eventBack;
     @BindView(R.id.add_event_email) EditText eventEmail;
+    @BindView(R.id.add_event_email_layout) LinearLayout eventEmailLayout;
 
     private static final String TAG = "AddCircleActivity";
     private String addCircleUrl = "http://steins.xin:8001/circles/postcircles";
@@ -71,8 +73,14 @@ public class AddCircleActivity extends AppCompatActivity {
         mContext = this;
         gridView = (GridView) findViewById(R.id.gridView);
         initGridView();
-        eventEmail.setVisibility(EditText.GONE);
+        eventEmailLayout.setVisibility(View.GONE);
 
+        eventBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         eventSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
