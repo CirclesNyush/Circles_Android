@@ -3,9 +3,9 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorLightViolet</item>
-        <item name="colorPrimaryDark">@color/colorDarkViolet</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/primary_material_light</item>
+        <item name="colorPrimaryDark">@color/primary_dark_material_light</item>
+        <item name="colorAccent">@color/colorLightViolet</item>
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowAllowEnterTransitionOverlap">false</item>
         <item name="android:windowAllowReturnTransitionOverlap">false</item>
@@ -29,6 +29,10 @@
         <!-- 模糊 -->
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:backgroundDimAmount">0.5</item>
+    </style>
+
+    <style name="CustomTheme1" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="colorAccent">@color/colorLightViolet</item>
     </style>
 
 </resources>
