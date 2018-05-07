@@ -1,137 +1,127 @@
 package com.example.anpu.circles.fragment
 
-import android.Manifest
 import android.content.Context
-import android.content.Intent
-import android.content.pm.ActivityInfo
-import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
+import android.os.Handler
+import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
-import android.support.v4.view.ViewPager
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
 import android.widget.Toast
-
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.example.anpu.circles.R
-import com.example.anpu.circles.adapter.ViewPageSlideShowAdapter
-import com.example.anpu.circles.utilities.GlideV4ImageEngine
-import com.example.anpu.circles.utilities.PermissonHelper
-import com.google.firebase.iid.FirebaseInstanceId
-import com.google.gson.Gson
-import com.youth.banner.Banner
-import com.youth.banner.listener.OnBannerListener
-import com.youth.banner.loader.ImageLoader
-import com.zhihu.matisse.Matisse
-import com.zhihu.matisse.MimeType
-import com.zhihu.matisse.filter.Filter
-
-import java.io.IOException
-import java.net.URI
-import java.net.URISyntaxException
-import java.util.ArrayList
-import java.util.Arrays
-import java.util.Collections
-import java.util.LinkedList
-import java.util.Objects
-
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.MediaType
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.RequestBody
-import okhttp3.Response
-
-import android.app.Activity.RESULT_OK
-import android.support.v4.app.FragmentActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import com.ajguan.library.EasyRefreshLayout
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.example.anpu.circles.AddCircleActivity
+import com.example.anpu.circles.R
 import com.example.anpu.circles.ViewCircleActivity
+import com.example.anpu.circles.ViewPersonalInfoActivity
 import com.example.anpu.circles.adapter.CirclesAdapter
-import com.example.anpu.circles.adapter.EventsAdapter
-import com.example.anpu.circles.model.*
-import com.example.anpu.circles.utilities.PermissonHelper.askStroage
-import com.youth.banner.BannerConfig
-import kotlinx.android.synthetic.main.tab_group.*
-import org.jetbrains.anko.find
-import org.jetbrains.anko.support.v4.browse
+import com.example.anpu.circles.model.CircleBean
+import com.example.anpu.circles.model.CircleItemLab
+import com.example.anpu.circles.model.CircleResponseBean
+import com.google.gson.Gson
+import okhttp3.*
+import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.support.v4.startActivity
+import org.jetbrains.anko.support.v4.toast
+import java.io.IOException
+
 
 /**
  * Created by anpu on 2018/3/5.
+ * rewrite in Koilin on 2018/4/19
+ * @author Anpu Li & Wenhe Li
  */
 
 class GroupFragment : Fragment() {
 
-    internal var images = ArrayList<String>()
-    internal lateinit var banner: Banner
-    internal lateinit var newsBean : NewsBean
-    internal lateinit var eventsBean : EventBean
     private lateinit var mRecyclerView: RecyclerView
-    private lateinit var mAdapter: EventsAdapter
-
+    private lateinit var mSwipeRefreshLayout: EasyRefreshLayout
+    private lateinit var mAdapter: CirclesAdapter
+    private val mLayoutManager: RecyclerView.LayoutManager? = null
+    private lateinit var addButton: FloatingActionButton
+    private val queryCirlcesUrl = "http://steins.xin:8001/circles/querycircles"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.tab_group, container, false)
-        banner = view.findViewById<View>(R.id.banner) as Banner
-        mRecyclerView = view.findViewById(R.id.events_recycler)
+        val rootView = inflater.inflate(R.layout.tab_settings, container, false)
+        mRecyclerView = rootView.findViewById<View>(R.id.circles_recycler) as RecyclerView
         mRecyclerView.layoutManager = LinearLayoutManager(activity)
+        addButton = rootView.findViewById(R.id.fab_add)
+        mSwipeRefreshLayout = rootView.findViewById(R.id.swipe_circle)
 
-
-        getNews()
-        getEvents()
-
-        banner.setImageLoader(object : ImageLoader() {
-            override fun displayImage(context: Context, path: Any, imageView: ImageView) {
-                Glide.with(context).load(path).into(imageView)
-            }
-        })
-        banner.setImages(images)
-        banner.setBannerStyle(BannerConfig.NUM_INDICATOR_TITLE)
-        banner.setOnBannerListener {
-            val url = newsBean.item[it].link
-            browse(url, true)
-        }
-
-        banner.start()
-        return view
+        return rootView
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        askStroage(activity)
-        val events = null
-        mAdapter = EventsAdapter(R.layout.events_item, null)
+        CircleItemLab.get(activity).circleItems
+        getEvent(-1)
+        addButton.onClick { startActivity<AddCircleActivity>() }
+
+        val itemsData = CircleItemLab.get(context).circleItems
+        mAdapter = CirclesAdapter(R.layout.circle_item, itemsData)
 
         mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
 
+        mAdapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener {
+            adapter, view, position -> startActivity<ViewCircleActivity>("eventId" to mAdapter.getItem(position)!!.eventId)
+        }
+
+        mAdapter.onItemChildClickListener = BaseQuickAdapter.OnItemChildClickListener { adapter, view, position ->
+            when (view.id) {
+                R.id.circle_avatar -> startActivity<ViewPersonalInfoActivity>("eventId" to mAdapter.getItem(position)!!.eventId)
+                R.id.circle_title -> toast( "you click title")
+            }
+        }
+
         mRecyclerView.adapter = mAdapter
+
+        mSwipeRefreshLayout.addEasyEvent(object : EasyRefreshLayout.EasyEvent {
+            override fun onLoadMore() {
+                //pull upon
+                Handler().postDelayed({ mSwipeRefreshLayout.loadMoreComplete({ }, 500) }, 2000)
+                // This is a local test
+                val len = CircleItemLab.get(activity).length()
+
+                val eventId = CircleItemLab.get(activity).circleItems[len-1].id
+                Log.d("loadmore", eventId.toString())
+                getEvent(eventId)
+            }
+
+            override fun onRefreshing() {
+                //pull down
+                Handler().postDelayed({ mSwipeRefreshLayout.refreshComplete() }, 2000)
+                // just an expedient
+                // clear the data set and reload it
+                CircleItemLab.get(activity).clear()
+                getEvent(-1)
+            }
+        })
     }
 
-    private fun getNews() {
-        val gson = Gson()
-        val user = User(UserData.getEmail())
-        val userJson = gson.toJson(user)
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        CircleItemLab.get(activity).clear()
+        getEvent(-1)
 
-        Log.d("json", userJson)
+    }
+
+    private fun getEvent(event_id: Int) {
+        val gson = Gson()
+
+        val circle = CircleBean(event_id)
+
+        val circleString = gson.toJson(circle)
         // post to the server
         val client = OkHttpClient()
-        val body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), userJson)
+        val body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), circleString)
         val request = Request.Builder()
                 .post(body)
-                .url("http://steins.xin:8001/news")
+                .url(queryCirlcesUrl)
                 .build()
-
-        //receive from server
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 activity!!.runOnUiThread { Toast.makeText(activity, "Failure to connect to the server", Toast.LENGTH_LONG).show() }
@@ -140,62 +130,37 @@ class GroupFragment : Fragment() {
             @Throws(IOException::class)
             override fun onResponse(call: Call, response: Response) {
                 val ans = response.body().string()
-                newsBean = gson.fromJson(ans, NewsBean::class.java)
-                val imgs = ArrayList<String>()
-                for (itemBean in newsBean.item) {
-                    imgs.add("https://" + itemBean.img)
+                val circleResponseBean = gson.fromJson(ans, CircleResponseBean::class.java)
+                if (circleResponseBean.status == 0) {
+                    activity!!.runOnUiThread { Toast.makeText(activity, "Account is not activated.", Toast.LENGTH_LONG).show() }
+                } else {
+                    if (circleResponseBean.data.isEmpty()) {
+                        mAdapter.loadMoreEnd()
+                        activity!!.runOnUiThread { toast("no more message") }
+                    } else {
+                        val imgs = ArrayList<String>()
+                        for (dataBean in circleResponseBean.data) {
+                            val imgs = dataBean.imgs
+                            if (imgs.size == 1 && imgs[0].isEmpty()) {
+                                imgs.clear()
+                            }
 
-                }
-                Log.d("group", imgs[0])
-                Objects.requireNonNull<FragmentActivity>(activity).runOnUiThread({
-                    val titles = ArrayList<String>()
-                    for (it in newsBean.item) {
-                        titles.add(it.title)
+                            for (i in imgs.indices) {
+                                imgs[i] = "http://steins.xin:8001" + imgs[i]
+                                Log.d("imgs", imgs[i])
+                            }
+
+                            CircleItemLab.get(activity).addCircleItem(CircleBean(dataBean.title,
+                                    dataBean.content, dataBean.avatar, dataBean.nickname, dataBean.event_id, imgs))
+
+
+                        }
+                        activity!!.runOnUiThread { mAdapter.notifyDataSetChanged() }
                     }
-
-                    banner.setBannerTitles(titles)
-                    banner.setImages(imgs)
-                    banner.start()
-                })
+                }
             }
         })
+
     }
-
-    private fun getEvents() {
-        val gson = Gson()
-        val user = User(UserData.getEmail())
-        val userJson = gson.toJson(user)
-
-        Log.d("json", userJson)
-        // post to the server
-        val client = OkHttpClient()
-        val body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), userJson)
-        val request = Request.Builder()
-                .post(body)
-                .url("http://steins.xin:8001/events")
-                .build()
-
-        //receive from server
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                activity!!.runOnUiThread { Toast.makeText(activity, "Failure to connect to the server", Toast.LENGTH_LONG).show() }
-            }
-
-            @Throws(IOException::class)
-            override fun onResponse(call: Call, response: Response) {
-                val ans = response.body().string()
-                eventsBean = gson.fromJson(ans, EventBean::class.java)
-                val imgs = ArrayList<String>()
-
-                Objects.requireNonNull<FragmentActivity>(activity).runOnUiThread({
-                    val events = eventsBean.events
-
-                    mAdapter.data = events
-
-                })
-            }
-        })
-    }
-
 
 }

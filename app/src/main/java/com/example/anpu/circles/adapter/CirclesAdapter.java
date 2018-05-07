@@ -3,14 +3,10 @@ package com.example.anpu.circles.adapter;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.anpu.circles.R;
@@ -18,11 +14,7 @@ import com.example.anpu.circles.model.CircleBean;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import de.hdodenhof.circleimageview.CircleImageView;
-
-import static com.example.anpu.circles.fragment.HomeFragment.options;
+import static com.example.anpu.circles.fragment.SettingsFragment.options;
 
 public class CirclesAdapter extends BaseQuickAdapter<CircleBean, BaseViewHolder> {
 

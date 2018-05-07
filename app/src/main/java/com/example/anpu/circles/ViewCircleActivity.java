@@ -48,7 +48,7 @@ public class ViewCircleActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_circle);
-        TextView eventTitle = findViewById(R.id.circle_title);
+        TextView eventTitle = findViewById(R.id.circle_top);
         eventTitle.setText("");
         ImageView imageView = findViewById(R.id.add_circle_post);
         imageView.setVisibility(View.INVISIBLE);
