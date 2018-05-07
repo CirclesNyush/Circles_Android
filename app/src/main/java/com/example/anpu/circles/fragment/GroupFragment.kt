@@ -52,6 +52,8 @@ import okhttp3.Response
 
 import android.app.Activity.RESULT_OK
 import android.support.v4.app.FragmentActivity
+import android.support.v4.content.ContextCompat
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -79,12 +81,18 @@ class GroupFragment : Fragment() {
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mAdapter: EventsAdapter
 
+    private lateinit var mDivider: DividerItemDecoration
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.tab_group, container, false)
         banner = view.findViewById<View>(R.id.banner) as Banner
         mRecyclerView = view.findViewById(R.id.events_recycler)
         mRecyclerView.layoutManager = LinearLayoutManager(activity)
+
+        mDivider = DividerItemDecoration(activity,DividerItemDecoration.VERTICAL)
+        mDivider.setDrawable(ContextCompat.getDrawable(this.activity!!, R.drawable.custom_divider)!!)
+        mRecyclerView.addItemDecoration(mDivider)
 
 
         getNews()
@@ -110,7 +118,7 @@ class GroupFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         askStroage(activity)
         val events = null
-        mAdapter = EventsAdapter(R.layout.events_item, null)
+        mAdapter = EventsAdapter(R.layout.event_item, null)
 
         mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
 

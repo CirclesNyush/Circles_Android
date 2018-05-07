@@ -1,6 +1,7 @@
 package com.example.anpu.circles.adapter;
 
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -11,6 +12,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.anpu.circles.R;
 import com.example.anpu.circles.model.EventBean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.anpu.circles.fragment.HomeFragment.options;
@@ -24,10 +26,21 @@ public class EventsAdapter extends BaseQuickAdapter<EventBean.EventsBean, BaseVi
 
     @Override
     protected void convert(BaseViewHolder helper, EventBean.EventsBean item) {
-        helper.setText(R.id.events_title, item.getTitle());
-        helper.setText(R.id.events_location, item.getLocation());
-        helper.setText(R.id.events_time, item.getTime());
-        Glide.with(mContext).load(item.getImg()).into((ImageView) helper.getView(R.id.events_img));
+        helper.setText(R.id.event_title, item.getTitle());
+        helper.setText(R.id.event_location, item.getLocation());
+        helper.setText(R.id.event_time, item.getTime());
+        Glide.with(mContext).load(item.getImg()).into((ImageView) helper.getView(R.id.event_img));
+
+//        GridView gridView = helper.getView(R.id.gridView);
+//        List<String> tempImg = new ArrayList<>();
+//        tempImg.add(item.getImg());
+//        gridView.setAdapter(new GridPreViewAdapter(mContext, tempImg));
+//        if (item.getImg() == null) {
+//            helper.getView(R.id.event_thumbnails).setVisibility(View.GONE);
+//        } else {
+//            helper.getView(R.id.event_thumbnails).setVisibility(View.VISIBLE);
+//            helper.getView(R.id.event_thumbnails).setBackgroundColor(255);
+//        }
     }
 
     @Nullable
