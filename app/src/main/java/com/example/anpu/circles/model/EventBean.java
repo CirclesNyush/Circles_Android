@@ -4,88 +4,70 @@ import java.util.List;
 
 public class EventBean {
 
-    /**
-     * title : title
-     * content : content
-     * time : time
-     * location : location
-     * eventId : 1
-     * imgs : [""]
-     */
 
-    private String title;
-    private String content;
-    private String time;
-    private String location;
-    private int eventId;
-    private List<String> imgs;
+    private List<EventsBean> events;
 
-    private String avatar;
-
-
-    public EventBean(String title, String content, String time, String location, int eventId, List<String> imgs) {
-        this.title = title;
-        this.content = content;
-        this.time = time;
-        this.location = location;
-        this.eventId = eventId;
-        this.imgs = imgs;
-        this.avatar = imgs.get(0);
+    public List<EventsBean> getEvents() {
+        return events;
     }
 
-    public String getTitle() {
-        return title;
+    public void setEvents(List<EventsBean> events) {
+        this.events = events;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public static class EventsBean {
+        /**
+         * title :
+         * time :
+         * img :
+         * link :
+         * location :
+         */
 
-    public String getContent() {
-        return content;
-    }
+        private String title;
+        private String time;
+        private String img;
+        private String link;
+        private String location;
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+        public String getTitle() {
+            return title;
+        }
 
-    public String getTime() {
-        return time;
-    }
+        public void setTitle(String title) {
+            this.title = title;
+        }
 
-    public void setTime(String time) {
-        this.time = time;
-    }
+        public String getTime() {
+            return time;
+        }
 
-    public String getLocation() {
-        return location;
-    }
+        public void setTime(String time) {
+            this.time = time;
+        }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
+        public String getImg() {
+            return img;
+        }
 
-    public List<String> getImgs() {
-        return imgs;
-    }
+        public void setImg(String img) {
+            this.img = img;
+        }
 
-    public void setImgs(List<String> imgs) {
-        this.imgs = imgs;
-    }
+        public String getLink() {
+            return link;
+        }
 
-    public int getEventId() {
-        return eventId;
-    }
+        public void setLink(String link) {
+            this.link = link;
+        }
 
-    public void setEventId(int eventId) {
-        this.eventId = eventId;
-    }
+        public String getLocation() {
+            return location;
+        }
 
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+        public void setLocation(String location) {
+            this.location = location;
+        }
     }
 }

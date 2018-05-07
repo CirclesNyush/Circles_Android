@@ -61,6 +61,8 @@ import com.example.anpu.circles.adapter.EventsAdapter
 import com.example.anpu.circles.model.*
 import com.example.anpu.circles.utilities.PermissonHelper.askStroage
 import com.youth.banner.BannerConfig
+import kotlinx.android.synthetic.main.tab_group.*
+import org.jetbrains.anko.find
 import org.jetbrains.anko.support.v4.browse
 import org.jetbrains.anko.support.v4.startActivity
 
@@ -73,6 +75,7 @@ class GroupFragment : Fragment() {
     internal var images = ArrayList<String>()
     internal lateinit var banner: Banner
     internal lateinit var newsBean : NewsBean
+    internal lateinit var eventsBean : EventBean
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mAdapter: EventsAdapter
 
@@ -80,11 +83,12 @@ class GroupFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.tab_group, container, false)
         banner = view.findViewById<View>(R.id.banner) as Banner
-        mRecyclerView = view.findViewById<View>(R.id.events_recycler) as RecyclerView
+        mRecyclerView = view.findViewById(R.id.events_recycler)
         mRecyclerView.layoutManager = LinearLayoutManager(activity)
 
 
         getNews()
+        getEvents()
 
         banner.setImageLoader(object : ImageLoader() {
             override fun displayImage(context: Context, path: Any, imageView: ImageView) {
@@ -105,15 +109,10 @@ class GroupFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         askStroage(activity)
-
-        val itemsData = EventItemLab.get(context).eventItems
-        mAdapter = EventsAdapter(R.layout.circle_item, itemsData)
+        val events = null
+        mAdapter = EventsAdapter(R.layout.events_item, null)
 
         mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
-
-        mAdapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener {
-            adapter, view, position -> startActivity<ViewCircleActivity>("eventId" to mAdapter.getItem(position)!!.eventId)
-        }
 
         mRecyclerView.adapter = mAdapter
     }
@@ -157,6 +156,42 @@ class GroupFragment : Fragment() {
                     banner.setBannerTitles(titles)
                     banner.setImages(imgs)
                     banner.start()
+                })
+            }
+        })
+    }
+
+    private fun getEvents() {
+        val gson = Gson()
+        val user = User(UserData.getEmail())
+        val userJson = gson.toJson(user)
+
+        Log.d("json", userJson)
+        // post to the server
+        val client = OkHttpClient()
+        val body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), userJson)
+        val request = Request.Builder()
+                .post(body)
+                .url("http://steins.xin:8001/events")
+                .build()
+
+        //receive from server
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                activity!!.runOnUiThread { Toast.makeText(activity, "Failure to connect to the server", Toast.LENGTH_LONG).show() }
+            }
+
+            @Throws(IOException::class)
+            override fun onResponse(call: Call, response: Response) {
+                val ans = response.body().string()
+                eventsBean = gson.fromJson(ans, EventBean::class.java)
+                val imgs = ArrayList<String>()
+
+                Objects.requireNonNull<FragmentActivity>(activity).runOnUiThread({
+                    val events = eventsBean.events
+
+                    mAdapter.data = events
+
                 })
             }
         })
