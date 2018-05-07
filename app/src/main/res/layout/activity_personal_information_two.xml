@@ -87,7 +87,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="5"
                         android:ellipsize="end"
-                        android:gravity="center_horizontal|right"
+                        android:gravity="start"
                         android:maxLines="1"
                         android:text="Username:  "
                         android:textColor="@color/colorBlack"
@@ -99,10 +99,44 @@
                         android:layout_width="0dp"
                         android:layout_height="32dp"
                         android:layout_weight="5"
-                        android:gravity="center_horizontal|left"
+                        android:gravity="end"
                         android:background="@null"
                         android:inputType="text"
                         android:selectAllOnFocus="false"
+                        android:singleLine="true"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="17sp" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:paddingTop="25dp"
+                    android:paddingBottom="25dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="start|center_horizontal"
+                        android:layout_weight="5"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textSize="17sp"
+                        android:textColor="@color/colorBlack"
+                        android:text="Cell No:  "/>
+
+
+                    <EditText
+                        android:id="@+id/personal_cell"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                        android:background="@null"
+                        android:gravity="right|center_horizontal"
                         android:singleLine="true"
                         android:textColor="@color/colorBlack"
                         android:textSize="17sp" />
@@ -120,7 +154,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:gravity="center_horizontal|right"
+                        android:gravity="start"
                         android:layout_weight="5"
                         android:ellipsize="end"
                         android:maxLines="1"
@@ -135,43 +169,10 @@
                         android:layout_height="match_parent"
                         android:layout_weight="5"
                         android:background="@null"
-                        android:gravity="center_horizontal|left"
+                        android:gravity="end"
                         android:textSize="17sp"
                         android:textColor="@color/colorBlack"
                         />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:paddingTop="25dp"
-                    android:paddingBottom="25dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center_horizontal|right"
-                        android:layout_weight="5"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:textSize="17sp"
-                        android:textColor="@color/colorBlack"
-                        android:text="Cell:  "/>
-
-
-                    <EditText
-                        android:id="@+id/personal_cell"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="5"
-                        android:background="@null"
-                        android:gravity="center_horizontal|left"
-                        android:singleLine="true"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="17sp" />
 
                 </LinearLayout>
 
