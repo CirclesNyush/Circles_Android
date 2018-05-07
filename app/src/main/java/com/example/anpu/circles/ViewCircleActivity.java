@@ -38,6 +38,7 @@ public class ViewCircleActivity extends AppCompatActivity {
     private EditText location;
     private EditText time;
     private EditText email;
+    private ImageView back;
 
     private GridView gridView;
     private GridPreViewAdapter mGridViewAdapter;
@@ -57,6 +58,7 @@ public class ViewCircleActivity extends AppCompatActivity {
         location = findViewById(R.id.add_event_location);
         time = findViewById(R.id.add_event_time);
         email = findViewById(R.id.add_event_email);
+        back = findViewById(R.id.add_event_back);
 
         imgs = new ArrayList<>();
         gridView = (GridView) findViewById(R.id.gridView);
@@ -70,6 +72,13 @@ public class ViewCircleActivity extends AppCompatActivity {
 
         int eventId =  getIntent().getIntExtra("eventId", -1);
         getEvent(eventId);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private void initGridView() {

@@ -56,6 +56,7 @@ public class CirclesAdapter extends BaseQuickAdapter<CircleBean, BaseViewHolder>
 //            gridView.setLayoutParams(layoutParams);
         } else {
             helper.getView(R.id.circle_thumbnails).setVisibility(View.VISIBLE);
+            helper.getView(R.id.circle_thumbnails).setBackgroundColor(255);
         }
         helper.addOnClickListener(R.id.circle_avatar);
         helper.addOnClickListener(R.id.circle_title);
