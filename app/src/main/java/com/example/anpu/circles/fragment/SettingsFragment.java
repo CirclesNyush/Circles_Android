@@ -56,7 +56,7 @@ import static android.app.Activity.RESULT_OK;
 /**
  * Created by anpu on 2018/3/5.
  */
-public class HomeFragment extends Fragment {
+public class SettingsFragment extends Fragment {
 
 //    @BindView(R.id.get_token) Button getToken;
 
@@ -115,11 +115,11 @@ public class HomeFragment extends Fragment {
         pfp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Matisse.from(HomeFragment.this)
+                Matisse.from(SettingsFragment.this)
                         .choose(MimeType.allOf())
                         .countable(false)
                         .capture(true)
-                        .captureStrategy(new CaptureStrategy(true, "com.example.anpu.circles.fragment.HomeFragment"))
+                        .captureStrategy(new CaptureStrategy(true, "com.example.anpu.circles.fragment.SettingsFragment"))
                         .maxSelectable(1)
                         .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.picker))
                         .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
@@ -200,7 +200,7 @@ public class HomeFragment extends Fragment {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Glide.with(HomeFragment.this)
+                                Glide.with(SettingsFragment.this)
                                         .load(baseUrl + UserData.getAvatar())
                                         .apply(options)
                                         .into(pfp);

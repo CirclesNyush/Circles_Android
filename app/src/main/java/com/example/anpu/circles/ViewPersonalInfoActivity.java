@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.anpu.circles.fragment.HomeFragment;
+import com.example.anpu.circles.fragment.SettingsFragment;
 import com.example.anpu.circles.model.InfoBean;
 import com.example.anpu.circles.model.User;
 import com.example.anpu.circles.model.UserData;
@@ -117,7 +117,7 @@ public class ViewPersonalInfoActivity extends AppCompatActivity {
 
                             Glide.with(theActivity)
                                     .load(baseUrl + UserData.getAvatar())
-                                    .apply(HomeFragment.options)
+                                    .apply(SettingsFragment.options)
                                     .into(pfp);
                         }
                     });

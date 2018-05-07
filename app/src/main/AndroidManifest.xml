@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <provider
-            android:authorities="com.example.anpu.circles.fragment.HomeFragment"
+            android:authorities="com.example.anpu.circles.fragment.SettingsFragment"
             android:name="android.support.v4.content.FileProvider"
             android:exported="false"
             android:grantUriPermissions="true">

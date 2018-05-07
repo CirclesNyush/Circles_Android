@@ -1,9 +1,6 @@
 package com.example.anpu.circles.adapter;
 
 import android.support.annotation.Nullable;
-import android.util.Log;
-import android.view.View;
-import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -12,10 +9,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.anpu.circles.R;
 import com.example.anpu.circles.model.EventBean;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.example.anpu.circles.fragment.HomeFragment.options;
 
 public class EventsAdapter extends BaseQuickAdapter<EventBean.EventsBean, BaseViewHolder> {
 

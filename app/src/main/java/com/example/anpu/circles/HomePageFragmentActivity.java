@@ -10,9 +10,9 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.anpu.circles.adapter.ViewPagerFragmentAdapter;
-import com.example.anpu.circles.fragment.GroupFragment;
 import com.example.anpu.circles.fragment.HomeFragment;
 import com.example.anpu.circles.fragment.SettingsFragment;
+import com.example.anpu.circles.fragment.GroupFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -123,7 +123,7 @@ public class HomePageFragmentActivity extends AppCompatActivity {
 //        switch (tabSelection) {
 //            case 0:
 //                if (tabHome == null) {
-//                    tabHome = new HomeFragment();
+//                    tabHome = new SettingsFragment();
 //                    fragmentTransaction.add(R.id.id_content, tabHome);
 //                }
 //                else {
@@ -132,7 +132,7 @@ public class HomePageFragmentActivity extends AppCompatActivity {
 //                break;
 //            case 1:
 //                if (tabGroup == null) {
-//                    tabGroup = new GroupFragment();
+//                    tabGroup = new HomeFragment();
 //                    fragmentTransaction.add(R.id.id_content, tabGroup);
 //                }
 //                else {
@@ -141,7 +141,7 @@ public class HomePageFragmentActivity extends AppCompatActivity {
 //                break;
 //            case 2:
 //                if (tabSettings == null) {
-//                    tabSettings = new SettingsFragment();
+//                    tabSettings = new GroupFragment();
 //                    fragmentTransaction.add(R.id.id_content, tabSettings);
 //                }
 //                else {
