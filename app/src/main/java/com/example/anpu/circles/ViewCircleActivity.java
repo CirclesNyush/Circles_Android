@@ -33,7 +33,7 @@ import okhttp3.Response;
 public class ViewCircleActivity extends AppCompatActivity {
 
     private String getEventURL = "http://steins.xin:8001/circles/querycirclesbyid";
-    private EditText eventName;
+    private EditText circleName;
     private EditText description;
     private EditText location;
     private EditText time;
@@ -47,24 +47,24 @@ public class ViewCircleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_event);
-        TextView eventTitle = findViewById(R.id.event_title);
+        setContentView(R.layout.activity_add_circle);
+        TextView eventTitle = findViewById(R.id.circle_title);
         eventTitle.setText("");
-        ImageView imageView = findViewById(R.id.add_event_post);
+        ImageView imageView = findViewById(R.id.add_circle_post);
         imageView.setVisibility(View.INVISIBLE);
 
-        eventName = findViewById(R.id.add_event_name);
-        description = findViewById(R.id.add_event_description);
-        location = findViewById(R.id.add_event_location);
-        time = findViewById(R.id.add_event_time);
-        email = findViewById(R.id.add_event_email);
-        back = findViewById(R.id.add_event_back);
+        circleName = findViewById(R.id.add_circle_name);
+        description = findViewById(R.id.add_circle_description);
+        location = findViewById(R.id.add_circle_location);
+        time = findViewById(R.id.add_circle_time);
+        email = findViewById(R.id.add_circle_email);
+        back = findViewById(R.id.add_circle_back);
 
         imgs = new ArrayList<>();
         gridView = (GridView) findViewById(R.id.gridView);
         initGridView();
 
-        setupEdittext(eventName);
+        setupEdittext(circleName);
         setupEdittext(description);
         setupEdittext(location);
         setupEdittext(time);
@@ -137,7 +137,7 @@ public class ViewCircleActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             CircleResponseBean.DataBean dataBean = userResponseStatus.getData().get(0);
-                            eventName.setText(dataBean.getTitle());
+                            circleName.setText(dataBean.getTitle());
                             description.setText(dataBean.getContent());
                             location.setText(dataBean.getLocation());
                             time.setText(dataBean.getTime());

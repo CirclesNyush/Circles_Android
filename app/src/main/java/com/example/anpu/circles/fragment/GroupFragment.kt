@@ -56,6 +56,8 @@ import okhttp3.Response
 
 import android.app.Activity.RESULT_OK
 import android.support.v4.app.FragmentActivity
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import com.example.anpu.circles.utilities.PermissonHelper.askStroage
 import com.youth.banner.BannerConfig
 import org.jetbrains.anko.support.v4.browse
@@ -69,10 +71,14 @@ class GroupFragment : Fragment() {
     internal var images = ArrayList<String>()
     internal lateinit var banner: Banner
     internal lateinit var newsBean : NewsBean
+    private lateinit var mRecyclerView: RecyclerView
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.tab_group, container, false)
         banner = view.findViewById<View>(R.id.banner) as Banner
+        mRecyclerView = view.findViewById<View>(R.id.events_recycler) as RecyclerView
+        mRecyclerView.layoutManager = LinearLayoutManager(activity)
 
 
         getNews()
@@ -96,6 +102,7 @@ class GroupFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         askStroage(activity)
+
     }
 
     private fun getNews() {

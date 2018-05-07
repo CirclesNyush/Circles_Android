@@ -44,7 +44,7 @@
 
     <include
         android:id="@+id/circle_thumbnails"
-        layout="@layout/add_event_gridview"
+        layout="@layout/add_circle_gridview"
         android:layout_width="0dp"
         android:layout_height="99dp"
         android:layout_marginBottom="16dp"

@@ -7,14 +7,14 @@
     android:alpha="0.8">
 
     <ImageView
-        android:id="@+id/add_event_back"
+        android:id="@+id/add_circle_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/dp_10"
         android:src="@drawable/ic_chevron_left_black_24dp"/>
 
     <TextView
-        android:id="@+id/event_title"
+        android:id="@+id/circle_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -24,7 +24,7 @@
         android:textColor="#ffffff" />
 
     <ImageView
-        android:id="@+id/add_event_post"
+        android:id="@+id/add_circle_post"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"

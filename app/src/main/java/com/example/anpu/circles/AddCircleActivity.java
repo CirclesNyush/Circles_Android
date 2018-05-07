@@ -47,14 +47,14 @@ import static com.example.anpu.circles.utilities.ImageHelper.Bitmap2StrByBase64;
 
 public class AddCircleActivity extends AppCompatActivity {
 
-    @BindView(R.id.add_event_name) EditText eventName;
-    @BindView(R.id.add_event_description) EditText eventDetail;
-    @BindView(R.id.add_event_location) EditText eventLocation;
-    @BindView(R.id.add_event_time) EditText eventTime;
-    @BindView(R.id.add_event_post) ImageView eventSubmit;
-    @BindView(R.id.add_event_back) ImageView eventBack;
-    @BindView(R.id.add_event_email) EditText eventEmail;
-    @BindView(R.id.add_event_email_layout) LinearLayout eventEmailLayout;
+    @BindView(R.id.add_circle_name) EditText eventName;
+    @BindView(R.id.add_circle_description) EditText eventDetail;
+    @BindView(R.id.add_circle_location) EditText eventLocation;
+    @BindView(R.id.add_circle_time) EditText eventTime;
+    @BindView(R.id.add_circle_post) ImageView eventSubmit;
+    @BindView(R.id.add_circle_back) ImageView eventBack;
+    @BindView(R.id.add_circle_email) EditText eventEmail;
+    @BindView(R.id.add_circle_email_layout) LinearLayout eventEmailLayout;
 
     private static final String TAG = "AddCircleActivity";
     private String addCircleUrl = "http://steins.xin:8001/circles/postcircles";
@@ -66,7 +66,7 @@ public class AddCircleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_event);
+        setContentView(R.layout.activity_add_circle);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN|WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         ButterKnife.bind(this);
 

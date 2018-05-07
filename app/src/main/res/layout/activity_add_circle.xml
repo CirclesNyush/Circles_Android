@@ -7,7 +7,7 @@
     android:weightSum="10">
 
     <include
-        layout="@layout/add_event_app_bar" />
+        layout="@layout/add_circle_app_bar" />
 
     <!--<ImageButton-->
         <!--android:id="@+id/add_event_change_cover"-->
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/add_event_name"
+                android:id="@+id/add_circle_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
@@ -47,7 +47,7 @@
                 android:background="#E0E0E0"/>
 
             <EditText
-                android:id="@+id/add_event_description"
+                android:id="@+id/add_circle_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
@@ -79,7 +79,7 @@
                     android:src="@drawable/ic_location"/>
 
                 <EditText
-                    android:id="@+id/add_event_location"
+                    android:id="@+id/add_circle_location"
                     android:layout_width="0dp"
                     android:layout_weight="9"
                     android:layout_height="wrap_content"
@@ -106,7 +106,7 @@
                     android:src="@drawable/ic_time"/>
 
                 <EditText
-                    android:id="@+id/add_event_time"
+                    android:id="@+id/add_circle_time"
                     android:layout_width="0dp"
                     android:layout_weight="9"
                     android:layout_height="wrap_content"
@@ -120,7 +120,7 @@
 
 
             <LinearLayout
-                android:id="@+id/add_event_email_layout"
+                android:id="@+id/add_circle_email_layout"
                 android:paddingTop="@dimen/dp_10"
                 android:paddingBottom="@dimen/dp_10"
                 android:layout_width="match_parent"
@@ -135,7 +135,7 @@
                     android:src="@drawable/ic_email_black_24dp"/>
 
                 <EditText
-                    android:id="@+id/add_event_email"
+                    android:id="@+id/add_circle_email"
                     android:layout_width="0dp"
                     android:layout_weight="9"
                     android:layout_height="wrap_content"
@@ -155,7 +155,7 @@
         android:layout_height="0dp"
         android:layout_width="match_parent"
         android:layout_weight="4"
-        layout="@layout/add_event_gridview" />
+        layout="@layout/add_circle_gridview" />
 
 
 </LinearLayout>

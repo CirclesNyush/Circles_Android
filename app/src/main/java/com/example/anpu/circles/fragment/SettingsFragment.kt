@@ -49,8 +49,8 @@ class SettingsFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.tab_settings, container, false)
         mRecyclerView = rootView.findViewById<View>(R.id.circles_recycler) as RecyclerView
         mRecyclerView.layoutManager = LinearLayoutManager(activity)
-        mSwipeRefreshLayout = rootView.findViewById(R.id.swipe_circle)
         addButton = rootView.findViewById(R.id.fab_add)
+        mSwipeRefreshLayout = rootView.findViewById(R.id.swipe_circle)
 
         return rootView
     }
