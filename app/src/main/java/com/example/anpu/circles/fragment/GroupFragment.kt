@@ -22,10 +22,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.anpu.circles.R
 import com.example.anpu.circles.adapter.ViewPageSlideShowAdapter
-import com.example.anpu.circles.model.InfoBean
-import com.example.anpu.circles.model.NewsBean
-import com.example.anpu.circles.model.User
-import com.example.anpu.circles.model.UserData
 import com.example.anpu.circles.utilities.GlideV4ImageEngine
 import com.example.anpu.circles.utilities.PermissonHelper
 import com.google.firebase.iid.FirebaseInstanceId
@@ -56,9 +52,17 @@ import okhttp3.Response
 
 import android.app.Activity.RESULT_OK
 import android.support.v4.app.FragmentActivity
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.example.anpu.circles.ViewCircleActivity
+import com.example.anpu.circles.adapter.CirclesAdapter
+import com.example.anpu.circles.adapter.EventsAdapter
+import com.example.anpu.circles.model.*
 import com.example.anpu.circles.utilities.PermissonHelper.askStroage
 import com.youth.banner.BannerConfig
 import org.jetbrains.anko.support.v4.browse
+import org.jetbrains.anko.support.v4.startActivity
 
 /**
  * Created by anpu on 2018/3/5.
@@ -69,10 +73,15 @@ class GroupFragment : Fragment() {
     internal var images = ArrayList<String>()
     internal lateinit var banner: Banner
     internal lateinit var newsBean : NewsBean
+    private lateinit var mRecyclerView: RecyclerView
+    private lateinit var mAdapter: EventsAdapter
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.tab_group, container, false)
         banner = view.findViewById<View>(R.id.banner) as Banner
+        mRecyclerView = view.findViewById<View>(R.id.events_recycler) as RecyclerView
+        mRecyclerView.layoutManager = LinearLayoutManager(activity)
 
 
         getNews()
@@ -96,6 +105,17 @@ class GroupFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         askStroage(activity)
+
+        val itemsData = EventItemLab.get(context).eventItems
+        mAdapter = EventsAdapter(R.layout.circle_item, itemsData)
+
+        mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
+
+        mAdapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener {
+            adapter, view, position -> startActivity<ViewCircleActivity>("eventId" to mAdapter.getItem(position)!!.eventId)
+        }
+
+        mRecyclerView.adapter = mAdapter
     }
 
     private fun getNews() {
