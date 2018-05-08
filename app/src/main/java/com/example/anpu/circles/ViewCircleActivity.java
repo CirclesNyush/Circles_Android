@@ -1,6 +1,7 @@
 package com.example.anpu.circles;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -69,6 +70,13 @@ public class ViewCircleActivity extends AppCompatActivity {
         setupEdittext(location);
         setupEdittext(time);
         setupEdittext(email);
+
+        email.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendEmail();
+            }
+        });
 
         int eventId =  getIntent().getIntExtra("eventId", -1);
         getEvent(eventId);
@@ -164,4 +172,13 @@ public class ViewCircleActivity extends AppCompatActivity {
         });
 
     }
+
+    private void sendEmail() {
+
+        Intent data = new Intent(Intent.ACTION_SENDTO);
+        data.setData(Uri.parse("mailto:" + email.getText().toString()));
+        startActivity(data);
+        Log.d("personal", 1+"");
+    }
+
 }
